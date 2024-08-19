@@ -19,11 +19,6 @@ public class UniversalCharacterMovement : MonoBehaviour
     bool isOnGround;
 
 
-    float JumpCooldown = 0f;
-
-    int timesjumped = 0;
-
-
     void Start()
     {
         
@@ -44,26 +39,29 @@ public class UniversalCharacterMovement : MonoBehaviour
     {
         HorizontalMovement();
         FakeDrag();
-        //another one
 
-        if (GetComponent<Rigidbody>().velocity.y < 3f && isOnGround == false)
+
+
+        //this is for regulating the jump arc
+
+        if (GetComponent<Rigidbody>().velocity.y < 2f && isOnGround == false)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.down * AirFallSpeed * 1.50f, ForceMode.Force);
+            GetComponent<Rigidbody>().AddForce(Vector3.down * AirFallSpeed * 3.50f, ForceMode.Force);
         }
     }
 
 
     void FakeDrag()
     {
+        //this is because we need the vertical and horizontal drags to be different depending on what a character needs
 
-        //fake friction generator
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x + ((0.05f * (GroundFrictionWhileMoving / 100)) * -GetComponent<Rigidbody>().velocity.x), GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
         }
         else
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x + ((0.15f * (GroundFrictionWhenStopped / 100)) * -GetComponent<Rigidbody>().velocity.x), GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
+            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x + ((0.25f * (GroundFrictionWhenStopped / 100)) * -GetComponent<Rigidbody>().velocity.x), GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
         }
 
         GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, GetComponent<Rigidbody>().velocity.y + ((0.25f * (AirFriction / 100)) * -GetComponent<Rigidbody>().velocity.y), GetComponent<Rigidbody>().velocity.z);
@@ -73,46 +71,33 @@ public class UniversalCharacterMovement : MonoBehaviour
 
     void HorizontalMovement()
     {
-        if (isOnGround == true)
-        {
-            GetComponent<Rigidbody>().AddForce(new Vector3(Input.GetAxisRaw("Horizontal"), 0,0) * MoveSpeed , ForceMode.Force);
-        }
-        else
-        {
-            GetComponent<Rigidbody>().AddForce(new Vector3(Input.GetAxisRaw("Horizontal"), 0,0) * MoveSpeed, ForceMode.Force);
-        }
+        //this takes the left and right inputs etc etc easy enough right
 
-
+        GetComponent<Rigidbody>().AddForce(new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0) * MoveSpeed * 1.5f, ForceMode.Force);
     }
 
 
     void Jump()
     {
 
-        //jump
+        //this is for jumping, just a velocity set
 
 
-        if (JumpCooldown >= 0f)
+
+
+
+
+
+        if (isOnGround == true && Input.GetButton("Jump"))
         {
-            JumpCooldown -= 13f * Time.deltaTime;
-        }
 
+            GetComponent<Rigidbody>().velocity = new Vector2(GetComponent<Rigidbody>().velocity.x, JumpStrength * 1.3333f);
 
-
-
-        if (isOnGround == true && Input.GetButton("Jump") && JumpCooldown < 0)
-        {
-            JumpCooldown = 10f;
-
-            GetComponent<Rigidbody>().velocity = new Vector2(GetComponent<Rigidbody>().velocity.x, JumpStrength);
-
-            timesjumped += 1;
-            print(timesjumped);
 
         }
 
 
-        //jump cancel
+        //when releasing jump, do a short hop
 
         if (Input.GetButton("Jump") != true && GetComponent<Rigidbody>().velocity.y > 0)
         {
