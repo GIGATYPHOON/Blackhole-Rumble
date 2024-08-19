@@ -6,14 +6,14 @@ public class UniversalCharacterMovement : MonoBehaviour
 {
     // Start is called before the first frame update\
 
-    [SerializeField] float Weight;
+    [SerializeField] float Gravity;
     [SerializeField] float MoveSpeed; 
     [SerializeField] float GroundFrictionWhileMoving;
     [SerializeField] float GroundFrictionWhenStopped;
     [SerializeField] float JumpStrength;
     [SerializeField] float AirFallSpeed; 
     [SerializeField] float AirFriction;
-
+    [SerializeField] float AirFrictionHorizontal;
 
     [SerializeField] GameObject GroundChecker;
     bool isOnGround;
@@ -46,8 +46,10 @@ public class UniversalCharacterMovement : MonoBehaviour
 
         if (GetComponent<Rigidbody>().velocity.y < 2f && isOnGround == false)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.down * AirFallSpeed * 3.50f, ForceMode.Force);
+            GetComponent<Rigidbody>().AddForce(Vector3.down * AirFallSpeed * 2.50f, ForceMode.Force);
         }
+
+        GetComponent<Rigidbody>().AddForce(Vector3.down * Gravity * 0.7f, ForceMode.Force);
     }
 
 
@@ -55,16 +57,26 @@ public class UniversalCharacterMovement : MonoBehaviour
     {
         //this is because we need the vertical and horizontal drags to be different depending on what a character needs
 
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        if (isOnGround)
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x + ((0.05f * (GroundFrictionWhileMoving / 100)) * -GetComponent<Rigidbody>().velocity.x), GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
+            if (Input.GetAxisRaw("Horizontal") != 0)
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x + ((0.05f * (GroundFrictionWhileMoving / 100)) * -GetComponent<Rigidbody>().velocity.x), GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
+            }
+            else
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x + ((0.55f * (GroundFrictionWhenStopped / 100)) * -GetComponent<Rigidbody>().velocity.x), GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
+            }
         }
         else
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x + ((0.25f * (GroundFrictionWhenStopped / 100)) * -GetComponent<Rigidbody>().velocity.x), GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
+            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x + ((0.05f * (AirFrictionHorizontal / 100)) * -GetComponent<Rigidbody>().velocity.x), GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
+
+
         }
 
-        GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, GetComponent<Rigidbody>().velocity.y + ((0.25f * (AirFriction / 100)) * -GetComponent<Rigidbody>().velocity.y), GetComponent<Rigidbody>().velocity.z);
+
+        GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, GetComponent<Rigidbody>().velocity.y + ((0.12f * (AirFriction / 100)) * -GetComponent<Rigidbody>().velocity.y), GetComponent<Rigidbody>().velocity.z);
 
 
     }
@@ -73,7 +85,7 @@ public class UniversalCharacterMovement : MonoBehaviour
     {
         //this takes the left and right inputs etc etc easy enough right
 
-        GetComponent<Rigidbody>().AddForce(new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0) * MoveSpeed * 1.5f, ForceMode.Force);
+        GetComponent<Rigidbody>().AddForce(new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0) * MoveSpeed * 1f, ForceMode.Force);
     }
 
 
@@ -91,7 +103,7 @@ public class UniversalCharacterMovement : MonoBehaviour
         if (isOnGround == true && Input.GetButton("Jump"))
         {
 
-            GetComponent<Rigidbody>().velocity = new Vector2(GetComponent<Rigidbody>().velocity.x, JumpStrength * 1.3333f);
+            GetComponent<Rigidbody>().velocity = new Vector2(GetComponent<Rigidbody>().velocity.x, JumpStrength * 0.85f);
 
 
         }
