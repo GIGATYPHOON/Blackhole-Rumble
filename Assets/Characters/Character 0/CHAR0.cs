@@ -12,6 +12,8 @@ public class CHAR0 : MonoBehaviour
 
     string CurrentStance = "Time Stance";
 
+    bool CurrentStanceBool = false;
+
 
     [SerializeField] GameObject StanceText;
 
@@ -73,8 +75,28 @@ public class CHAR0 : MonoBehaviour
 
     void Stances()
     {
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            CurrentStanceBool = !CurrentStanceBool;
+        }
+        else if (Input.mouseScrollDelta.y < 0)
+        {
+            CurrentStanceBool = !CurrentStanceBool;
+        }
 
-        if(CurrentStance == "Time Stance")
+        if (CurrentStanceBool == true)
+        {
+            CurrentStance = "Space Stance";
+        }
+        else
+        {
+            CurrentStance = "Time Stance";
+        }
+
+
+
+
+        if (CurrentStance == "Time Stance")
         {
             GetComponent<Animator>().SetFloat("AnimMultiplier", 2.2f);
         }
@@ -84,7 +106,7 @@ public class CHAR0 : MonoBehaviour
         }
 
 
-        if (CurrentStance == "Space Stance")
+        if (CurrentStanceBool == true)
         {
             HorizonStrikesObject.transform.localScale = new Vector3(5f,1.5f,1f);
         }
@@ -94,16 +116,7 @@ public class CHAR0 : MonoBehaviour
         }
 
 
-        if(Input.mouseScrollDelta.y > 0)
-        {
 
-            CurrentStance = "Space Stance";
-        }
-        if (Input.mouseScrollDelta.y < 0)
-        {
-
-            CurrentStance = "Time Stance";
-        }
 
         StanceText.GetComponent<TextMeshProUGUI>().text = CurrentStance;
 
@@ -155,18 +168,30 @@ public class CHAR0 : MonoBehaviour
         }
 
 
+
+
+
         if (CurrentStance == "Space Stance")
         {
-            SingularityCooldown = 10f;
+            SingularityCooldown = 4f;
 
             TheSphere.transform.localScale = Vector3.one * 2;
+
+            TheSphere.GetComponent<CHAR0SingularitySphereScript>().WhenDoIDestroyMyself = 1f;
+
         }
         else
         {
-            SingularityCooldown = 5f;
+            SingularityCooldown = 2f;
         }
 
     }
 
+
+
+    void EmptySpace()
+    {
+
+    }
 
 }
