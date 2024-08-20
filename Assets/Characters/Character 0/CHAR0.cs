@@ -18,9 +18,12 @@ public class CHAR0 : MonoBehaviour
 
     [SerializeField] GameObject HorizonStrikesObject;
 
-    float HorizonTimer = 0f;
-
     bool HorizonStriking = false;
+
+    [SerializeField] GameObject SingularitySpherePrefab;
+
+
+    float SingularityCooldown = 0f;
 
 
     void Start()
@@ -31,7 +34,7 @@ public class CHAR0 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HorizonStrikes();
+        PrimarySecondary();
 
 
         Stances();
@@ -73,7 +76,7 @@ public class CHAR0 : MonoBehaviour
 
         if(CurrentStance == "Time Stance")
         {
-            GetComponent<Animator>().SetFloat("AnimMultiplier", 1.5f);
+            GetComponent<Animator>().SetFloat("AnimMultiplier", 2.2f);
         }
         else
         {
@@ -83,11 +86,11 @@ public class CHAR0 : MonoBehaviour
 
         if (CurrentStance == "Space Stance")
         {
-            HorizonStrikesObject.transform.localScale = new Vector3(2f,1f,1f);
+            HorizonStrikesObject.transform.localScale = new Vector3(5f,1.5f,1f);
         }
         else
         {
-            HorizonStrikesObject.transform.localScale = new Vector3(1f, 1f, 1f);
+            HorizonStrikesObject.transform.localScale = new Vector3(2f, 1f, 1f);
         }
 
 
@@ -109,7 +112,7 @@ public class CHAR0 : MonoBehaviour
 
 
 
-    void HorizonStrikes()
+    void PrimarySecondary()
     {
         if(Input.GetButton("Fire1"))
         {
@@ -118,19 +121,52 @@ public class CHAR0 : MonoBehaviour
             GetComponent<Animator>().Play("HorizonStrikes");
         }
 
-        else
+
+        else if (Input.GetButton("Fire2") && SingularityCooldown <= 0)
         {
 
 
-
-
+            GetComponent<Animator>().Play("SingularitySphere");
 
 
         }
 
-
-
+        if(SingularityCooldown >0)
+        {
+            SingularityCooldown -= 6f * Time.deltaTime;
+        }
 
     }
+
+
+    void SingularitySphere()
+    {
+        GameObject TheSphere = Instantiate(SingularitySpherePrefab, HorizonStrikesObject.transform.position, Quaternion.identity);
+
+        if(GetComponent<UniversalEntityProperties>().isFacingRight)
+        {
+            TheSphere.GetComponent<Rigidbody>().AddForce(Vector3.right * 50f, ForceMode.VelocityChange);
+            //TheSphere.GetComponent<ConstantForce>().force = Vector3.right * 50f;
+        }
+        else
+        {
+            TheSphere.GetComponent<Rigidbody>().AddForce(Vector3.left * 50f, ForceMode.VelocityChange);
+            //TheSphere.GetComponent<ConstantForce>().force = Vector3.left * 50f;
+        }
+
+
+        if (CurrentStance == "Space Stance")
+        {
+            SingularityCooldown = 10f;
+
+            TheSphere.transform.localScale = Vector3.one * 2;
+        }
+        else
+        {
+            SingularityCooldown = 5f;
+        }
+
+    }
+
 
 }
