@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 699295661642963967}
   - component: {fileID: 2151655640634949014}
   - component: {fileID: 1805932998542206874}
-  - component: {fileID: 2020754136047559156}
+  - component: {fileID: 7558399920873432637}
   m_Layer: 0
   m_Name: CHAR0Prefab
   m_TagString: Untagged
@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectsToFlip: {fileID: 7261251905727349843}
+  CurrentStanceBool:
+    m_InternalValue: 1
   StanceText: {fileID: 7261251904999877626}
   HorizonStrikesObject: {fileID: 7261251905434700306}
   SingularitySpherePrefab: {fileID: 5253101934381260997, guid: 2f4dc5a6a68e3c34dbb478bfbd04ecf2, type: 3}
@@ -206,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2020754136047559156
+--- !u!114 &7558399920873432637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,7 +217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7261251903851003412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Script: {fileID: 11500000, guid: ddd215822bc02ce4290592b32f827e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
