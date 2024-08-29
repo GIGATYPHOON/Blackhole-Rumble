@@ -11,9 +11,12 @@ public class CHAR0 : NetworkBehaviour
     [SerializeField] GameObject ObjectsToFlip;
 
 
+
     string CurrentStance = "Time Stance";
 
-    bool CurrentStanceBool = false;
+    public NetworkVariable<bool> CurrentStanceBool = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    //bool CurrentStanceBool = false;
 
 
     [SerializeField] GameObject StanceText;
@@ -46,13 +49,15 @@ public class CHAR0 : NetworkBehaviour
             ObjectsToFlip.transform.localScale = new Vector3(-1, 1, 1);
         }
 
+        StancesMultiplayer();
+
+
 
         if (!IsOwner)
             return;
         Facing();
 
         PrimarySecondary();
-
 
         Stances();
 
@@ -84,14 +89,19 @@ public class CHAR0 : NetworkBehaviour
     {
         if (Input.mouseScrollDelta.y > 0)
         {
-            CurrentStanceBool = !CurrentStanceBool;
+            CurrentStanceBool.Value = !CurrentStanceBool.Value;
         }
         else if (Input.mouseScrollDelta.y < 0)
         {
-            CurrentStanceBool = !CurrentStanceBool;
+            CurrentStanceBool.Value = !CurrentStanceBool.Value;
         }
 
-        if (CurrentStanceBool == true)
+    }
+
+
+    void StancesMultiplayer()
+    {
+        if (CurrentStanceBool.Value == true)
         {
             CurrentStance = "Space Stance";
         }
@@ -113,9 +123,9 @@ public class CHAR0 : NetworkBehaviour
         }
 
 
-        if (CurrentStanceBool == true)
+        if (CurrentStanceBool.Value == true)
         {
-            HorizonStrikesObject.transform.localScale = new Vector3(5f,1.5f,1f);
+            HorizonStrikesObject.transform.localScale = new Vector3(5f, 1.5f, 1f);
         }
         else
         {
@@ -127,9 +137,7 @@ public class CHAR0 : NetworkBehaviour
 
         StanceText.GetComponent<TextMeshProUGUI>().text = CurrentStance;
 
-
     }
-
 
 
     void PrimarySecondary()

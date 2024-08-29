@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 699295661642963967}
   - component: {fileID: 2151655640634949014}
   - component: {fileID: 1805932998542206874}
+  - component: {fileID: 2020754136047559156}
   m_Layer: 0
   m_Name: CHAR0Prefab
   m_TagString: Untagged
@@ -121,7 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f14e79d501abf4d99ed6fdb51a59c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFacingRight: 0
+  isFacingRight:
+    m_InternalValue: 1
 --- !u!95 &7261251903851003421
 Animator:
   serializedVersion: 5
@@ -204,6 +206,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2020754136047559156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261251903851003412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 7261251903851003421}
 --- !u!1 &7261251903886915488
 GameObject:
   m_ObjectHideFlags: 0
