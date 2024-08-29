@@ -37,10 +37,10 @@ public class CHAR0 : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Facing();
         if (!IsOwner)
             return;
-        Facing();
-
 
         PrimarySecondary();
 
@@ -55,15 +55,15 @@ public class CHAR0 : NetworkBehaviour
     {
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            GetComponent<UniversalEntityProperties>().isFacingRight = true;
+            GetComponent<UniversalEntityProperties>().isFacingRight.Value = true;
         }
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            GetComponent<UniversalEntityProperties>().isFacingRight = false;
+            GetComponent<UniversalEntityProperties>().isFacingRight.Value = false;
         }
 
 
-        if (GetComponent<UniversalEntityProperties>().isFacingRight)
+        if (GetComponent<UniversalEntityProperties>().isFacingRight.Value == true)
         {
             ObjectsToFlip.transform.localScale = Vector3.one;
         }
@@ -161,7 +161,7 @@ public class CHAR0 : NetworkBehaviour
     {
         GameObject TheSphere = Instantiate(SingularitySpherePrefab, HorizonStrikesObject.transform.position, Quaternion.identity);
 
-        if(GetComponent<UniversalEntityProperties>().isFacingRight)
+        if(GetComponent<UniversalEntityProperties>().isFacingRight.Value == true)
         {
             TheSphere.GetComponent<Rigidbody>().AddForce(Vector3.right * 50f, ForceMode.VelocityChange);
             //TheSphere.GetComponent<ConstantForce>().force = Vector3.right * 50f;
