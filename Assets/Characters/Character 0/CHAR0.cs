@@ -37,10 +37,19 @@ public class CHAR0 : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<UniversalEntityProperties>().isFacingRight.Value == true)
+        {
+            ObjectsToFlip.transform.localScale = Vector3.one;
+        }
+        else
+        {
+            ObjectsToFlip.transform.localScale = new Vector3(-1, 1, 1);
+        }
 
-        Facing();
+
         if (!IsOwner)
             return;
+        Facing();
 
         PrimarySecondary();
 
@@ -63,14 +72,7 @@ public class CHAR0 : NetworkBehaviour
         }
 
 
-        if (GetComponent<UniversalEntityProperties>().isFacingRight.Value == true)
-        {
-            ObjectsToFlip.transform.localScale = Vector3.one;
-        }
-        else
-        {
-            ObjectsToFlip.transform.localScale = new Vector3(-1, 1, 1);
-        }
+
 
 
     }
