@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class UniversalCharacterMovement : MonoBehaviour
+public class UniversalCharacterMovement : NetworkBehaviour
 {
     // Start is called before the first frame update\
 
@@ -27,6 +28,9 @@ public class UniversalCharacterMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!IsOwner)
+            return;
+
         isOnGround = GroundChecker.GetComponent<UniversalGroundChecker>().onGround;
 
         Jump();
@@ -37,6 +41,9 @@ public class UniversalCharacterMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!IsOwner)
+            return;
+
         HorizontalMovement();
         FakeDrag();
 

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class CHAR0 : MonoBehaviour
+public class CHAR0 : NetworkBehaviour
 {
     // Start is called before the first frame update
 
@@ -36,12 +37,16 @@ public class CHAR0 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner)
+            return;
+        Facing();
+
+
         PrimarySecondary();
 
 
         Stances();
 
-        Facing();
     }
 
 
