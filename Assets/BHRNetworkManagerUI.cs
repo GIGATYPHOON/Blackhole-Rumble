@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class BHRNetworkManagerUI : MonoBehaviour
 
     [SerializeField] private Button clientbutton;
 
+    [SerializeField] private TMP_InputField codeinput;
+
     void Start()
     {
         
@@ -19,9 +22,9 @@ public class BHRNetworkManagerUI : MonoBehaviour
 
     private void Awake()
     {
-        hostbutton.onClick.AddListener(() => { NetworkManager.Singleton.StartHost();});
+        hostbutton.onClick.AddListener(() => { NetworkManager.Singleton.GetComponent<BHRRelay>().CreateRelay();});
 
-        clientbutton.onClick.AddListener(() => { NetworkManager.Singleton.StartClient(); });
+        clientbutton.onClick.AddListener(() => { NetworkManager.Singleton.GetComponent<BHRRelay>().JoinRelay(codeinput.text); });
     }
 
     // Update is called once per frame
