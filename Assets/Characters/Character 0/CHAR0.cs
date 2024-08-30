@@ -24,7 +24,10 @@ public class CHAR0 : NetworkBehaviour
 
     [SerializeField] GameObject HorizonStrikesObject;
 
-    bool HorizonStriking = false;
+
+    public NetworkVariable<bool> HorizonStriking = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    //bool HorizonStriking = false;
 
     [SerializeField] GameObject SingularitySpherePrefab;
 
@@ -50,6 +53,11 @@ public class CHAR0 : NetworkBehaviour
         }
 
         StancesMultiplayer();
+
+        if (HorizonStriking.Value == true)
+        {
+            GetComponent<Animator>().Play("HorizonStrikes");
+        }
 
 
 
@@ -112,7 +120,6 @@ public class CHAR0 : NetworkBehaviour
 
 
 
-
         if (CurrentStance == "Time Stance")
         {
             GetComponent<Animator>().SetFloat("AnimMultiplier", 2.2f);
@@ -145,12 +152,20 @@ public class CHAR0 : NetworkBehaviour
         if(Input.GetButton("Fire1"))
         {
 
+            HorizonStriking.Value = true;
 
-            GetComponent<Animator>().Play("HorizonStrikes");
+            
+        }
+        else
+        {
+
+            HorizonStriking.Value = false;
         }
 
 
-        else if (Input.GetButton("Fire2") && SingularityCooldown <= 0)
+
+
+        if (Input.GetButton("Fire2") && SingularityCooldown <= 0 && HorizonStriking.Value == false)
         {
 
 
@@ -208,5 +223,6 @@ public class CHAR0 : NetworkBehaviour
     {
 
     }
+
 
 }
