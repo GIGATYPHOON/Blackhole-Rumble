@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 public class BHRRelay : MonoBehaviour
 {
-
+    [SerializeField] private TMP_InputField codeinput;
 
     private async void Start()
     {
@@ -47,7 +48,11 @@ public class BHRRelay : MonoBehaviour
                 allocation.Key, 
                 allocation.ConnectionData);
 
+
+            codeinput.text = joinCode;
             NetworkManager.Singleton.StartHost();
+
+
 
         }
 

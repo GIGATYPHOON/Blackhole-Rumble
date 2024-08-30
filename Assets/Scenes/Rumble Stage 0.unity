@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c70c2d550ece9146a2371bc39f30a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  codeinput: {fileID: 469908753}
 --- !u!1 &575400526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,6 +1672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostbutton: {fileID: 575400528}
   clientbutton: {fileID: 1318668822}
+  codeinput: {fileID: 469908753}
 --- !u!1 &1767491730
 GameObject:
   m_ObjectHideFlags: 0
