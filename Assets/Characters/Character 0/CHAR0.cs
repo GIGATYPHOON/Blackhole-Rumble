@@ -10,6 +10,8 @@ public class CHAR0 : NetworkBehaviour
 
     [SerializeField] GameObject ObjectsToFlip;
 
+    [SerializeField] GameObject SelfCamera;
+
 
 
     string CurrentStance = "Time Stance";
@@ -37,7 +39,11 @@ public class CHAR0 : NetworkBehaviour
 
     void Start()
     {
-        
+        if (!IsOwner)
+            return;
+        SelfCamera.SetActive(true);
+
+
     }
 
     // Update is called once per frame
