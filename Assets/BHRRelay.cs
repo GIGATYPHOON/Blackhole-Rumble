@@ -36,7 +36,7 @@ public class BHRRelay : MonoBehaviour
     {
         try
         {
-           Allocation allocation=  await RelayService.Instance.CreateAllocationAsync(5, "asia-southeast1");
+           Allocation allocation=  await RelayService.Instance.CreateAllocationAsync(9, "asia-southeast1");
 
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             Debug.Log(joinCode);
