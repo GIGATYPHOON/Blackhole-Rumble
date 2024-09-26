@@ -17,6 +17,8 @@ public class BHRNetworkManagerUI : MonoBehaviour
 
     [SerializeField] private TMP_InputField codeinput;
 
+    [SerializeField] private GameObject playerPrefab;
+
     void Start()
     {
         
@@ -27,6 +29,7 @@ public class BHRNetworkManagerUI : MonoBehaviour
         hostbutton.onClick.AddListener(() => { NetworkManager.Singleton.GetComponent<BHRRelay>().CreateRelay();});
 
         clientbutton.onClick.AddListener(() => { NetworkManager.Singleton.GetComponent<BHRRelay>().JoinRelay(codeinput.text); });
+
 
         teambutton.onClick.AddListener(() => { ChangeTeam(); });
     }
@@ -50,6 +53,12 @@ public class BHRNetworkManagerUI : MonoBehaviour
         {
             teambutton.transform.GetChild(0).GetComponent<TMP_Text>().text = "L";
         }
+
+    }
+
+
+    void SpawnGuys()
+    {
 
     }
 }
