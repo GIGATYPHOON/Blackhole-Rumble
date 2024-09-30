@@ -95,7 +95,7 @@ public class UniversalEntityProperties : NetworkBehaviour
             healthbar.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
 
 
-
+            GameObject.FindGameObjectWithTag("PreGameCanvas").SetActive(false);
 
         }
         else
