@@ -76,13 +76,13 @@ public class UniversalEntityProperties : NetworkBehaviour
             if (GameObject.FindGameObjectWithTag("TeamButton").transform.GetChild(0).GetComponent<TMP_Text>().text == "L")
             {
                TeamInt.Value = 0;
-                this.transform.position = new Vector3(-8, 1, 0);
+                this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
 
             }
             else
             {
                 TeamInt.Value = 1;
-                this.transform.position = new Vector3(8, 1, 0);
+                this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
             }
 
             YourTeam.Value = TeamInt.Value;

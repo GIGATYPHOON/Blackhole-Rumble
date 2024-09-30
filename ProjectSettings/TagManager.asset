@@ -6,6 +6,8 @@ TagManager:
   tags:
   - TeamButton
   - PreGameCanvas
+  - LSpawn
+  - RSpawn
   layers:
   - Default
   - TransparentFX
