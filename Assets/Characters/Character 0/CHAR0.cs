@@ -101,14 +101,11 @@ public class CHAR0 : NetworkBehaviour
 
     void Stances()
     {
-        if (Input.mouseScrollDelta.y > 0)
+        if (Input.GetButtonDown("Special1"))
         {
             CurrentStanceBool.Value = !CurrentStanceBool.Value;
         }
-        else if (Input.mouseScrollDelta.y < 0)
-        {
-            CurrentStanceBool.Value = !CurrentStanceBool.Value;
-        }
+
 
     }
 

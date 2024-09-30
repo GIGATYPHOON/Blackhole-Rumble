@@ -17,7 +17,37 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     [SerializeField] GameObject healthbar;
 
+    public bool multihitted = false;
+    public GameObject multihitdamagesource;
+    public float multihitdmg;
+    public float multihitknockback;
+    public float multihitknockup;
+    public float multihithitinvincibilityfloat;
+    public Vector2 multihitdamagepoint;
+    public string multihitdamagecause;
+    public int multihitdamageprio;
 
+
+    public float HP;
+    public float BaseHP;
+
+    public Vector2 hitloc;
+
+    public bool dead = false;
+
+    public bool isdamageable = true;
+
+    public GameObject sprites;
+
+    [SerializeField]
+    private float hitinvincibilitytimer = 0f;
+    public bool invuln = false;
+
+    public bool combatcollisionoverride = false;
+
+
+    public int olddamageprio = 0;
+    public int currentdamageprio = 0;
 
     void Start()
     {
@@ -63,7 +93,99 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         }
 
+
+
+
+        if (isdamageable == true)
+        {
+            if (HP <= 0)
+            {
+                HP = 0;
+                dead = true;
+            }
+
+            if (combatcollisionoverride == false)
+                INVINCIBLEEEE();
+
+            Healthbar();
+
+            if (multihitted == true)
+            {
+                TakeDamage(multihitdamagesource, multihitdmg, multihitknockback, multihitknockup, multihithitinvincibilityfloat, multihitdamagepoint, multihitdamagecause, multihitdamageprio);
+                if (hitinvincibilitytimer <= 0f)
+                {
+                    multihitted = false;
+                }
+
+
+            }
+
+
+        }
+
+
+
     }
+
+
+
+    void INVINCIBLEEEE()
+    {
+
+        if (hitinvincibilitytimer > 0f)
+        {
+
+
+
+            hitinvincibilitytimer -= 10f * Time.deltaTime;
+
+
+
+
+            invuln = true;
+
+            if (((hitinvincibilitytimer - Mathf.Floor(hitinvincibilitytimer)) * 2f) < 0.5f)
+            {
+                sprites.SetActive(false);
+            }
+            else
+            {
+                sprites.SetActive(true);
+            }
+        }
+        else if (hitinvincibilitytimer <= 0f)
+        {
+            hitinvincibilitytimer = 0f;
+
+
+
+            currentdamageprio = 0;
+
+            invuln = false;
+
+            sprites.SetActive(true);
+
+
+        }
+    }
+
+
+    void Healthbar()
+    {
+        if ( healthbar.gameObject)
+        {
+            healthbar.transform.localScale = new Vector3( (HP / BaseHP) * 3, 0.3333f, 1f);
+
+        }
+        else
+        {
+
+
+        }
+
+    }
+
+
 
 
     public override void OnNetworkSpawn()
@@ -77,12 +199,14 @@ public class UniversalEntityProperties : NetworkBehaviour
             {
                TeamInt.Value = 0;
                 this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
+                this.gameObject.layer = LayerMask.NameToLayer("PlayerTeamL");
 
             }
             else
             {
                 TeamInt.Value = 1;
                 this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
+                this.gameObject.layer = LayerMask.NameToLayer("PlayerTeamR");
             }
 
             YourTeam.Value = TeamInt.Value;
@@ -104,4 +228,76 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         }
     }
+
+
+    public void MultiPartTakeDamage(GameObject damagesource, float dmg, float knockback, float knockup, float hitinvincibilityfloat, Vector2 damagepoint, string specificcause, int damageprio)
+    {
+        multihitted = true;
+
+        multihitdamagesource = damagesource;
+        multihitdmg = dmg;
+        multihitknockback = knockback;
+        multihitknockup = knockup;
+        multihithitinvincibilityfloat = hitinvincibilityfloat;
+        multihitdamagepoint = damagepoint;
+        multihitdamagecause = specificcause;
+        multihitdamageprio = damageprio;
+    }
+
+
+    public void TakeDamage(GameObject damagesource, float dmg, float knockback, float knockup, float hitinvincibilityfloat, Vector2 damagepoint, string specificcause, int damageprio)
+    {
+        //if(damagesource == null)
+        //{
+
+
+
+        //    damagesource = this.gameObject;
+        //}
+
+
+
+
+        if ((invuln == false || damageprio > currentdamageprio) && isdamageable == true && dead == false)
+        {
+            currentdamageprio = damageprio;
+
+
+
+
+
+            GetComponent<UniversalEntityProperties>().HP -= dmg;
+
+
+            if (HP > 0)
+            {
+
+                if (damagepoint.x < this.transform.position.x)
+                {
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * knockback, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.left * knockback, ForceMode2D.Impulse);
+                }
+
+
+                GetComponent<Rigidbody2D>().AddForce(Vector2.up * knockup, ForceMode2D.Impulse);
+
+
+            }
+
+
+
+
+
+            hitinvincibilitytimer = hitinvincibilityfloat;
+
+
+
+        }
+
+    }
+
+
 }

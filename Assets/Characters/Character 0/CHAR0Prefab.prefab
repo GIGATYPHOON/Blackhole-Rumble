@@ -187,9 +187,9 @@ GameObject:
   - component: {fileID: 2151655640634949014}
   - component: {fileID: 7558399920873432637}
   - component: {fileID: 57627576385952046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CHAR0Prefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -299,10 +299,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFacingRight:
     m_InternalValue: 1
-  YourTeam: 0
+  YourTeam:
+    m_InternalValue: 0
   TeamInt:
     m_InternalValue: 0
   healthbar: {fileID: 8526854491006020142}
+  multihitted: 0
+  multihitdamagesource: {fileID: 0}
+  multihitdmg: 0
+  multihitknockback: 0
+  multihitknockup: 0
+  multihithitinvincibilityfloat: 0
+  multihitdamagepoint: {x: 0, y: 0}
+  multihitdamagecause: 
+  multihitdamageprio: 0
+  HP: 100
+  BaseHP: 100
+  hitloc: {x: 0, y: 0}
+  dead: 0
+  isdamageable: 1
+  sprites: {fileID: 0}
+  hitinvincibilitytimer: 0
+  invuln: 0
+  combatcollisionoverride: 0
+  olddamageprio: 0
+  currentdamageprio: 0
 --- !u!95 &7261251903851003421
 Animator:
   serializedVersion: 5
@@ -498,7 +519,7 @@ GameObject:
   - component: {fileID: 7261251904051899867}
   - component: {fileID: 7261251904051899864}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -607,6 +628,7 @@ GameObject:
   - component: {fileID: 7261251904379752583}
   - component: {fileID: 7261251904379752600}
   - component: {fileID: 7261251904379752601}
+  - component: {fileID: 6944095275577843327}
   m_Layer: 0
   m_Name: Horizon Strikes Hitbox
   m_TagString: Untagged
@@ -692,6 +714,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6944095275577843327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261251904379752603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a29db63bf3dd4143822f3964d32358e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
 --- !u!1 &7261251904999877626
 GameObject:
   m_ObjectHideFlags: 0
