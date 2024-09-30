@@ -23,27 +23,23 @@ public class CHAR0Attacks : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (owner.gameObject.layer == LayerMask.NameToLayer("PlayerTeamL") && collision.gameObject.layer == LayerMask.NameToLayer("PlayerTeamR"))
-        {
-            teamcheck = true;
-        }
-        else if (owner.gameObject.layer == LayerMask.NameToLayer("PlayerTeamR") && collision.gameObject.layer == LayerMask.NameToLayer("PlayerTeamL"))
-        {
-            teamcheck = true;
-        }
-        else
-        {
-            teamcheck = false;
-        }
 
-        if (teamcheck == true)
+        try
         {
-            collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
+            if (owner.GetComponent<UniversalEntityProperties>().TeamInt != collision.GetComponent<UniversalEntityProperties>().TeamInt)
+            {
+                collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
 
 
-            collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 20f, 10f, 0f, 5f, owner.transform.position, "CHAR0Attack", 1);
+                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 20f, 10f, 0f, 5f, owner.transform.position, "CHAR0Attack", 1);
+
+            }
+        }
+        catch
+        {
 
         }
+
 
 
 

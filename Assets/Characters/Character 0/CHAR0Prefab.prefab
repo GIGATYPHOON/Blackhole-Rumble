@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 2151655640634949014}
   - component: {fileID: 7558399920873432637}
   - component: {fileID: 57627576385952046}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: CHAR0Prefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -313,13 +313,16 @@ MonoBehaviour:
   multihitdamagepoint: {x: 0, y: 0}
   multihitdamagecause: 
   multihitdamageprio: 0
-  HP: 100
-  BaseHP: 100
+  HP:
+    m_InternalValue: 100
+  BaseHP:
+    m_InternalValue: 100
   hitloc: {x: 0, y: 0}
   dead: 0
   isdamageable: 1
   sprites: {fileID: 7261251903886915488}
-  hitinvincibilitytimer: 0
+  hitinvincibilitytimer:
+    m_InternalValue: 0
   invuln: 0
   combatcollisionoverride: 0
   olddamageprio: 0

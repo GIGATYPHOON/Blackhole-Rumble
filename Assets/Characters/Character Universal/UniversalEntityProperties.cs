@@ -137,8 +137,8 @@ public class UniversalEntityProperties : NetworkBehaviour
         {
 
 
-
-            hitinvincibilitytimer.Value -= 10f * Time.deltaTime;
+            if(IsOwner)
+              hitinvincibilitytimer.Value -= 10f * Time.deltaTime;
 
 
 
@@ -156,7 +156,8 @@ public class UniversalEntityProperties : NetworkBehaviour
         }
         else if (hitinvincibilitytimer.Value <= 0f)
         {
-            hitinvincibilitytimer.Value = 0f;
+            if (IsOwner)
+                hitinvincibilitytimer.Value = 0f;
 
 
 
@@ -200,14 +201,17 @@ public class UniversalEntityProperties : NetworkBehaviour
             {
                TeamInt.Value = 0;
                 this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
-                this.gameObject.layer = LayerMask.NameToLayer("PlayerTeamL");
+                this.gameObject.layer = 3;
+
+
+
 
             }
             else
             {
                 TeamInt.Value = 1;
                 this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
-                this.gameObject.layer = LayerMask.NameToLayer("PlayerTeamR");
+                this.gameObject.layer = 7;
             }
 
             YourTeam.Value = TeamInt.Value;
@@ -266,8 +270,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-
-            GetComponent<UniversalEntityProperties>().HP.Value -= dmg;
+            if(IsOwner)
+              GetComponent<UniversalEntityProperties>().HP.Value -= dmg;
 
 
             if (HP.Value > 0)
