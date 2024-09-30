@@ -136,10 +136,12 @@ public class CHAR0 : NetworkBehaviour
         if (CurrentStanceBool.Value == true)
         {
             HorizonStrikesObject.transform.localScale = new Vector3(5f, 1.5f, 1f);
+            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(1.4f);
         }
         else
         {
             HorizonStrikesObject.transform.localScale = new Vector3(2f, 1f, 1f);
+            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(1f);
         }
 
 
@@ -200,6 +202,7 @@ public class CHAR0 : NetworkBehaviour
             //TheSphere.GetComponent<ConstantForce>().force = Vector3.left * 50f;
         }
 
+        TheSphere.GetComponent<CHAR0Attacks>().SetOwner(this.gameObject);
 
 
 
@@ -212,10 +215,14 @@ public class CHAR0 : NetworkBehaviour
 
             TheSphere.GetComponent<CHAR0SingularitySphereScript>().WhenDoIDestroyMyself = 1f;
 
+            TheSphere.GetComponent<CHAR0Attacks>().SetDMGMulti(1.2f);
+
         }
         else
         {
             SingularityCooldown = 2f;
+
+            TheSphere.GetComponent<CHAR0Attacks>().SetDMGMulti(0.8f);
         }
 
     }

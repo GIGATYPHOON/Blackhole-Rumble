@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3933901711889269236}
   - component: {fileID: 1797355005926086804}
   - component: {fileID: 4750901117942253628}
+  - component: {fileID: 7592735401808667231}
   m_Layer: 0
   m_Name: CHAR0SingularitySphere
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c275b86a46e11045aaa073977dad18f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WhenDoIDestroyMyself: 0.333
 --- !u!54 &1797355005926086804
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,6 +77,19 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &7592735401808667231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253101934381260997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a29db63bf3dd4143822f3964d32358e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
 --- !u!1 &6456799272131186529
 GameObject:
   m_ObjectHideFlags: 0

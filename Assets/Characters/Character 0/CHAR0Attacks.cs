@@ -8,7 +8,7 @@ public class CHAR0Attacks : MonoBehaviour
     [SerializeField]
     private GameObject owner;
 
-    bool teamcheck;
+    float dmg = 1;
 
     void Start()
     {
@@ -24,25 +24,32 @@ public class CHAR0Attacks : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
 
-        try
+        if(collision.tag == "Player")
         {
-            if (owner.GetComponent<UniversalEntityProperties>().TeamInt != collision.GetComponent<UniversalEntityProperties>().TeamInt)
+            if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != collision.GetComponent<UniversalEntityProperties>().TeamInt.Value)
             {
                 collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
 
-
-                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 20f, 10f, 0f, 5f, owner.transform.position, "CHAR0Attack", 1);
+                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 10f * dmg, 10f, 0f, 5f, owner.transform.position, "CHAR0Attack", 1);
 
             }
-        }
-        catch
-        {
+
 
         }
 
 
+    }
 
 
+    public void SetOwner(GameObject ownerthing)
+    {
+        owner = ownerthing;
 
+    }
+
+
+    public void SetDMGMulti(float multiplier)
+    {
+        dmg = multiplier;
     }
 }

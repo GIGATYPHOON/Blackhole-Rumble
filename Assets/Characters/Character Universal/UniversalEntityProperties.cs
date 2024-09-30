@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using Unity.Networking.Transport;
 using UnityEngine;
 
 public class UniversalEntityProperties : NetworkBehaviour
@@ -16,6 +17,8 @@ public class UniversalEntityProperties : NetworkBehaviour
     public NetworkVariable<int> TeamInt = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     [SerializeField] GameObject healthbar;
+
+    [SerializeField] GameObject youindicator;
 
     public bool multihitted = false;
     public GameObject multihitdamagesource;
@@ -41,7 +44,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     [SerializeField]
     private NetworkVariable<float>  hitinvincibilitytimer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public bool invuln = false;
+    public NetworkVariable<bool> invuln = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public bool combatcollisionoverride = false;
 
@@ -71,7 +74,15 @@ public class UniversalEntityProperties : NetworkBehaviour
     void Update()
     {
 
-        
+
+        if (TeamInt.Value == 0)
+        {
+            this.gameObject.layer = 3;
+        }
+        else if (TeamInt.Value == 1)
+        {
+            this.gameObject.layer = 7;
+        }
 
 
         print(TeamInt.Value);
@@ -105,8 +116,12 @@ public class UniversalEntityProperties : NetworkBehaviour
                 dead = true;
             }
 
-            if (combatcollisionoverride == false)
-                INVINCIBLEEEE();
+            //if (combatcollisionoverride == false)
+            //{ 
+            //}
+
+            INVINCIBLEEEE();
+
 
             Healthbar();
 
@@ -138,12 +153,16 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
             if(IsOwner)
-              hitinvincibilitytimer.Value -= 10f * Time.deltaTime;
+            {
+                hitinvincibilitytimer.Value -= 10f * Time.deltaTime;
+                invuln.Value = true;
+            }
 
 
 
 
-            invuln = true;
+
+
 
             if (((hitinvincibilitytimer.Value - Mathf.Floor(hitinvincibilitytimer.Value)) * 2f) < 0.5f)
             {
@@ -157,13 +176,17 @@ public class UniversalEntityProperties : NetworkBehaviour
         else if (hitinvincibilitytimer.Value <= 0f)
         {
             if (IsOwner)
+            {
                 hitinvincibilitytimer.Value = 0f;
+                invuln.Value = false;
+            }
+
 
 
 
             currentdamageprio = 0;
 
-            invuln = false;
+
 
             sprites.SetActive(true);
 
@@ -201,7 +224,6 @@ public class UniversalEntityProperties : NetworkBehaviour
             {
                TeamInt.Value = 0;
                 this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
-                this.gameObject.layer = 3;
 
 
 
@@ -211,17 +233,16 @@ public class UniversalEntityProperties : NetworkBehaviour
             {
                 TeamInt.Value = 1;
                 this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
-                this.gameObject.layer = 7;
+
             }
 
             YourTeam.Value = TeamInt.Value;
 
             healthbar.GetComponent<SpriteRenderer>().color = Color.green;
 
-            healthbar.transform.GetChild(0).gameObject.SetActive(true);
+            youindicator.gameObject.SetActive(true);
 
 
-            healthbar.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
 
 
             //GameObject.FindGameObjectWithTag("PreGameCanvas").SetActive(false);
@@ -232,6 +253,10 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
         }
+
+
+
+
     }
 
 
@@ -263,7 +288,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-        if ((invuln == false || damageprio > currentdamageprio) && isdamageable == true && dead == false)
+        if ((invuln.Value == false || damageprio > currentdamageprio) && isdamageable == true && dead == false)
         {
             currentdamageprio = damageprio;
 
@@ -295,8 +320,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-
-            hitinvincibilitytimer.Value = hitinvincibilityfloat;
+            if(IsOwner)
+              hitinvincibilitytimer.Value = hitinvincibilityfloat;
 
 
 
