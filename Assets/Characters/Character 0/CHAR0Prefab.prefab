@@ -318,7 +318,7 @@ MonoBehaviour:
   hitloc: {x: 0, y: 0}
   dead: 0
   isdamageable: 1
-  sprites: {fileID: 0}
+  sprites: {fileID: 7261251903886915488}
   hitinvincibilitytimer: 0
   invuln: 0
   combatcollisionoverride: 0

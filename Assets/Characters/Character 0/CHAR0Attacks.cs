@@ -38,7 +38,7 @@ public class CHAR0Attacks : MonoBehaviour
 
         if (teamcheck == true)
         {
-            collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider2D>().ClosestPoint(this.transform.position);
+            collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
 
 
             collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 20f, 10f, 0f, 5f, owner.transform.position, "CHAR0Attack", 1);

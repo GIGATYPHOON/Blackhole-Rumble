@@ -28,8 +28,8 @@ public class UniversalEntityProperties : NetworkBehaviour
     public int multihitdamageprio;
 
 
-    public float HP;
-    public float BaseHP;
+    public NetworkVariable<float> HP = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> BaseHP = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public Vector2 hitloc;
 
@@ -40,7 +40,7 @@ public class UniversalEntityProperties : NetworkBehaviour
     public GameObject sprites;
 
     [SerializeField]
-    private float hitinvincibilitytimer = 0f;
+    private NetworkVariable<float>  hitinvincibilitytimer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public bool invuln = false;
 
     public bool combatcollisionoverride = false;
@@ -71,6 +71,7 @@ public class UniversalEntityProperties : NetworkBehaviour
     void Update()
     {
 
+        
 
 
         print(TeamInt.Value);
@@ -95,12 +96,12 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-
+ 
         if (isdamageable == true)
         {
-            if (HP <= 0)
+            if (HP.Value <= 0)
             {
-                HP = 0;
+                HP.Value = 0;
                 dead = true;
             }
 
@@ -112,7 +113,7 @@ public class UniversalEntityProperties : NetworkBehaviour
             if (multihitted == true)
             {
                 TakeDamage(multihitdamagesource, multihitdmg, multihitknockback, multihitknockup, multihithitinvincibilityfloat, multihitdamagepoint, multihitdamagecause, multihitdamageprio);
-                if (hitinvincibilitytimer <= 0f)
+                if (hitinvincibilitytimer.Value <= 0f)
                 {
                     multihitted = false;
                 }
@@ -132,19 +133,19 @@ public class UniversalEntityProperties : NetworkBehaviour
     void INVINCIBLEEEE()
     {
 
-        if (hitinvincibilitytimer > 0f)
+        if (hitinvincibilitytimer.Value > 0f)
         {
 
 
 
-            hitinvincibilitytimer -= 10f * Time.deltaTime;
+            hitinvincibilitytimer.Value -= 10f * Time.deltaTime;
 
 
 
 
             invuln = true;
 
-            if (((hitinvincibilitytimer - Mathf.Floor(hitinvincibilitytimer)) * 2f) < 0.5f)
+            if (((hitinvincibilitytimer.Value - Mathf.Floor(hitinvincibilitytimer.Value)) * 2f) < 0.5f)
             {
                 sprites.SetActive(false);
             }
@@ -153,9 +154,9 @@ public class UniversalEntityProperties : NetworkBehaviour
                 sprites.SetActive(true);
             }
         }
-        else if (hitinvincibilitytimer <= 0f)
+        else if (hitinvincibilitytimer.Value <= 0f)
         {
-            hitinvincibilitytimer = 0f;
+            hitinvincibilitytimer.Value = 0f;
 
 
 
@@ -174,7 +175,7 @@ public class UniversalEntityProperties : NetworkBehaviour
     {
         if ( healthbar.gameObject)
         {
-            healthbar.transform.localScale = new Vector3( (HP / BaseHP) * 3, 0.3333f, 1f);
+            healthbar.transform.localScale = new Vector3( (HP.Value / BaseHP.Value) * 3, 0.3333f, 1f);
 
         }
         else
@@ -266,23 +267,23 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-            GetComponent<UniversalEntityProperties>().HP -= dmg;
+            GetComponent<UniversalEntityProperties>().HP.Value -= dmg;
 
 
-            if (HP > 0)
+            if (HP.Value > 0)
             {
 
                 if (damagepoint.x < this.transform.position.x)
                 {
-                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * knockback, ForceMode2D.Impulse);
+                    GetComponent<Rigidbody>().AddForce(Vector2.right * knockback, ForceMode.Impulse);
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().AddForce(Vector2.left * knockback, ForceMode2D.Impulse);
+                    GetComponent<Rigidbody>().AddForce(Vector2.left * knockback, ForceMode.Impulse);
                 }
 
 
-                GetComponent<Rigidbody2D>().AddForce(Vector2.up * knockup, ForceMode2D.Impulse);
+                GetComponent<Rigidbody>().AddForce(Vector2.up * knockup, ForceMode.Impulse);
 
 
             }
@@ -291,7 +292,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-            hitinvincibilitytimer = hitinvincibilityfloat;
+            hitinvincibilitytimer.Value = hitinvincibilityfloat;
 
 
 
