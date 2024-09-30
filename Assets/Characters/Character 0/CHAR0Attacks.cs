@@ -21,7 +21,7 @@ public class CHAR0Attacks : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (owner.gameObject.layer == LayerMask.NameToLayer("PlayerTeamL") && collision.gameObject.layer == LayerMask.NameToLayer("PlayerTeamR"))
         {
