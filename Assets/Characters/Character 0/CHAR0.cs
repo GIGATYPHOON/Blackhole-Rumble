@@ -37,6 +37,9 @@ public class CHAR0 : NetworkBehaviour
     float SingularityCooldown = 0f;
 
 
+    [SerializeField] GameObject DeadIndicator;
+
+
     void Start()
     {
         if (!IsOwner)
@@ -65,6 +68,7 @@ public class CHAR0 : NetworkBehaviour
             GetComponent<Animator>().Play("HorizonStrikes");
         }
 
+        Dead();
 
 
         if (!IsOwner)
@@ -229,9 +233,13 @@ public class CHAR0 : NetworkBehaviour
 
 
 
-    void EmptySpace()
+    void Dead()
     {
-
+        if(GetComponent<UniversalEntityProperties>().dead)
+        {
+            this.enabled = false;
+            DeadIndicator.SetActive(true);
+        }
     }
 
 

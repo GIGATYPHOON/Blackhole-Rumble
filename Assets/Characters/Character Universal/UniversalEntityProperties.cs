@@ -38,6 +38,14 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public bool dead = false;
 
+
+    public float deathtimer = 10f;
+
+
+    public GameObject deathoverlay;
+
+    public GameObject deathoverlayint;
+
     public bool isdamageable = true;
 
     public GameObject sprites;
@@ -73,7 +81,7 @@ public class UniversalEntityProperties : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
 
         if (TeamInt.Value == 0)
         {
@@ -103,8 +111,8 @@ public class UniversalEntityProperties : NetworkBehaviour
                 healthbar.GetComponent<SpriteRenderer>().color = Color.red;
             }
 
-        }
 
+        }
 
 
  
@@ -137,6 +145,11 @@ public class UniversalEntityProperties : NetworkBehaviour
             }
 
 
+        }
+
+        if(IsOwner)
+        {
+            DeadAndRespawn();
         }
 
 
@@ -330,4 +343,24 @@ public class UniversalEntityProperties : NetworkBehaviour
     }
 
 
+
+    void DeadAndRespawn()
+    {
+        if(dead == true)
+        {
+
+            GetComponent<UniversalCharacterMovement>().enabled = false;
+
+            GetComponent<BoxCollider>().enabled = false;
+
+            deathoverlay.SetActive(true);
+
+            deathoverlayint.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(deathtimer) + "";
+
+            deathtimer -= 1f * Time.deltaTime;
+
+        }
+
+
+    }
 }
