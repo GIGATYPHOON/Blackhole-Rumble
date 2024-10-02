@@ -16,6 +16,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public NetworkVariable<int> TeamInt = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    
+
     [SerializeField] GameObject healthbar;
 
     [SerializeField] GameObject youindicator;
@@ -36,8 +38,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public Vector2 hitloc;
 
-    public bool dead = false;
-
+    public NetworkVariable<bool> dead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public float deathtimer = 10f;
 
@@ -121,7 +122,7 @@ public class UniversalEntityProperties : NetworkBehaviour
             if (HP.Value <= 0)
             {
                 HP.Value = 0;
-                dead = true;
+                dead.Value = true;
             }
 
             //if (combatcollisionoverride == false)
@@ -129,6 +130,7 @@ public class UniversalEntityProperties : NetworkBehaviour
             //}
 
             INVINCIBLEEEE();
+
 
 
             Healthbar();
@@ -147,11 +149,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         }
 
-        if(IsOwner)
-        {
-            DeadAndRespawn();
-        }
 
+        DeadAndRespawn();
 
 
     }
@@ -173,10 +172,6 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-
-
-
-
             if (((hitinvincibilitytimer.Value - Mathf.Floor(hitinvincibilitytimer.Value)) * 2f) < 0.5f)
             {
                 sprites.SetActive(false);
@@ -185,6 +180,10 @@ public class UniversalEntityProperties : NetworkBehaviour
             {
                 sprites.SetActive(true);
             }
+
+
+
+
         }
         else if (hitinvincibilitytimer.Value <= 0f)
         {
@@ -301,7 +300,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-        if ((invuln.Value == false || damageprio > currentdamageprio) && isdamageable == true && dead == false)
+        if ((invuln.Value == false || damageprio > currentdamageprio) && isdamageable == true && dead.Value == false)
         {
             currentdamageprio = damageprio;
 
@@ -346,19 +345,71 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     void DeadAndRespawn()
     {
-        if(dead == true)
+        if(dead.Value == true)
+        {
+            if (IsOwner)
+            {
+                GetComponent<UniversalCharacterMovement>().enabled = false;
+
+                deathoverlay.SetActive(true);
+
+                deathoverlayint.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(deathtimer) + "";
+
+                deathtimer -= 1f * Time.deltaTime;
+            }
+
+
+            GetComponent<Collider>().enabled = false;
+
+
+
+            if(deathtimer <=0 )
+            {
+
+                if (IsOwner)
+                {
+
+
+                    deathoverlay.SetActive(false);
+
+                    HP.Value = BaseHP.Value;
+
+                    if (TeamInt.Value == 0)
+                    {
+
+                        this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
+
+
+
+
+                    }
+                    else if (TeamInt.Value == 1)
+                    {
+                        this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
+
+                    }
+
+
+                    deathtimer = 10f;
+
+                    GetComponent<UniversalCharacterMovement>().enabled = true;
+
+
+
+
+                    dead.Value = false;
+
+                }
+
+
+
+            }
+        }
+
+        else
         {
 
-            GetComponent<UniversalCharacterMovement>().enabled = false;
-
-            GetComponent<BoxCollider>().enabled = false;
-
-            deathoverlay.SetActive(true);
-
-            deathoverlayint.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(deathtimer) + "";
-
-            deathtimer -= 1f * Time.deltaTime;
-
+            GetComponent<Collider>().enabled = true;
         }
 
 

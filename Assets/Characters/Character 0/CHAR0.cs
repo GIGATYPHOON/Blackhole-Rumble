@@ -52,32 +52,43 @@ public class CHAR0 : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<UniversalEntityProperties>().isFacingRight.Value == true)
-        {
-            ObjectsToFlip.transform.localScale = Vector3.one;
-        }
-        else
-        {
-            ObjectsToFlip.transform.localScale = new Vector3(-1, 1, 1);
-        }
-
-        StancesMultiplayer();
-
-        if (HorizonStriking.Value == true)
-        {
-            GetComponent<Animator>().Play("HorizonStrikes");
-        }
-
         Dead();
 
+        if (GetComponent<UniversalEntityProperties>().dead.Value == false)
+        {
 
-        if (!IsOwner)
-            return;
-        Facing();
+            if (GetComponent<UniversalEntityProperties>().isFacingRight.Value == true)
+            {
+                ObjectsToFlip.transform.localScale = Vector3.one;
+            }
+            else
+            {
+                ObjectsToFlip.transform.localScale = new Vector3(-1, 1, 1);
+            }
 
-        PrimarySecondary();
+            StancesMultiplayer();
 
-        Stances();
+            if (HorizonStriking.Value == true)
+            {
+                GetComponent<Animator>().Play("HorizonStrikes");
+            }
+
+
+
+
+            if (!IsOwner)
+                return;
+            Facing();
+
+            PrimarySecondary();
+
+            Stances();
+
+
+        }
+
+
+
 
     }
 
@@ -235,12 +246,20 @@ public class CHAR0 : NetworkBehaviour
 
     void Dead()
     {
-        if(GetComponent<UniversalEntityProperties>().dead)
+        if(GetComponent<UniversalEntityProperties>().dead.Value == true)
         {
-            this.enabled = false;
             DeadIndicator.SetActive(true);
+        }
+        else
+        {
+            DeadIndicator.SetActive(false);
         }
     }
 
 
+
+    void EmptySpace()
+    {
+
+    }
 }
