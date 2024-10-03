@@ -23,6 +23,10 @@ public class CapturePoint : NetworkBehaviour
 
     Color RColor;
 
+    bool ContestedFakeSineWaveBool = false;
+
+    float ContestedFakeSineWave = 0f;
+
 
     void Start()
     {
@@ -105,11 +109,40 @@ public class CapturePoint : NetworkBehaviour
 
             this.GetComponent<SpriteRenderer>().color = RColor;
         }
-        else
+        else if (LTeamCount.Value == 0 && RTeamCount.Value ==0)
         {
 
 
             this.GetComponent<SpriteRenderer>().color =  new Color(1,1,1,0.2f);
+
+        }
+        else
+        {
+
+
+            if(ContestedFakeSineWaveBool == false)
+            {
+
+                ContestedFakeSineWave += 11f * Time.deltaTime;
+
+                if(ContestedFakeSineWave > 10f)
+                {
+                    ContestedFakeSineWaveBool = true;
+                }
+            }
+            else
+            {
+                ContestedFakeSineWave -= 11f * Time.deltaTime;
+
+                if (ContestedFakeSineWave < 0f)
+                {
+                    ContestedFakeSineWaveBool = false;
+                }
+            }
+
+
+
+            this.GetComponent<SpriteRenderer>().color = Color.Lerp(RColor,LColor, ContestedFakeSineWave/10f);
 
         }
 
