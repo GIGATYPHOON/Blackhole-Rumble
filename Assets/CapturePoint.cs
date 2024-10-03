@@ -98,13 +98,13 @@ public class CapturePoint : NetworkBehaviour
 
 
 
-        if (LTeamCount.Value > RTeamCount.Value)
+        if (LTeamCount.Value > 0 && RTeamCount.Value == 0)
         {
             this.GetComponent<SpriteRenderer>().color = LColor;
 
 
         }
-        else if (RTeamCount.Value > LTeamCount.Value)
+        else if (RTeamCount.Value > 0 && LTeamCount.Value == 0)
         {
 
             this.GetComponent<SpriteRenderer>().color = RColor;
