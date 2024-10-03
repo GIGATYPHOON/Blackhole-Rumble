@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Objectives
+    uniqueID: 1021569667
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

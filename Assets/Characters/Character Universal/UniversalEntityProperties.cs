@@ -227,7 +227,6 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
 
 
         if(IsOwner)
@@ -267,6 +266,7 @@ public class UniversalEntityProperties : NetworkBehaviour
         }
 
 
+        base.OnNetworkSpawn();
 
 
     }
