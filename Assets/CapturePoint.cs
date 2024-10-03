@@ -67,7 +67,7 @@ public class CapturePoint : NetworkBehaviour
 
         foreach(Collider thingamajig in hitColliders)
         {
-            if(thingamajig.gameObject.GetComponent<UniversalEntityProperties>())
+            if(thingamajig.gameObject.GetComponent<UniversalEntityProperties>().dead.Value == false)
             {
 
                 if(thingamajig.gameObject.GetComponent< UniversalEntityProperties>().TeamInt.Value == 0)
