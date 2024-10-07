@@ -172,7 +172,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-            if (((hitinvincibilitytimer.Value - Mathf.Floor(hitinvincibilitytimer.Value)) * 2f) < 0.5f)
+            if (((hitinvincibilitytimer.Value - Mathf.Floor(hitinvincibilitytimer.Value)) * 2f) < 0.8f)
             {
                 sprites.SetActive(false);
             }
@@ -356,6 +356,8 @@ public class UniversalEntityProperties : NetworkBehaviour
                 deathoverlayint.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(deathtimer) + "";
 
                 deathtimer -= 1f * Time.deltaTime;
+
+                GetComponent<Rigidbody>().velocity = Vector3.zero; 
             }
 
 
