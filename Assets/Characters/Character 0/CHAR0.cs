@@ -151,12 +151,16 @@ public class CHAR0 : NetworkBehaviour
         if (CurrentStanceBool.Value == true)
         {
             HorizonStrikesObject.transform.localScale = new Vector3(5f, 1.5f, 1f);
-            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(1.4f);
+            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetInvincibilityTimer(3f);
+            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(1f);
+
         }
         else
         {
             HorizonStrikesObject.transform.localScale = new Vector3(2f, 1f, 1f);
-            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(1f);
+            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetInvincibilityTimer(1.2f);
+
+            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(0.4f);
         }
 
 
@@ -230,14 +234,23 @@ public class CHAR0 : NetworkBehaviour
 
             TheSphere.GetComponent<CHAR0SingularitySphereScript>().WhenDoIDestroyMyself = 1f;
 
-            TheSphere.GetComponent<CHAR0Attacks>().SetDMGMulti(1.2f);
+
+            TheSphere.GetComponent<CHAR0Attacks>().SetInvincibilityTimer(2.2f);
+
+            TheSphere.GetComponent<CHAR0Attacks>().SetDMGMulti(0.9f);
+
+
 
         }
         else
         {
             SingularityCooldown = 2f;
 
-            TheSphere.GetComponent<CHAR0Attacks>().SetDMGMulti(0.8f);
+
+            TheSphere.GetComponent<CHAR0Attacks>().SetInvincibilityTimer(0.4f);
+
+            TheSphere.GetComponent<CHAR0Attacks>().SetDMGMulti(0.45f);
+
         }
 
     }

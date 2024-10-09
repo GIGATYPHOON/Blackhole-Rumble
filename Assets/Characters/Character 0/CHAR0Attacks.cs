@@ -10,6 +10,8 @@ public class CHAR0Attacks : MonoBehaviour
 
     float dmg = 1;
 
+    float invincibilitytimer = 5f;
+
     void Start()
     {
         
@@ -30,7 +32,7 @@ public class CHAR0Attacks : MonoBehaviour
             {
                 collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
 
-                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 10f * dmg, 10f, 0f, 5f, owner.transform.position, "CHAR0Attack", 1);
+                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 10f * dmg, 10f, 0f, invincibilitytimer, owner.transform.position, "CHAR0Attack", 1);
 
             }
 
@@ -51,5 +53,11 @@ public class CHAR0Attacks : MonoBehaviour
     public void SetDMGMulti(float multiplier)
     {
         dmg = multiplier;
+    }
+
+
+    public void SetInvincibilityTimer(float multiplier)
+    {
+        invincibilitytimer= multiplier;
     }
 }

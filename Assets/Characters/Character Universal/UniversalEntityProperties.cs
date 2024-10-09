@@ -121,8 +121,12 @@ public class UniversalEntityProperties : NetworkBehaviour
         {
             if (HP.Value <= 0)
             {
-                HP.Value = 0;
-                dead.Value = true;
+                if(IsOwner)
+                {
+                    HP.Value = 0;
+                    dead.Value = true;
+                }
+
             }
 
             //if (combatcollisionoverride == false)
