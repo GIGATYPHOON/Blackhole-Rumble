@@ -298,7 +298,7 @@ public class CHAR0 : NetworkBehaviour
             }
 
 
-            if(Input.GetButton("Special2"))
+            if(Input.GetButton("Special2") && UltimateCharge.Value >= 100)
             {
 
                 EventusMode.Value = true;
@@ -308,6 +308,12 @@ public class CHAR0 : NetworkBehaviour
             if (EventusMode.Value == true)
             {
                 UltimateCharge.Value -= 6f * Time.deltaTime;
+
+                if(UltimateCharge.Value <=0)
+                {
+                    UltimateCharge.Value = 0f;
+                    EventusMode.Value = false;
+                }
             }
 
         }
@@ -331,8 +337,8 @@ public class CHAR0 : NetworkBehaviour
 
     public void GainUltimateCharge()
     {
-        if(IsOwner)
-            UltimateCharge.Value += 3f;
+        if(IsOwner && EventusMode.Value == false)
+            UltimateCharge.Value += 5f;
 
 
     }

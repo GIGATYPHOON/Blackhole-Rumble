@@ -107,7 +107,7 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
 
 
-        if (isOnGround == true && Input.GetButton("Jump"))
+        if (isOnGround == true && Input.GetButtonDown("Jump"))
         {
 
             GetComponent<Rigidbody>().velocity = new Vector2(GetComponent<Rigidbody>().velocity.x, JumpStrength * 0.65f);

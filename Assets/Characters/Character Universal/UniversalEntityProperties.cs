@@ -61,6 +61,8 @@ public class UniversalEntityProperties : NetworkBehaviour
     public int olddamageprio = 0;
     public int currentdamageprio = 0;
 
+    public string lastspecificcause = "";
+
     void Start()
     {
 
@@ -202,6 +204,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
             currentdamageprio = 0;
 
+            lastspecificcause = "";
 
 
             sprites.SetActive(true);
@@ -248,6 +251,7 @@ public class UniversalEntityProperties : NetworkBehaviour
             {
                 TeamInt.Value = 1;
                 this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
+                isFacingRight.Value = true;
 
             }
 
@@ -304,9 +308,11 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-        if ((invuln.Value == false || damageprio > currentdamageprio) && isdamageable == true && dead.Value == false)
+        if ((invuln.Value == false || specificcause != lastspecificcause) && isdamageable == true && dead.Value == false)
         {
-            currentdamageprio = damageprio;
+            //currentdamageprio = damageprio;
+
+            lastspecificcause = specificcause;
 
 
 

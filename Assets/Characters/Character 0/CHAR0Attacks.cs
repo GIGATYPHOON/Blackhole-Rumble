@@ -40,7 +40,7 @@ public class CHAR0Attacks : MonoBehaviour
             {
                 collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
 
-                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 10f * dmg, 10f, 0f, invincibilitytimer, owner.transform.position, "CHAR0Attack", 1);
+                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 15f * dmg, 10f, 0f, invincibilitytimer, owner.transform.position, "CHAR0Attack", 2);
 
 
                 if(ismelee)
