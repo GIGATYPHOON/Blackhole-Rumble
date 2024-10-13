@@ -12,6 +12,13 @@ public class CHAR0Attacks : MonoBehaviour
 
     float invincibilitytimer = 5f;
 
+
+    [SerializeField]
+    private bool ismelee;
+
+
+    int counter = 0;
+
     void Start()
     {
         
@@ -28,6 +35,7 @@ public class CHAR0Attacks : MonoBehaviour
 
         if(collision.tag == "Player")
         {
+
             if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != collision.GetComponent<UniversalEntityProperties>().TeamInt.Value)
             {
                 collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
@@ -35,7 +43,22 @@ public class CHAR0Attacks : MonoBehaviour
                 collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 10f * dmg, 10f, 0f, invincibilitytimer, owner.transform.position, "CHAR0Attack", 1);
 
 
-                owner.GetComponent<CHAR0>().GainUltimateCharge();
+                if(ismelee)
+                {
+
+                    if (owner.GetComponent<CHAR0>().CaughtInAttacksCounter == 0)
+                        owner.GetComponent<CHAR0>().GainUltimateCharge();
+
+                    owner.GetComponent<CHAR0>().CaughtInAttacksCounter += 1;
+
+                }
+                else
+                {
+
+                    Destroy(this.gameObject);
+                }
+
+
 
 
             }
@@ -43,6 +66,14 @@ public class CHAR0Attacks : MonoBehaviour
 
         }
 
+
+    }
+
+
+
+    void Counter0()
+    {
+        counter = 0;
 
     }
 

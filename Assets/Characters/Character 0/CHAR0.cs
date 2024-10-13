@@ -44,6 +44,9 @@ public class CHAR0 : NetworkBehaviour
     [SerializeField] GameObject UltimateChargeIndicator;
 
 
+    public int CaughtInAttacksCounter = 0;
+
+
     void Start()
     {
         if (!IsOwner)
@@ -166,7 +169,7 @@ public class CHAR0 : NetworkBehaviour
             HorizonStrikesObject.transform.localScale = new Vector3(2f, 1f, 1f);
             HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetInvincibilityTimer(1.2f);
 
-            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(0.4f);
+            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(0.6f);
         }
 
 
@@ -285,6 +288,11 @@ public class CHAR0 : NetworkBehaviour
 
             UltimateCharge.Value += 0.4f * Time.deltaTime;
 
+            if(UltimateCharge.Value >= 100)
+            {
+                UltimateCharge.Value = 100f;
+            }
+
         }
 
         UltimateChargeIndicator.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(UltimateCharge.Value) + "%";
@@ -296,9 +304,16 @@ public class CHAR0 : NetworkBehaviour
     public void GainUltimateCharge()
     {
         if(IsOwner)
-            UltimateCharge.Value += 4f;
+            UltimateCharge.Value += 3f;
 
 
+    }
+
+
+
+    void CaughtInAttacksCounterReset()
+    {
+        CaughtInAttacksCounter = 0;
     }
 
 
