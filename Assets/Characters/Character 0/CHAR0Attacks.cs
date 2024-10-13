@@ -54,7 +54,7 @@ public class CHAR0Attacks : MonoBehaviour
                 }
                 else
                 {
-
+                    owner.GetComponent<CHAR0>().GainUltimateCharge();
                     Destroy(this.gameObject);
                 }
 

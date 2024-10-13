@@ -8,6 +8,11 @@ public class CHAR0Ultimate : MonoBehaviour
     private GameObject owner;
 
 
+    public float multiplier = 1;
+
+    public float size = 1;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +26,7 @@ public class CHAR0Ultimate : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerStay(Collider collision)
     {
 
         if (collision.tag == "Player")
@@ -29,7 +34,10 @@ public class CHAR0Ultimate : MonoBehaviour
             if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != collision.GetComponent<UniversalEntityProperties>().TeamInt.Value)
             {
 
+                Vector3 forceDirection = transform.position - collision.transform.position;
 
+                // apply force on target towards me
+                collision.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 3000f * Time.fixedDeltaTime, ForceMode.Force);
 
             }
 

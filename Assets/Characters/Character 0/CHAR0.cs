@@ -43,6 +43,11 @@ public class CHAR0 : NetworkBehaviour
 
     [SerializeField] GameObject UltimateChargeIndicator;
 
+    [SerializeField] GameObject Eventus;
+
+
+    NetworkVariable<bool> EventusMode = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
     public int CaughtInAttacksCounter = 0;
 
@@ -286,14 +291,37 @@ public class CHAR0 : NetworkBehaviour
         if(IsOwner)
         {
 
-            UltimateCharge.Value += 0.4f * Time.deltaTime;
 
             if(UltimateCharge.Value >= 100)
             {
                 UltimateCharge.Value = 100f;
             }
 
+
+            if(Input.GetButton("Special2"))
+            {
+
+                EventusMode.Value = true;
+
+            }
+
+            if (EventusMode.Value == true)
+            {
+                UltimateCharge.Value -= 6f * Time.deltaTime;
+            }
+
         }
+
+        if(EventusMode.Value == true)
+        {
+            Eventus.SetActive(true);
+        }
+        else
+        {
+
+            Eventus.SetActive(false);
+        }
+
 
         UltimateChargeIndicator.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(UltimateCharge.Value) + "%";
 
