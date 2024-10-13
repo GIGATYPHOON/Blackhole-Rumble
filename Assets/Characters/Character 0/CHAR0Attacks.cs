@@ -34,6 +34,10 @@ public class CHAR0Attacks : MonoBehaviour
 
                 collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 10f * dmg, 10f, 0f, invincibilitytimer, owner.transform.position, "CHAR0Attack", 1);
 
+
+                owner.GetComponent<CHAR0>().GainUltimateCharge();
+
+
             }
 
 

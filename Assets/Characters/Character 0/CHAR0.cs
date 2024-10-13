@@ -39,6 +39,10 @@ public class CHAR0 : NetworkBehaviour
 
     [SerializeField] GameObject DeadIndicator;
 
+    public NetworkVariable<float> UltimateCharge = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    [SerializeField] GameObject UltimateChargeIndicator;
+
 
     void Start()
     {
@@ -53,6 +57,7 @@ public class CHAR0 : NetworkBehaviour
     void Update()
     {
         Dead();
+
 
         if (GetComponent<UniversalEntityProperties>().dead.Value == false)
         {
@@ -75,6 +80,7 @@ public class CHAR0 : NetworkBehaviour
 
 
 
+            Ultimate();
 
             if (!IsOwner)
                 return;
@@ -269,6 +275,31 @@ public class CHAR0 : NetworkBehaviour
         }
     }
 
+
+
+    void Ultimate()
+    {
+
+        if(IsOwner)
+        {
+
+            UltimateCharge.Value += 0.4f * Time.deltaTime;
+
+        }
+
+        UltimateChargeIndicator.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(UltimateCharge.Value) + "%";
+
+
+    }
+
+
+    public void GainUltimateCharge()
+    {
+        if(IsOwner)
+            UltimateCharge.Value += 4f;
+
+
+    }
 
 
     void EmptySpace()
