@@ -16,7 +16,9 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public NetworkVariable<int> TeamInt = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    
+
+    [SerializeField] GameObject SelfCamera;
+
 
     [SerializeField] GameObject healthbar;
 
@@ -68,12 +70,9 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-
-
-
         if (!IsOwner)
             return;
-
+        SelfCamera.SetActive(true);
 
 
 
@@ -96,7 +95,7 @@ public class UniversalEntityProperties : NetworkBehaviour
         }
 
 
-        print(TeamInt.Value);
+
 
 
 
@@ -426,4 +425,17 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
     }
+
+
+
+
+
+    void CameraMovement()
+    {
+
+
+
+    }
+
+
 }

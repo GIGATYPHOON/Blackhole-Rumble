@@ -10,8 +10,6 @@ public class CHAR0 : NetworkBehaviour
 
     [SerializeField] GameObject ObjectsToFlip;
 
-    [SerializeField] GameObject SelfCamera;
-
 
 
     string CurrentStance = "Time Stance";
@@ -54,9 +52,6 @@ public class CHAR0 : NetworkBehaviour
 
     void Start()
     {
-        if (!IsOwner)
-            return;
-        SelfCamera.SetActive(true);
 
 
     }
@@ -260,6 +255,16 @@ public class CHAR0 : NetworkBehaviour
         {
             SingularityCooldown = 2f;
 
+            if (GetComponent<UniversalEntityProperties>().isFacingRight.Value == true)
+            {
+                TheSphere.GetComponent<Rigidbody>().AddForce(Vector3.right * 14f, ForceMode.VelocityChange);
+                //TheSphere.GetComponent<ConstantForce>().force = Vector3.right * 50f;
+            }
+            else
+            {
+                TheSphere.GetComponent<Rigidbody>().AddForce(Vector3.left * 14f, ForceMode.VelocityChange);
+                //TheSphere.GetComponent<ConstantForce>().force = Vector3.left * 50f;
+            }
 
             TheSphere.GetComponent<CHAR0Attacks>().SetInvincibilityTimer(0.4f);
 
