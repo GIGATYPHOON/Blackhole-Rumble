@@ -60,7 +60,7 @@ public class CHAR0 : NetworkBehaviour
     void Update()
     {
         Dead();
-
+        Ultimate();
 
         if (GetComponent<UniversalEntityProperties>().dead.Value == false)
         {
@@ -83,7 +83,7 @@ public class CHAR0 : NetworkBehaviour
 
 
 
-            Ultimate();
+
 
             if (!IsOwner)
                 return;
@@ -314,15 +314,7 @@ public class CHAR0 : NetworkBehaviour
                 UltimateCharge.Value -= 6f * Time.deltaTime;
 
 
-                if (GetComponent<UniversalEntityProperties>().HP.Value <= 0)
-                {
-                    UltimateCharge.Value = 0;
-                    EventusMode.Value = false;
-                }
-
-
-
-                if (UltimateCharge.Value <=0)
+                if (UltimateCharge.Value <=0 || GetComponent<UniversalEntityProperties>().HP.Value <= 0)
                 {
                     UltimateCharge.Value = 0f;
                     EventusMode.Value = false;

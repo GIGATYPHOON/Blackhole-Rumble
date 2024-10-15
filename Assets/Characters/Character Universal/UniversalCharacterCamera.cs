@@ -206,12 +206,13 @@ public class UniversalCharacterCamera : MonoBehaviour
 
         if (Input.mouseScrollDelta.y > 0)
         {
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
         }
         else if(Input.mouseScrollDelta.y < 0)
         {
             Cursor.visible = true;
-
+            Cursor.lockState = CursorLockMode.None;
         }
 
 
