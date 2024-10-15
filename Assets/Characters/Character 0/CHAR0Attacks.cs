@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class CHAR0Attacks : MonoBehaviour
@@ -40,7 +41,13 @@ public class CHAR0Attacks : MonoBehaviour
             {
                 collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
 
-                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 15f * dmg, 10f, 0f, invincibilitytimer, owner.transform.position, "CHAR0Attack", 2);
+                float damagetodo = 0;
+
+                damagetodo = 15f * dmg;
+
+                Mathf.Floor(damagetodo);
+
+                collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, damagetodo, 10f, 0f, invincibilitytimer, owner.transform.position, "CHAR0Attack", 2);
 
 
                 if(ismelee)

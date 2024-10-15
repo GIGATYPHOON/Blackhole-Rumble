@@ -40,7 +40,9 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 dmgmultiplier = 1 + (1 - (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value));
 
-                dmgmultiplier = Mathf.Pow(dmgmultiplier, 3f);
+                dmgmultiplier = Mathf.Pow(dmgmultiplier, 2f);
+                
+                dmgmultiplier = Mathf.Floor(dmgmultiplier);
 
                 dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 2f * dmgmultiplier, 0f, 0f, 3f, owner.transform.position, "CHAR0Ultimate", 1);
 
