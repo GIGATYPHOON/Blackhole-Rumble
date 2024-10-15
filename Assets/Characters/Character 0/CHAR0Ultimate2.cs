@@ -27,12 +27,12 @@ public class CHAR0Ultimate2 : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, transform.localScale.x / 2, m_LayerMask);
 
 
-        foreach (GameObject stupid in GameObject.FindGameObjectsWithTag("Player"))
-        {
+        //foreach (GameObject stupid in GameObject.FindGameObjectsWithTag("Player"))
+        //{
 
-            Physics.IgnoreCollision(owner.gameObject.GetComponent<BoxCollider>(), stupid.gameObject.GetComponent<BoxCollider>(), false);
+        //    Physics.IgnoreCollision(owner.gameObject.GetComponent<BoxCollider>(), stupid.gameObject.GetComponent<BoxCollider>(), false);
 
-        }
+        //}
 
 
         foreach (Collider dumbidiot in hitColliders)
@@ -66,23 +66,23 @@ public class CHAR0Ultimate2 : MonoBehaviour
                 dmgmultiplier = Mathf.Ceil(dmgmultiplier);
 
 
-
-                if(dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value > dmgmultiplier)
-                {
-                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
-
-                }
-
-                if(Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 3f)
-                {
-
-                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
-                }
+                dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
+                //if (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value > dmgmultiplier)
+                //{
 
 
+                //}
+
+                //if(Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 3f)
+                //{
+
+                //    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
+                //}
 
 
-                Physics.IgnoreCollision(owner.gameObject.GetComponent<BoxCollider>(), dumbidiot.gameObject.GetComponent<BoxCollider>(),true);
+
+
+                //Physics.IgnoreCollision(owner.gameObject.GetComponent<BoxCollider>(), dumbidiot.gameObject.GetComponent<BoxCollider>(),true);
 
 
 
