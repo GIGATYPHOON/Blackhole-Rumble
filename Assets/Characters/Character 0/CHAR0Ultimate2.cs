@@ -41,7 +41,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
                 pullmultiplier = 1 + (1 - (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value));
 
 
-                pullmultiplier = Mathf.Pow(pullmultiplier, 3f);
+                pullmultiplier = Mathf.Pow(pullmultiplier, 4f);
 
                 pullmultiplier = Mathf.Floor(pullmultiplier);
 
@@ -49,9 +49,9 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 float dmgmultiplier = 1;
 
-                dmgmultiplier = 12.5f - Vector3.Distance(this.transform.position, dumbidiot.transform.position);
+                dmgmultiplier = 13f - Vector3.Distance(this.transform.position, dumbidiot.transform.position);
 
-                dmgmultiplier = dmgmultiplier / 5f;
+                dmgmultiplier = dmgmultiplier / 1.5f;
 
 
                 print(dmgmultiplier);
@@ -61,8 +61,17 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
 
 
+                if(dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value > dmgmultiplier)
+                {
+                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
 
-                dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 2f * dmgmultiplier, 0f, 0f, 3f, owner.transform.position, "CHAR0Ultimate", 1);
+                }
+
+                if(Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 3f)
+                {
+
+                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
+                }
 
 
 
