@@ -51,7 +51,7 @@ public class CHAR0Ultimate : MonoBehaviour
                     Vector3 forceDirection = transform.position - collision.transform.position;
 
                 // apply force on target towards me
-                collision.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 3000f * dmgmultiplier* Time.fixedDeltaTime, ForceMode.Force);
+                collision.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 3000f * dmgmultiplier* Time.deltaTime, ForceMode.Force);
 
             }
 
