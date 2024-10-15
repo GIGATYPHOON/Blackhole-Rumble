@@ -1884,7 +1884,7 @@ GameObject:
   - component: {fileID: 8593484400100480326}
   - component: {fileID: 2214159842914525015}
   - component: {fileID: 5022815359277946147}
-  - component: {fileID: 6342147557504211420}
+  - component: {fileID: 6803975548062365338}
   m_Layer: 0
   m_Name: DarkHole
   m_TagString: Untagged
@@ -1972,7 +1972,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6342147557504211420
+--- !u!114 &6803975548062365338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1981,12 +1981,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8799979862962703521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676bdb2bf396ef84a97c515b94b778fd, type: 3}
+  m_Script: {fileID: 11500000, guid: ea948d036a41a6240b841ffb5cd23344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 7261251903851003412}
-  multiplier: 1
-  size: 1
+  playersinult: []
 --- !u!1001 &1831780943285729228
 PrefabInstance:
   m_ObjectHideFlags: 0

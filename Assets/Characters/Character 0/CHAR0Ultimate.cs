@@ -8,9 +8,7 @@ public class CHAR0Ultimate : MonoBehaviour
     private GameObject owner;
 
 
-    public float multiplier = 1;
 
-    public float size = 1;
 
 
     // Start is called before the first frame update
