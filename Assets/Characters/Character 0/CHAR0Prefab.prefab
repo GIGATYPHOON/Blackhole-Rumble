@@ -1986,6 +1986,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 7261251903851003412}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 136
   playersinult: []
 --- !u!54 &7806616541597364751
 Rigidbody:

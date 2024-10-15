@@ -8,6 +8,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
     private GameObject owner;
 
 
+    public LayerMask m_LayerMask;
 
     [SerializeField]
     List<GameObject> playersinult;
@@ -23,7 +24,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
     void Update()
     {
 
-        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity);
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, transform.localScale.x / 2, m_LayerMask);
 
 
 
