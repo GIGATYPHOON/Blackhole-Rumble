@@ -21,7 +21,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
 
         Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, transform.localScale.x / 2, m_LayerMask);
@@ -33,7 +33,15 @@ public class CHAR0Ultimate2 : MonoBehaviour
         //    Physics.IgnoreCollision(owner.gameObject.GetComponent<BoxCollider>(), stupid.gameObject.GetComponent<BoxCollider>(), false);
 
         //}
+        foreach (GameObject fuckwad in GameObject.FindGameObjectsWithTag("Player"))
+        {
 
+            if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != fuckwad.GetComponent<UniversalEntityProperties>().TeamInt.Value)
+            {
+
+                fuckwad.GetComponent<UniversalCharacterMovement>().CHAR0Eventus(false);
+            }
+        }
 
         foreach (Collider dumbidiot in hitColliders)
         {
@@ -47,7 +55,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
                 pullmultiplier = 1 + (1 - (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value));
 
 
-                pullmultiplier = Mathf.Pow(pullmultiplier, 4.3f);
+                pullmultiplier = Mathf.Pow(pullmultiplier, 3f);
 
                 pullmultiplier = Mathf.Floor(pullmultiplier);
 
@@ -73,10 +81,10 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 //}
 
-                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 3.5f)
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 4f)
                 {
 
-                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 2f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
+                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
                 }
 
 
@@ -92,21 +100,41 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 // apply force on target towards me
 
-                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 3.5f)
+
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 2f)
                 {
-                    dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1500f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
+                    dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1800f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
+
                 }
                 else
                 {
 
-                    dumbidiot.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+
                 }
+
+                if((dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value) < 0.32f)
+                {
+
+                    dumbidiot.GetComponent<UniversalCharacterMovement>().CHAR0Eventus(true);
+                }
+                else
+                {
+                    dumbidiot.GetComponent<UniversalCharacterMovement>().CHAR0Eventus(false);
+                }
+
+
 
 
             }
 
 
         }
+
+    }
+
+    private void OnDisable()
+    {
 
     }
 

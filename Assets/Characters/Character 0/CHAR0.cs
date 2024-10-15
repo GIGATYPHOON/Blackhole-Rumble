@@ -331,7 +331,7 @@ public class CHAR0 : NetworkBehaviour
             }
 
 
-            if (UltimateCharge.Value >= 100)
+            if (UltimateCharge.Value >= 100 || Input.GetKeyDown(KeyCode.U))
             {
                 UltimateCharge.Value = 100f;
             }

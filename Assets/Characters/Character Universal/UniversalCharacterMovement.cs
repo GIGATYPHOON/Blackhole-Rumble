@@ -20,6 +20,9 @@ public class UniversalCharacterMovement : NetworkBehaviour
     bool isOnGround;
 
 
+
+    public NetworkVariable<bool> CHAR0EventusNoGravity = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     void Start()
     {
         
@@ -51,12 +54,19 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
         //this is for regulating the jump arc
 
-        if (GetComponent<Rigidbody>().velocity.y < 2f && isOnGround == false)
+
+        if(DeniedGravity()== false)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.down * AirFallSpeed * 2.50f, ForceMode.Force);
+            if (GetComponent<Rigidbody>().velocity.y < 2f && isOnGround == false)
+            {
+                GetComponent<Rigidbody>().AddForce(Vector3.down * AirFallSpeed * 2.50f, ForceMode.Force);
+            }
+
+            GetComponent<Rigidbody>().AddForce(Vector3.down * Gravity * 0.7f, ForceMode.Force);
+
         }
 
-        GetComponent<Rigidbody>().AddForce(Vector3.down * Gravity * 0.7f, ForceMode.Force);
+
     }
 
 
@@ -131,6 +141,36 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
 
 
+
+
+
+    bool DeniedGravity()
+    {
+        if(CHAR0EventusNoGravity.Value == true)
+        {
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+    }
+
+
+
+    public void CHAR0Eventus(bool onoff)
+    {
+
+        if(IsOwner)
+        {
+
+
+            GetComponent<UniversalCharacterMovement>().CHAR0EventusNoGravity.Value = onoff;
+        }
+    }
 
 
 }
