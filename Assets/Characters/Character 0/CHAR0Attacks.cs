@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class CHAR0Attacks : MonoBehaviour
@@ -45,7 +44,7 @@ public class CHAR0Attacks : MonoBehaviour
 
                 damagetodo = 15f * dmg;
 
-                Mathf.Floor(damagetodo);
+                damagetodo = Mathf.Floor(damagetodo);
 
                 collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, damagetodo, 10f, 0f, invincibilitytimer, owner.transform.position, "CHAR0Attack", 2);
 
