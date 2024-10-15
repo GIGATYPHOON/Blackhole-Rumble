@@ -46,7 +46,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
                 Vector3 forceDirection = transform.position - dumbidiot.transform.position;
 
                 // apply force on target towards me
-                dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 800f * dmgmultiplier * Time.deltaTime, ForceMode.Force);
+                dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1300f * dmgmultiplier * Time.deltaTime, ForceMode.Force);
 
             }
 
