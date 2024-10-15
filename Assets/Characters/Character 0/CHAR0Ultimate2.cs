@@ -73,11 +73,11 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 //}
 
-                //if(Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 3f)
-                //{
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 3f)
+                {
 
-                //    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
-                //}
+                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
+                }
 
 
 
@@ -92,7 +92,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 // apply force on target towards me
 
-                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 3f)
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 2f)
                 {
                     dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1500f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
                 }
