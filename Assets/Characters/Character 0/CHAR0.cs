@@ -302,11 +302,6 @@ public class CHAR0 : NetworkBehaviour
                 UltimateCharge.Value = 100f;
             }
 
-            if(GetComponent<UniversalEntityProperties>().dead.Value == true)
-            {
-                UltimateCharge.Value = 0;
-            }    
-
             if(Input.GetButton("Special2") && UltimateCharge.Value >= 100)
             {
 
@@ -318,7 +313,15 @@ public class CHAR0 : NetworkBehaviour
             {
                 UltimateCharge.Value -= 6f * Time.deltaTime;
 
-                if(UltimateCharge.Value <=0)
+
+                if (GetComponent<UniversalEntityProperties>().dead.Value == true)
+                {
+                    UltimateCharge.Value = 0;
+                }
+
+
+
+                if (UltimateCharge.Value <=0)
                 {
                     UltimateCharge.Value = 0f;
                     EventusMode.Value = false;
