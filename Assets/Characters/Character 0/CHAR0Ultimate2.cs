@@ -23,8 +23,12 @@ public class CHAR0Ultimate2 : MonoBehaviour
     void Update()
     {
 
+        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity);
 
-        foreach(GameObject dumbidiot in playersinult.ToArray())
+
+
+
+        foreach (Collider dumbidiot in hitColliders)
         {
             if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != dumbidiot.GetComponent<UniversalEntityProperties>().TeamInt.Value && dumbidiot.GetComponent<UniversalEntityProperties>().dead.Value == false)
             {
@@ -50,62 +54,9 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
             }
 
-            if(dumbidiot.GetComponent<UniversalEntityProperties>().dead.Value == true)
-            {
-                playersinult.Remove(dumbidiot.gameObject);
-
-            }
-
 
         }
 
-    }
-
-    private void OnDisable()
-    {
-        playersinult.Clear();
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.tag == "Player")
-        {
-            if (!playersinult.Contains(collision.gameObject))
-            {
-                playersinult.Add(collision.gameObject);
-            }
-        }
-
-    }
-
-    private void OnTriggerStay(Collider collision)
-    {
-
-        if (collision.tag == "Player")
-        {
-   
-
-
-            if(!playersinult.Contains( collision.gameObject))
-            {
-                playersinult.Add( collision.gameObject);
-            }
-
-
-        }
-
-
-    }
-
-    private void OnTriggerExit(Collider collision)
-    {
-        if (collision.tag == "Player")
-        {
-            if (playersinult.Contains(collision.gameObject))
-            {
-                playersinult.Remove(collision.gameObject);
-            }
-        }
     }
 
 }
