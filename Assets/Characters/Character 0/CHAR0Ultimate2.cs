@@ -27,6 +27,12 @@ public class CHAR0Ultimate2 : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, transform.localScale.x / 2, m_LayerMask);
 
 
+        foreach (GameObject stupid in GameObject.FindGameObjectsWithTag("Player"))
+        {
+
+            Physics.IgnoreCollision(owner.gameObject.GetComponent<BoxCollider>(), stupid.gameObject.GetComponent<BoxCollider>(), false);
+
+        }
 
 
         foreach (Collider dumbidiot in hitColliders)
@@ -51,7 +57,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 dmgmultiplier = 13f - Vector3.Distance(this.transform.position, dumbidiot.transform.position);
 
-                dmgmultiplier = dmgmultiplier / 1.5f;
+                dmgmultiplier = dmgmultiplier / 2.5f;
 
 
                 print(dmgmultiplier);
@@ -76,11 +82,21 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
 
 
+                Physics.IgnoreCollision(owner.gameObject.GetComponent<BoxCollider>(), dumbidiot.gameObject.GetComponent<BoxCollider>(),true);
+
+
+
+
 
                 Vector3 forceDirection = transform.position - dumbidiot.transform.position;
 
                 // apply force on target towards me
-                dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1500f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
+
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 3f)
+                {
+                    dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1500f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
+                }
+
 
             }
 

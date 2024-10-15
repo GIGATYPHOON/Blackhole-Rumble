@@ -91,6 +91,7 @@ public class CHAR0 : NetworkBehaviour
 
             PrimarySecondary();
 
+
             Stances();
 
 
@@ -241,7 +242,6 @@ public class CHAR0 : NetworkBehaviour
 
             TheSphere.transform.localScale = Vector3.one * 2;
 
-            TheSphere.GetComponent<CHAR0SingularitySphereScript>().WhenDoIDestroyMyself = 1f;
 
 
             TheSphere.GetComponent<CHAR0Attacks>().SetInvincibilityTimer(2.2f);
@@ -297,28 +297,50 @@ public class CHAR0 : NetworkBehaviour
         {
 
 
-            if(UltimateCharge.Value >= 100)
+
+
+            if (EventusMode.Value == true)
+            {
+                UltimateCharge.Value -= 10f * Time.deltaTime;
+
+
+            }
+            else
+            {
+
+                if(GetComponent<UniversalEntityProperties>().dead.Value == false)
+                {
+                    if (CurrentStanceBool.Value == true)
+                    {
+                        UltimateCharge.Value += 1f * Time.deltaTime;
+                    }
+                    else
+                    {
+                        UltimateCharge.Value += 3f * Time.deltaTime;
+                    }
+
+                }
+
+            }
+
+
+            if (UltimateCharge.Value <= 0 || GetComponent<UniversalEntityProperties>().HP.Value <= 0)
+            {
+                UltimateCharge.Value = 0f;
+                EventusMode.Value = false;
+            }
+
+
+            if (UltimateCharge.Value >= 100)
             {
                 UltimateCharge.Value = 100f;
             }
 
-            if(Input.GetButton("Special2") && UltimateCharge.Value >= 100)
+            if (Input.GetButton("Special2") && UltimateCharge.Value >= 100)
             {
 
                 EventusMode.Value = true;
 
-            }
-
-            if (EventusMode.Value == true)
-            {
-                UltimateCharge.Value -= 6f * Time.deltaTime;
-
-
-                if (UltimateCharge.Value <=0 || GetComponent<UniversalEntityProperties>().HP.Value <= 0)
-                {
-                    UltimateCharge.Value = 0f;
-                    EventusMode.Value = false;
-                }
             }
 
         }
@@ -326,6 +348,7 @@ public class CHAR0 : NetworkBehaviour
         if(EventusMode.Value == true)
         {
             Eventus.SetActive(true);
+
         }
         else
         {
@@ -343,7 +366,7 @@ public class CHAR0 : NetworkBehaviour
     public void GainUltimateCharge()
     {
         if(IsOwner && EventusMode.Value == false)
-            UltimateCharge.Value += 100f;
+            UltimateCharge.Value += 8f;
 
 
     }

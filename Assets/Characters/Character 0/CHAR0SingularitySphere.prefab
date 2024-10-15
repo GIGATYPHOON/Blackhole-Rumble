@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c275b86a46e11045aaa073977dad18f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WhenDoIDestroyMyself: 0.333
+  WhenDoIDestroyMyself: 1
 --- !u!54 &1797355005926086804
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  ismelee: 0
 --- !u!1 &6456799272131186529
 GameObject:
   m_ObjectHideFlags: 0

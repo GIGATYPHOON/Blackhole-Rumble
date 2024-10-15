@@ -65,6 +65,9 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public string lastspecificcause = "";
 
+
+    public NetworkVariable<bool> ghosted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     void Start()
     {
 
@@ -439,8 +442,9 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
-    void CameraMovement()
+    void Ghosted()
     {
+
 
 
 

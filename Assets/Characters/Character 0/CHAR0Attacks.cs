@@ -57,6 +57,8 @@ public class CHAR0Attacks : MonoBehaviour
 
                     owner.GetComponent<CHAR0>().CaughtInAttacksCounter += 1;
 
+                    //owner.GetComponent<CHAR0>().GainUltimateCharge();
+
                 }
                 else
                 {

@@ -6,7 +6,7 @@ public class CHAR0SingularitySphereScript : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float WhenDoIDestroyMyself = 0.333f;
+    public float WhenDoIDestroyMyself;
 
 
     void Start()
