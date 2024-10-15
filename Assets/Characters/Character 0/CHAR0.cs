@@ -317,6 +317,7 @@ public class CHAR0 : NetworkBehaviour
                 if (GetComponent<UniversalEntityProperties>().dead.Value == true)
                 {
                     UltimateCharge.Value = 0;
+                    EventusMode.Value = false;
                 }
 
 
