@@ -92,7 +92,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 // apply force on target towards me
 
-                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 2f)
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 3f)
                 {
                     dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1500f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
                 }
