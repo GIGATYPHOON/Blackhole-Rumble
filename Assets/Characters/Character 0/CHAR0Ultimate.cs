@@ -40,7 +40,7 @@ public class CHAR0Ultimate : MonoBehaviour
 
                 dmgmultiplier = 1 + (1-(collision.GetComponent<UniversalEntityProperties>().HP.Value / collision.GetComponent<UniversalEntityProperties>().BaseHP.Value));
 
-                dmgmultiplier = Mathf.Pow(dmgmultiplier, 4f);
+                dmgmultiplier = Mathf.Pow(dmgmultiplier, 2f);
 
                 collision.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 2f * dmgmultiplier, 0f, 0f, 3f, owner.transform.position, "CHAR0Ultimate", 1);
 
