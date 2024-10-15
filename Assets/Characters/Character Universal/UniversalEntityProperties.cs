@@ -130,6 +130,15 @@ public class UniversalEntityProperties : NetworkBehaviour
 
             }
 
+            if(HP.Value > 100)
+            {
+                if (IsOwner)
+                {
+                    HP.Value = 100;
+                }
+
+            }
+
             //if (combatcollisionoverride == false)
             //{ 
             //}
