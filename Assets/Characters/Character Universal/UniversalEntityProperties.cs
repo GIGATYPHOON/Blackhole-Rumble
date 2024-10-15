@@ -242,7 +242,7 @@ public class UniversalEntityProperties : NetworkBehaviour
                TeamInt.Value = 0;
                 this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
 
-
+                isFacingRight.Value = true;
 
 
             }
@@ -250,8 +250,8 @@ public class UniversalEntityProperties : NetworkBehaviour
             {
                 TeamInt.Value = 1;
                 this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
-                isFacingRight.Value = true;
 
+                isFacingRight.Value = false;
             }
 
             YourTeam.Value = TeamInt.Value;

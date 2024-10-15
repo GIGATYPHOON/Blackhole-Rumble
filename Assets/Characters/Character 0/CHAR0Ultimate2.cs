@@ -40,11 +40,16 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 dmgmultiplier = 1 + (1 - (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value));
 
-                dmgmultiplier = Mathf.Pow(dmgmultiplier, 2f);
-                
+
+                dmgmultiplier = Mathf.Pow(dmgmultiplier, 3f);
+
                 dmgmultiplier = Mathf.Floor(dmgmultiplier);
 
-                dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 2f * dmgmultiplier, 0f, 0f, 3f, owner.transform.position, "CHAR0Ultimate", 1);
+
+                print(dmgmultiplier);
+
+
+                dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 3f * dmgmultiplier, 0f, 0f, 3f, owner.transform.position, "CHAR0Ultimate", 1);
 
 
 
@@ -53,7 +58,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
                 Vector3 forceDirection = transform.position - dumbidiot.transform.position;
 
                 // apply force on target towards me
-                dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 2300f * dmgmultiplier * Time.deltaTime, ForceMode.Acceleration);
+                dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1300f * dmgmultiplier * Time.deltaTime, ForceMode.Acceleration);
 
             }
 
