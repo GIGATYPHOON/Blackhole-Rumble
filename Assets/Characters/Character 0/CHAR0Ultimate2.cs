@@ -47,7 +47,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
                 pullmultiplier = 1 + (1 - (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value));
 
 
-                pullmultiplier = Mathf.Pow(pullmultiplier, 4f);
+                pullmultiplier = Mathf.Pow(pullmultiplier, 4.3f);
 
                 pullmultiplier = Mathf.Floor(pullmultiplier);
 
@@ -73,10 +73,10 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 //}
 
-                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 3f)
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) < 3.5f)
                 {
 
-                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
+                    dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 2f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
                 }
 
 
@@ -92,9 +92,14 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 // apply force on target towards me
 
-                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 3f)
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 3.5f)
                 {
                     dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1500f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
+                }
+                else
+                {
+
+                    dumbidiot.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 }
 
 

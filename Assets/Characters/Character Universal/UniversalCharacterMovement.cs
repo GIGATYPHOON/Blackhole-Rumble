@@ -7,12 +7,12 @@ public class UniversalCharacterMovement : NetworkBehaviour
 {
     // Start is called before the first frame update\
 
-    [SerializeField] float Gravity;
+    [SerializeField] public float Gravity;
     [SerializeField] float MoveSpeed; 
     [SerializeField] float GroundFrictionWhileMoving;
     [SerializeField] float GroundFrictionWhenStopped;
     [SerializeField] float JumpStrength;
-    [SerializeField] float AirFallSpeed; 
+    [SerializeField] public float AirFallSpeed; 
     [SerializeField] float AirFriction;
     [SerializeField] float AirFrictionHorizontal;
 
