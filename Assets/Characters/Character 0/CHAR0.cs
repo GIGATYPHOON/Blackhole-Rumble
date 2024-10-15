@@ -314,7 +314,7 @@ public class CHAR0 : NetworkBehaviour
                 UltimateCharge.Value -= 6f * Time.deltaTime;
 
 
-                if (GetComponent<UniversalEntityProperties>().dead.Value == true)
+                if (GetComponent<UniversalEntityProperties>().HP.Value <= 0)
                 {
                     UltimateCharge.Value = 0;
                     EventusMode.Value = false;
