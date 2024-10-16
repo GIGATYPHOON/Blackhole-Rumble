@@ -113,7 +113,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 }
 
-                if((dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value) < 0.45f)
+                if((dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value) < 0.4f)
                 {
 
                     dumbidiot.GetComponent<UniversalCharacterMovement>().CHAR0Eventus(true);
