@@ -113,7 +113,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 }
 
-                if((dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value) < 0.32f)
+                if((dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value / dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value) < 0.45f)
                 {
 
                     dumbidiot.GetComponent<UniversalCharacterMovement>().CHAR0Eventus(true);
@@ -135,7 +135,15 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
     private void OnDisable()
     {
+        foreach (GameObject fuckwad in GameObject.FindGameObjectsWithTag("Player"))
+        {
 
+            if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != fuckwad.GetComponent<UniversalEntityProperties>().TeamInt.Value)
+            {
+
+                fuckwad.GetComponent<UniversalCharacterMovement>().CHAR0Eventus(false);
+            }
+        }
     }
 
 }
