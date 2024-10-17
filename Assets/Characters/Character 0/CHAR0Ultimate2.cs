@@ -65,14 +65,15 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 dmgmultiplier = 13f - Vector3.Distance(this.transform.position, dumbidiot.transform.position);
 
-                dmgmultiplier = dmgmultiplier / 1.5f;
+                dmgmultiplier = dmgmultiplier / 2f;
 
 
-                print(dmgmultiplier);
+
 
 
                 dmgmultiplier = Mathf.Ceil(dmgmultiplier);
 
+                print(pullmultiplier);
 
                 dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().TakeDamage(owner, 1f * dmgmultiplier, 0f, 0f, 2f, owner.transform.position, "CHAR0Ultimate", 1);
                 //if (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value > dmgmultiplier)
@@ -101,9 +102,9 @@ public class CHAR0Ultimate2 : MonoBehaviour
                 // apply force on target towards me
 
 
-                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 3f)
+                if (Vector3.Distance(this.transform.position, dumbidiot.transform.position) > 2f)
                 {
-                    dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 1800f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
+                    dumbidiot.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * 2000f * pullmultiplier * Time.deltaTime, ForceMode.Acceleration);
 
                 }
                 else
