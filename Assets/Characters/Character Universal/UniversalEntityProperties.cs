@@ -442,6 +442,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public void Heal(float healamount)
     {
+        if(IsOwner)
         HP.Value += healamount;
 
     }
