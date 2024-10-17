@@ -65,7 +65,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
                 dmgmultiplier = 13f - Vector3.Distance(this.transform.position, dumbidiot.transform.position);
 
-                dmgmultiplier = dmgmultiplier / 2.5f;
+                dmgmultiplier = dmgmultiplier / 1.5f;
 
 
                 print(dmgmultiplier);
