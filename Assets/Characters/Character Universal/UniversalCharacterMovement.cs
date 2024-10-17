@@ -38,6 +38,8 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
         isOnGround = GroundChecker.GetComponent<UniversalGroundChecker>().onGround;
 
+        thefloor = GroundChecker.GetComponent<UniversalGroundChecker>().whatisfloor;
+
         Jump();
 
         PlatformBypass();
@@ -157,7 +159,11 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
             }
 
-            isOnGround = false;
+            if(thefloor == "Platform")
+            {
+                isOnGround = false;
+            }
+
         }
         else
         {

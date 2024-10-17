@@ -440,6 +440,11 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
 
+    public void Heal(float healamount)
+    {
+        HP.Value += healamount;
+
+    }
 
 
     void Ghosted()
