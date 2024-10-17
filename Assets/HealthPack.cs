@@ -23,7 +23,7 @@ public class HealthPack : NetworkBehaviour
     void Update()
     {
 
-        consumptionregen += 0.12f * Time.deltaTime;
+
 
 
 
@@ -34,7 +34,7 @@ public class HealthPack : NetworkBehaviour
         }
         else
         {
-            consumptionregen += 6f * Time.deltaTime;
+            consumptionregen +=2f * Time.deltaTime;
             isreadyforconsumption = false;
         }
 
