@@ -16,9 +16,11 @@ public class UniversalCharacterMovement : NetworkBehaviour
     [SerializeField] float AirFriction;
     [SerializeField] float AirFrictionHorizontal;
 
+
     [SerializeField] GameObject GroundChecker;
     bool isOnGround;
 
+    [SerializeField] string thefloor;
 
 
     public NetworkVariable<bool> CHAR0EventusNoGravity = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -38,6 +40,7 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
         Jump();
 
+        PlatformBypass();
 
     }
 
@@ -142,6 +145,37 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
 
 
+    void PlatformBypass()
+    {
+
+        if(GetComponent<Rigidbody>().velocity.y > 0.1f || Input.GetButton("Descend"))
+        {
+
+            foreach(GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
+            {
+                Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), platform.gameObject.GetComponent<Collider>(), true);
+
+            }
+
+            isOnGround = false;
+        }
+        else
+        {
+
+            foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
+            {
+                Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), platform.gameObject.GetComponent<Collider>(), false);
+            }
+
+        }
+
+
+    }
+
+
+
+
+    // status effects go under vvvvvvv OKAY GOOD
 
 
     bool DeniedGravity()
@@ -161,6 +195,7 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
 
 
+
     public void CHAR0Eventus(bool onoff)
     {
 
@@ -171,6 +206,8 @@ public class UniversalCharacterMovement : NetworkBehaviour
             GetComponent<UniversalCharacterMovement>().CHAR0EventusNoGravity.Value = onoff;
         }
     }
+
+
 
 
 }

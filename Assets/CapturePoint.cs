@@ -113,7 +113,7 @@ public class CapturePoint : NetworkBehaviour
         {
 
 
-            this.GetComponent<SpriteRenderer>().color =  new Color(0.5f, 0.5f, 0.5f, 0.2f);
+            this.GetComponent<SpriteRenderer>().color =  new Color(0.5f, 0.5f, 0.5f, 0.4f);
 
         }
         else

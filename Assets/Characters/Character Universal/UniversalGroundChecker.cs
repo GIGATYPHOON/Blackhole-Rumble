@@ -8,6 +8,8 @@ public class UniversalGroundChecker : MonoBehaviour
 
     public bool onGround;
 
+    public string whatisfloor;
+
     void Start()
     {
         
@@ -16,22 +18,27 @@ public class UniversalGroundChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        print(whatisfloor);
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 9)
+        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 8)
         {
             onGround = true;
+
+            whatisfloor = collision.gameObject.tag;
         }
     }
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 9)
+        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 8)
         {
             onGround = false;
+
+            whatisfloor = "";
         }
     }
 }

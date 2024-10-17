@@ -502,13 +502,13 @@ InputManager:
     axis: 0
     joyNum: 16
   - serializedVersion: 3
-    m_Name: Debug Horizontal
+    m_Name: Descend
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: left
-    positiveButton: right
+    negativeButton: 
+    positiveButton: down
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: s
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
