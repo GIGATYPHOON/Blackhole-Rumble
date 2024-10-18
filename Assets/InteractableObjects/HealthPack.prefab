@@ -380,6 +380,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   representation: {fileID: 2709459218804141953}
+  consumptionregen:
+    m_InternalValue: 10
+  consumptionregenbool:
+    m_InternalValue: 1
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 136
+  specialguests: []
 --- !u!114 &811768071302198503
 MonoBehaviour:
   m_ObjectHideFlags: 0

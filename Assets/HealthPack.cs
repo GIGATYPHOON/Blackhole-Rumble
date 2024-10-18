@@ -18,10 +18,9 @@ public class HealthPack : NetworkBehaviour
 
     bool cantake = true;
 
+    [SerializeField] LayerMask m_LayerMask;
+
     public List< GameObject> specialguests;
-
-
-    public NetworkVariable<NetworkObjectReference> specialguest = new NetworkVariable<NetworkObjectReference>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
     void Start()
@@ -44,29 +43,54 @@ public class HealthPack : NetworkBehaviour
 
         }
 
-        if(consumptionregen.Value > 9f && consumptionregen.Value < 10f)
-        {
-            cantake = true;
-        }
-
 
         representation.transform.localScale = Vector3.one * (consumptionregen.Value / 10f);
 
 
-        //closestguy = FindClosestPlayer();
+        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
 
-        //if (closestguy.GetComponent<NetworkObject>().OwnerClientId != OwnerClientId)
-        //{
-        //    GetComponent<NetworkObject>().ChangeOwnership(closestguy.GetComponent<NetworkObject>().OwnerClientId);
-        //}
+        specialguests.Clear();
 
-
-        if(consumptionregen.Value < 10f)
+        foreach (Collider dumbidiot in hitColliders)
         {
-       //     consumptionregen.OnValueChanged -= (previousValue, newValue);
+            if(!specialguests.Contains(dumbidiot.gameObject))
+            {
+
+                specialguests.Add(dumbidiot.gameObject);
+            }
 
         }
 
+
+        if (consumptionregenbool.Value == true && specialguests.Count > 0)
+        {
+
+            foreach(GameObject specialguest in specialguests)
+            {
+
+                if (specialguest.GetComponent<UniversalEntityProperties>().HP.Value < specialguest.GetComponent<UniversalEntityProperties>().BaseHP.Value)
+                {
+
+
+
+                    if (IsOwner)
+                    {
+
+
+                        consumptionregen.Value = 0;
+                        consumptionregenbool.Value = false;
+                    }
+
+
+
+                }
+
+            }
+
+
+
+
+        }
 
 
     }
@@ -91,57 +115,18 @@ public class HealthPack : NetworkBehaviour
 
 
 
-    private void OnTriggerStay(Collider other)
-    {
-
-        if (other.tag == "Player" && consumptionregenbool.Value == true)
-        {
-            if (!specialguests.Contains(other.gameObject))
-            {
-                specialguests.Add(other.gameObject);
-            }
-
-
-
-
-            if (other.GetComponent<UniversalEntityProperties>().HP.Value < other.GetComponent<UniversalEntityProperties>().BaseHP.Value)
-            {
-
-
-
-                if (IsOwner)
-                {
-
-
-                    consumptionregen.Value = 0;
-                    consumptionregenbool.Value = false;
-                }
-
-
-                cantake = false;
-
-
-            }
-
-
-        }
-
-
-    }
-
     public void WHAT_THE_FUCK(bool previous, bool current)
     {
-        //if(other!= null)
-        //{
-        //    other.GetComponent<UniversalEntityProperties>().Heal(25f);
-        //}    
+
 
         if(consumptionregenbool.Value == false)
         {
-            GOD_HATES_ROVERS(FindClosestPlayer());
+            foreach(GameObject specialguest in specialguests)
+            {
 
+                GOD_HATES_ROVERS(specialguest);
+            }
 
-            specialguests.Clear();
         }
 
     }
@@ -156,28 +141,6 @@ public class HealthPack : NetworkBehaviour
 
     }
 
-
-
-
-    public GameObject FindClosestPlayer()
-    {
-        GameObject[] gos;
-        gos = specialguests.ToArray();
-        GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach (GameObject go in gos)
-        {
-            Vector3 diff = go.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
-            {
-                closest = go;
-                distance = curDistance;
-            }
-        }
-        return closest;
-    }
 
 
 
