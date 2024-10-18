@@ -351,6 +351,12 @@ public class CHAR0 : NetworkBehaviour
                 UltimateCharge.Value = 100f;
             }
 
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                GetComponent<UniversalEntityProperties>().Heal(33f);
+
+            }
+
             if (Input.GetButton("Special2") && UltimateCharge.Value >= 100)
             {
 

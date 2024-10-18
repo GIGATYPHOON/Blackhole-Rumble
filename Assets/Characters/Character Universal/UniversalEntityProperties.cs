@@ -443,7 +443,11 @@ public class UniversalEntityProperties : NetworkBehaviour
     public void Heal(float healamount)
     {
         if(IsOwner)
-        HP.Value += healamount;
+        {
+            print("okay im healing");
+            GetComponent<UniversalEntityProperties>().HP.Value += healamount;
+        }
+
 
     }
 
