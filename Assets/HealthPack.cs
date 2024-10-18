@@ -14,14 +14,16 @@ public class HealthPack : NetworkBehaviour
 
     public NetworkVariable<float> consumptionregen = new NetworkVariable<float>(10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    public NetworkVariable<bool> consumptionregenbool = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     bool cantake = true;
 
-    GameObject specialguest;
+    public GameObject specialguest;
 
 
     void Start()
     {
-        consumptionregen.OnValueChanged += (previousValue, newValue) => WHAT_THE_FUCK(specialguest);
+        consumptionregenbool.OnValueChanged += WHAT_THE_FUCK;
 
 
         if (IsOwner)
@@ -58,7 +60,7 @@ public class HealthPack : NetworkBehaviour
 
         if(consumptionregen.Value < 10f)
         {
-            consumptionregen.OnValueChanged -= (previousValue, newValue) => WHAT_THE_FUCK(specialguest);
+       //     consumptionregen.OnValueChanged -= (previousValue, newValue);
 
         }
 
@@ -73,6 +75,7 @@ public class HealthPack : NetworkBehaviour
         if (consumptionregen.Value >= 10f)
         {
             consumptionregen.Value = 10f;
+            consumptionregenbool.Value = true;
 
         }
         else
@@ -88,11 +91,14 @@ public class HealthPack : NetworkBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        if (other.tag == "Player" && cantake == true)
+        if (other.tag == "Player" && consumptionregenbool.Value == true)
         {
+            specialguest = other.gameObject;
+
 
             if (other.GetComponent<UniversalEntityProperties>().HP.Value < other.GetComponent<UniversalEntityProperties>().BaseHP.Value)
             {
+
 
 
                 if (IsOwner)
@@ -100,9 +106,9 @@ public class HealthPack : NetworkBehaviour
 
 
                     consumptionregen.Value = 0;
+                    consumptionregenbool.Value = false;
                 }
 
-                specialguest = other.gameObject;
 
                 cantake = false;
 
@@ -115,12 +121,28 @@ public class HealthPack : NetworkBehaviour
 
     }
 
-    public void WHAT_THE_FUCK(GameObject other)
+    public void WHAT_THE_FUCK(bool previous, bool current)
+    {
+        //if(other!= null)
+        //{
+        //    other.GetComponent<UniversalEntityProperties>().Heal(25f);
+        //}    
+
+        if(consumptionregenbool.Value == false)
+        {
+            GOD_HATES_ROVERS(specialguest);
+
+        }
+
+    }
+
+    void GOD_HATES_ROVERS(GameObject other)
     {
         if(other!= null)
         {
             other.GetComponent<UniversalEntityProperties>().Heal(25f);
-        }    
+            specialguest = null;
+        }
 
     }
 
