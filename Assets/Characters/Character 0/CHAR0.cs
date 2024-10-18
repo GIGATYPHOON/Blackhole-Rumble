@@ -131,7 +131,7 @@ public class CHAR0 : NetworkBehaviour
     {
         if(StanceCooldown.Value <10f)
         {
-            StanceCooldown.Value += 5f * Time.deltaTime;
+            StanceCooldown.Value += 2f * Time.deltaTime;
         }
 
 
