@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class HealthPack : NetworkBehaviour
@@ -12,11 +13,11 @@ public class HealthPack : NetworkBehaviour
     bool isreadyforconsumption = true;
 
 
-    float consumptionregen = 10f;
+    public NetworkVariable<float> consumptionregen = new NetworkVariable<float>(10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     void Start()
     {
-        
+        GetComponent<NetworkObject>().ChangeOwnership(OwnerClientId);
     }
 
     // Update is called once per frame
@@ -24,21 +25,10 @@ public class HealthPack : NetworkBehaviour
     {
 
 
+        Replenish();
 
 
-
-        if (consumptionregen >= 10f)
-        {
-            consumptionregen = 10f;
-            isreadyforconsumption = true;
-        }
-        else
-        {
-            consumptionregen +=2f * Time.deltaTime;
-            isreadyforconsumption = false;
-        }
-
-        representation.transform.localScale = Vector3.one * (consumptionregen / 10f);
+        representation.transform.localScale = Vector3.one * (consumptionregen.Value / 10f);
 
 
 
@@ -48,7 +38,22 @@ public class HealthPack : NetworkBehaviour
     void Replenish()
     {
 
+        if(IsOwner)
+        {
 
+
+            if (consumptionregen.Value >= 10f)
+            {
+                consumptionregen.Value = 10f;
+                isreadyforconsumption = true;
+            }
+            else
+            {
+                consumptionregen.Value += 2f * Time.deltaTime;
+                isreadyforconsumption = false;
+            }
+
+        }
 
 
     }
@@ -63,7 +68,8 @@ public class HealthPack : NetworkBehaviour
             if (other.GetComponent<UniversalEntityProperties>().HP.Value < other.GetComponent<UniversalEntityProperties>().BaseHP.Value)
             {
                 other.GetComponent<UniversalEntityProperties>().Heal(25);
-                consumptionregen = 0;
+                if(IsOwner)
+                consumptionregen.Value = 0;
 
             }
 
