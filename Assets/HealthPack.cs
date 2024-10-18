@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class HealthPack : NetworkBehaviour
@@ -10,22 +9,24 @@ public class HealthPack : NetworkBehaviour
 
     [SerializeField] GameObject representation;
 
-    bool isreadyforconsumption = true;
+  //  bool isreadyforconsumption = true;
 
-
+    public NetworkVariable<bool> isreadyforconsumption = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<float> consumptionregen = new NetworkVariable<float>(10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     void Start()
     {
-        GetComponent<NetworkObject>().ChangeOwnership(OwnerClientId);
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        if(IsOwner)
+          Replenish();
 
-        Replenish();
+
 
 
         representation.transform.localScale = Vector3.one * (consumptionregen.Value / 10f);
@@ -38,21 +39,15 @@ public class HealthPack : NetworkBehaviour
     void Replenish()
     {
 
-        if(IsOwner)
+        if (consumptionregen.Value >= 10f)
         {
-
-
-            if (consumptionregen.Value >= 10f)
-            {
-                consumptionregen.Value = 10f;
-                isreadyforconsumption = true;
-            }
-            else
-            {
-                consumptionregen.Value += 2f * Time.deltaTime;
-                isreadyforconsumption = false;
-            }
-
+            consumptionregen.Value = 10f;
+            isreadyforconsumption.Value = true;
+        }
+        else
+        {
+            consumptionregen.Value += 2f * Time.deltaTime;
+            isreadyforconsumption.Value = false;
         }
 
 
@@ -62,14 +57,23 @@ public class HealthPack : NetworkBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        if (other.tag == "Player" && isreadyforconsumption)
+        if (other.tag == "Player" && isreadyforconsumption.Value == true)
         {
 
             if (other.GetComponent<UniversalEntityProperties>().HP.Value < other.GetComponent<UniversalEntityProperties>().BaseHP.Value)
             {
-                other.GetComponent<UniversalEntityProperties>().Heal(25);
+
+
                 if(IsOwner)
-                consumptionregen.Value = 0;
+                {
+                    other.GetComponent<UniversalEntityProperties>().Heal(25);
+                    consumptionregen.Value = 0;
+
+                }
+
+
+
+
 
             }
 
