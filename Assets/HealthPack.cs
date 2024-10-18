@@ -18,7 +18,10 @@ public class HealthPack : NetworkBehaviour
 
     bool cantake = true;
 
-    public GameObject specialguest;
+    public List< GameObject> specialguests;
+
+
+    public NetworkVariable<NetworkObjectReference> specialguest = new NetworkVariable<NetworkObjectReference>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
     void Start()
@@ -93,7 +96,12 @@ public class HealthPack : NetworkBehaviour
 
         if (other.tag == "Player" && consumptionregenbool.Value == true)
         {
-            specialguest = other.gameObject;
+            if (!specialguests.Contains(other.gameObject))
+            {
+                specialguests.Add(other.gameObject);
+            }
+
+
 
 
             if (other.GetComponent<UniversalEntityProperties>().HP.Value < other.GetComponent<UniversalEntityProperties>().BaseHP.Value)
@@ -130,8 +138,10 @@ public class HealthPack : NetworkBehaviour
 
         if(consumptionregenbool.Value == false)
         {
-            GOD_HATES_ROVERS(specialguest);
+            GOD_HATES_ROVERS(FindClosestPlayer());
 
+
+            specialguests.Clear();
         }
 
     }
@@ -141,7 +151,7 @@ public class HealthPack : NetworkBehaviour
         if(other!= null)
         {
             other.GetComponent<UniversalEntityProperties>().Heal(25f);
-            specialguest = null;
+
         }
 
     }
@@ -152,7 +162,7 @@ public class HealthPack : NetworkBehaviour
     public GameObject FindClosestPlayer()
     {
         GameObject[] gos;
-        gos = GameObject.FindGameObjectsWithTag("Player");
+        gos = specialguests.ToArray();
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
