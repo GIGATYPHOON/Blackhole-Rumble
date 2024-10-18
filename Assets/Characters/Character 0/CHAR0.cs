@@ -12,12 +12,15 @@ public class CHAR0 : NetworkBehaviour
 
 
 
-    string CurrentStance = "Time Stance";
+    string CurrentStance = "Time";
 
     public NetworkVariable<bool> CurrentStanceBool = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     //bool CurrentStanceBool = false;
 
+    public NetworkVariable<float> StanceCooldown = new NetworkVariable<float>(10f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    [SerializeField] GameObject StanceBar;
 
     [SerializeField] GameObject StanceText;
 
@@ -126,11 +129,23 @@ public class CHAR0 : NetworkBehaviour
 
     void Stances()
     {
-        if (Input.GetButtonDown("Special1"))
+        if(StanceCooldown.Value <10f)
         {
-            CurrentStanceBool.Value = !CurrentStanceBool.Value;
+            StanceCooldown.Value += 5f * Time.deltaTime;
         }
 
+
+
+
+        if (Input.GetButtonDown("Special1") && StanceCooldown.Value >= 10f)
+        {
+            CurrentStanceBool.Value = !CurrentStanceBool.Value;
+            StanceCooldown.Value = 0;
+        }
+
+
+
+        StanceBar.transform.localScale = new Vector3(StanceCooldown.Value / 10f, 1, 1);
 
     }
 
@@ -139,16 +154,16 @@ public class CHAR0 : NetworkBehaviour
     {
         if (CurrentStanceBool.Value == true)
         {
-            CurrentStance = "Space Stance";
+            CurrentStance = "Space";
         }
         else
         {
-            CurrentStance = "Time Stance";
+            CurrentStance = "Time";
         }
 
 
 
-        if (CurrentStance == "Time Stance")
+        if (CurrentStance == "Time")
         {
             GetComponent<Animator>().SetFloat("AnimMultiplier", 2.2f);
         }
@@ -236,7 +251,7 @@ public class CHAR0 : NetworkBehaviour
 
 
 
-        if (CurrentStance == "Space Stance")
+        if (CurrentStance == "Space")
         {
             SingularityCooldown = 4f;
 
