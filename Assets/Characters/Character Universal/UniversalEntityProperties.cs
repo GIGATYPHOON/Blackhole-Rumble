@@ -68,6 +68,9 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public NetworkVariable<bool> ghosted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    public NetworkVariable<float> healcooldowntimer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+
     void Start()
     {
 
