@@ -15,7 +15,7 @@ public class HealthPack : NetworkBehaviour
     public NetworkVariable<float> consumptionregen = new NetworkVariable<float>(10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
-    public float fakeconsumptionregen = 10f;
+    public float shortcooldown = 10f;
 
     void Start()
     {
@@ -32,33 +32,19 @@ public class HealthPack : NetworkBehaviour
 
 
 
-        if (fakeconsumptionregen >= 10f)
+        if (shortcooldown >= 10f)
         {
-            fakeconsumptionregen = 10f;
+            shortcooldown = 10f;
 
         }
         else
         {
-            fakeconsumptionregen += 2f * Time.deltaTime;
+            shortcooldown += 10f * Time.deltaTime;
         }
 
         representation.transform.localScale = Vector3.one * (consumptionregen.Value / 10f);
 
 
-
-        if (fakeconsumptionregen <= 0.2f)
-        {
-
-            if (IsOwner)
-            {
-                //print("really fuckwad");
-
-                consumptionregen.Value = 0;
-
-
-            }
-
-        }
 
 
     }
@@ -82,64 +68,32 @@ public class HealthPack : NetworkBehaviour
 
 
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-
-    //    if (other.tag == "Player" && isreadyforconsumption.Value == true)
-    //    {
-
-    //        if (other.GetComponent<UniversalEntityProperties>().HP.Value < other.GetComponent<UniversalEntityProperties>().BaseHP.Value)
-    //        {
-
-
-    //            if (IsHost)
-    //            {
-    //                print("really fuckwad");
-    //                other.GetComponent<UniversalEntityProperties>().Heal(25);
-
-    //                consumptionregen.Value = 0;
-
-    //            }
-
-
-
-
-    //        }
-
-
-    //    }
-
-    //}
-
-
-
-
     private void OnTriggerStay(Collider other)
     {
 
-        if (other.tag == "Player" && fakeconsumptionregen>= 10f)
+        if (other.tag == "Player" && consumptionregen.Value >= 10f)
         {
 
             if (other.GetComponent<UniversalEntityProperties>().HP.Value < other.GetComponent<UniversalEntityProperties>().BaseHP.Value)
             {
 
-                
-                other.GetComponent<UniversalEntityProperties>().Heal(25f);
+                if(shortcooldown >=10f)
+                {
+                    other.GetComponent<UniversalEntityProperties>().Heal(25f);
+
+                    shortcooldown = 0;
+                }
 
 
 
 
-
-                fakeconsumptionregen = 0;
 
                 if (IsOwner)
                 {
-                    //print("really fuckwad");
 
                     consumptionregen.Value = 0;
-
-
                 }
+
             }
 
 
