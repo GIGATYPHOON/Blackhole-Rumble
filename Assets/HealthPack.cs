@@ -12,16 +12,19 @@ public class HealthPack : NetworkBehaviour
 
   //  bool isreadyforconsumption = true;
 
-    public NetworkVariable<float> fakeconsumptionregen = new NetworkVariable<float>(10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-
-    float consumptionregen = 10f;
+    public NetworkVariable<float> consumptionregen = new NetworkVariable<float>(10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     bool cantake = true;
+
+    GameObject specialguest;
 
 
     void Start()
     {
-        if(IsOwner)
+        consumptionregen.OnValueChanged += (previousValue, newValue) => WHAT_THE_FUCK(specialguest);
+
+
+        if (IsOwner)
             GetComponent<NetworkObject>().ChangeOwnership(OwnerClientId);
     }
 
@@ -29,21 +32,20 @@ public class HealthPack : NetworkBehaviour
     void Update()
     {
 
-        if (consumptionregen >= 10f)
-        {
-            consumptionregen = 10f;
-
-        }
-        else
-        {
-            consumptionregen += 2f * Time.deltaTime;
-        }
 
         if (IsOwner)
-          Replenish();
+        {
+            Replenish();
+
+        }
+
+        if(consumptionregen.Value > 9f && consumptionregen.Value < 10f)
+        {
+            cantake = true;
+        }
 
 
-        representation.transform.localScale = Vector3.one * (consumptionregen / 10f);
+        representation.transform.localScale = Vector3.one * (consumptionregen.Value / 10f);
 
 
         //closestguy = FindClosestPlayer();
@@ -54,6 +56,12 @@ public class HealthPack : NetworkBehaviour
         //}
 
 
+        if(consumptionregen.Value < 10f)
+        {
+            consumptionregen.OnValueChanged -= (previousValue, newValue) => WHAT_THE_FUCK(specialguest);
+
+        }
+
 
 
     }
@@ -62,14 +70,14 @@ public class HealthPack : NetworkBehaviour
     void Replenish()
     {
 
-        if (fakeconsumptionregen.Value >= 10f)
+        if (consumptionregen.Value >= 10f)
         {
-            fakeconsumptionregen.Value = 10f;
+            consumptionregen.Value = 10f;
 
         }
         else
         {
-            fakeconsumptionregen.Value += 2f * Time.deltaTime;
+           consumptionregen.Value += 2f * Time.deltaTime;
         }
 
 
@@ -80,25 +88,23 @@ public class HealthPack : NetworkBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        if (other.tag == "Player" && consumptionregen>= 10f)
+        if (other.tag == "Player" && cantake == true)
         {
 
             if (other.GetComponent<UniversalEntityProperties>().HP.Value < other.GetComponent<UniversalEntityProperties>().BaseHP.Value)
             {
+
+
                 if (IsOwner)
                 {
 
 
-                    fakeconsumptionregen.Value = 0;
+                    consumptionregen.Value = 0;
                 }
 
+                specialguest = other.gameObject;
 
-                other.GetComponent<UniversalEntityProperties>().Heal(25f);
-                consumptionregen = 0f;
-
-
-
-
+                cantake = false;
 
 
             }
@@ -106,6 +112,15 @@ public class HealthPack : NetworkBehaviour
 
         }
 
+
+    }
+
+    public void WHAT_THE_FUCK(GameObject other)
+    {
+        if(other!= null)
+        {
+            other.GetComponent<UniversalEntityProperties>().Heal(25f);
+        }    
 
     }
 
