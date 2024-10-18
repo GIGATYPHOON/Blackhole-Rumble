@@ -86,6 +86,7 @@ public class CHAR0 : NetworkBehaviour
 
 
 
+            StanceBar.transform.localScale = new Vector3(StanceCooldown.Value / 10f, 1, 1);
 
 
             if (!IsOwner)
@@ -145,7 +146,6 @@ public class CHAR0 : NetworkBehaviour
 
 
 
-        StanceBar.transform.localScale = new Vector3(StanceCooldown.Value / 10f, 1, 1);
 
     }
 
