@@ -16,16 +16,14 @@ public class HealthPack : NetworkBehaviour
 
     public NetworkVariable<bool> consumptionregenbool = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    bool cantake = true;
-
     [SerializeField] LayerMask m_LayerMask;
 
-    public List< GameObject> specialguests;
+    public List< GameObject> healtargets;
 
 
     void Start()
     {
-        consumptionregenbool.OnValueChanged += WHAT_THE_FUCK;
+        consumptionregenbool.OnValueChanged += CanHealOnValueChanged;
 
 
         if (IsOwner)
@@ -51,18 +49,18 @@ public class HealthPack : NetworkBehaviour
 
 
 
-        foreach (Collider dumbidiot in hitColliders)
+        foreach (Collider healtarget in hitColliders)
         {
-            if(!specialguests.Contains(dumbidiot.gameObject) && (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value < dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value))
+            if(!healtargets.Contains(healtarget.gameObject) && (healtarget.GetComponent<UniversalEntityProperties>().HP.Value < healtarget.GetComponent<UniversalEntityProperties>().BaseHP.Value))
             {
 
-                specialguests.Add(dumbidiot.gameObject);
+                healtargets.Add(healtarget.gameObject);
             }
 
         }
 
 
-        if (consumptionregenbool.Value == true && specialguests.Count > 0)
+        if (consumptionregenbool.Value == true && healtargets.Count > 0)
         {
 
             if (IsOwner)
@@ -100,23 +98,23 @@ public class HealthPack : NetworkBehaviour
 
 
 
-    public void WHAT_THE_FUCK(bool previous, bool current)
+    public void CanHealOnValueChanged(bool previous, bool current)
     {
 
 
         if(consumptionregenbool.Value == false)
         {
-            foreach(GameObject specialguest in specialguests)
+            foreach(GameObject healtarget in healtargets)
             {
 
-                GOD_HATES_ROVERS(specialguest);
+                Heal(healtarget);
 
             }
 
         }
         else
         {
-            specialguests.Clear();
+            healtargets.Clear();
 
 
 
@@ -124,7 +122,7 @@ public class HealthPack : NetworkBehaviour
 
     }
 
-    void GOD_HATES_ROVERS(GameObject other)
+    void Heal(GameObject other)
     {
         if(other!= null)
         {
