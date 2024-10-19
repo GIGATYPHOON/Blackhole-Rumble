@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class CapturePoint : NetworkBehaviour
+public class TeamAreaPoint : NetworkBehaviour
 {
     // Start is called before the first frame update
     bool m_Started;
