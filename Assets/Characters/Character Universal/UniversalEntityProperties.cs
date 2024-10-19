@@ -22,6 +22,9 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     [SerializeField] GameObject healthbar;
 
+
+    [SerializeField] GameObject shieldbar;
+
     [SerializeField] GameObject youindicator;
 
     public bool multihitted = false;
@@ -37,6 +40,10 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public NetworkVariable<float> HP = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<float> BaseHP = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+
+    public NetworkVariable<float> Shield = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
     public Vector2 hitloc;
 
@@ -228,11 +235,28 @@ public class UniversalEntityProperties : NetworkBehaviour
     }
 
 
+
+
     void Healthbar()
     {
         if ( healthbar.gameObject)
         {
-            healthbar.transform.localScale = new Vector3( (HP.Value / BaseHP.Value) * 3, 0.3333f, 1f);
+
+            if((HP.Value + Shield.Value) < BaseHP.Value )
+            {
+
+                healthbar.transform.localScale = new Vector3((HP.Value / BaseHP.Value) * 3, 0.3333f, 1f);
+
+                shieldbar.transform.localScale = new Vector3(((HP.Value + Shield.Value) / BaseHP.Value) * 3, 0.3333f, 1f);
+
+            }
+            else
+            {
+
+
+
+            }
+
 
         }
         else
@@ -242,6 +266,11 @@ public class UniversalEntityProperties : NetworkBehaviour
         }
 
     }
+
+
+
+
+
 
 
 
