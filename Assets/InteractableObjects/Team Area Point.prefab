@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5249759544925941731}
   - component: {fileID: 5249759544925941732}
   m_Layer: 0
-  m_Name: Capture Point
+  m_Name: Team Area Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
