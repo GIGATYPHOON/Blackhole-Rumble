@@ -38,11 +38,11 @@ public class UniversalEntityProperties : NetworkBehaviour
     public int multihitdamageprio;
 
 
-    public NetworkVariable<float> HP = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public NetworkVariable<float> BaseHP = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> HP = new NetworkVariable<float>(100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> BaseHP = new NetworkVariable<float>(100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
-    public NetworkVariable<float> Shield = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> Shield = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
     public Vector2 hitloc;
@@ -242,7 +242,7 @@ public class UniversalEntityProperties : NetworkBehaviour
         if ( healthbar.gameObject)
         {
 
-            if((HP.Value + Shield.Value) < BaseHP.Value )
+            if((HP.Value + Shield.Value) <= BaseHP.Value )
             {
 
                 healthbar.transform.localScale = new Vector3((HP.Value / BaseHP.Value) * 3, 0.3333f, 1f);
@@ -252,10 +252,18 @@ public class UniversalEntityProperties : NetworkBehaviour
             }
             else
             {
+                healthbar.transform.localScale = new Vector3((HP.Value  / (Shield.Value + HP.Value)) * 3, 0.3333f, 1f);
 
+                shieldbar.transform.localScale = new Vector3((Shield.Value / (Shield.Value + 0.001f)) * 3, 0.3333f, 1f); ;
 
 
             }
+
+            //assuming hp is 100 and shield is 100 the inteded values here are healthbar 0.5 and shield 1
+
+            //assuming hp is 100 and shield is 50 the inteded values here are healthbar 0.666 and shield 1
+
+            //assuming hp is 75 and shield is 100 the inteded values here are healthbar 
 
 
         }
@@ -357,11 +365,27 @@ public class UniversalEntityProperties : NetworkBehaviour
 
             lastspecificcause = specificcause;
 
-
+            float leftovershielddamage = 0;
 
 
             if(IsOwner)
-              GetComponent<UniversalEntityProperties>().HP.Value -= dmg;
+            {
+
+                GetComponent<UniversalEntityProperties>().Shield.Value -= dmg;
+
+                if(Shield.Value < 0)
+                {
+                    leftovershielddamage = -Shield.Value;
+                    Shield.Value = 0;
+
+                }
+
+
+
+                GetComponent<UniversalEntityProperties>().HP.Value -= leftovershielddamage;
+
+            }
+
 
 
             if (HP.Value > 0)
@@ -476,8 +500,18 @@ public class UniversalEntityProperties : NetworkBehaviour
     {
         if(IsOwner)
         {
-            print("okay im healing");
             GetComponent<UniversalEntityProperties>().HP.Value += healamount;
+        }
+
+
+    }
+
+
+    public void Shielding(float shieldamount)
+    {
+        if (IsOwner)
+        {
+            GetComponent<UniversalEntityProperties>().Shield.Value += shieldamount;
         }
 
 

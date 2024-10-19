@@ -53,6 +53,11 @@ public class CHAR0 : NetworkBehaviour
     public int CaughtInAttacksCounter = 0;
 
 
+    public float shielddecreasefloat = 0f;
+
+    public int shielddecreaseincrement = 0;
+
+
     void Start()
     {
 
@@ -140,8 +145,35 @@ public class CHAR0 : NetworkBehaviour
 
         if (Input.GetButtonDown("Special1") && StanceCooldown.Value >= 10f)
         {
+            GetComponent<UniversalEntityProperties>().Shielding(45f);
             CurrentStanceBool.Value = !CurrentStanceBool.Value;
             StanceCooldown.Value = 0;
+            shielddecreaseincrement += 45;
+            shielddecreasefloat += 1f;
+        }
+
+        if(shielddecreaseincrement > 0f && GetComponent<UniversalEntityProperties>().Shield.Value > 0f)
+        {
+
+            shielddecreasefloat -= 14f * Time.deltaTime;
+
+            if(shielddecreasefloat <=0f)
+            {
+                GetComponent<UniversalEntityProperties>().Shielding(-1f);
+
+
+                shielddecreaseincrement -= 1;
+                shielddecreasefloat = 1f;
+            }
+
+
+        }
+        else
+        {
+            shielddecreaseincrement = 0;
+            shielddecreasefloat = 0;
+
+
         }
 
 
@@ -353,9 +385,19 @@ public class CHAR0 : NetworkBehaviour
 
             if(Input.GetKeyDown(KeyCode.E))
             {
-                GetComponent<UniversalEntityProperties>().Heal(33f);
+                GetComponent<UniversalEntityProperties>().HP.Value -= 5f;;
 
             }
+
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                GetComponent<UniversalEntityProperties>().Shield.Value += 5f;
+
+            }
+
+
+
 
             if (Input.GetButton("Special2") && UltimateCharge.Value >= 100)
             {
