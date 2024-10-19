@@ -47,13 +47,13 @@ public class HealthPack : NetworkBehaviour
         representation.transform.localScale = Vector3.one * (consumptionregen.Value / 10f);
 
 
-        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
+        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, m_LayerMask);
 
-        specialguests.Clear();
+
 
         foreach (Collider dumbidiot in hitColliders)
         {
-            if(!specialguests.Contains(dumbidiot.gameObject))
+            if(!specialguests.Contains(dumbidiot.gameObject) && (dumbidiot.GetComponent<UniversalEntityProperties>().HP.Value < dumbidiot.GetComponent<UniversalEntityProperties>().BaseHP.Value))
             {
 
                 specialguests.Add(dumbidiot.gameObject);
@@ -65,28 +65,13 @@ public class HealthPack : NetworkBehaviour
         if (consumptionregenbool.Value == true && specialguests.Count > 0)
         {
 
-            foreach(GameObject specialguest in specialguests)
+            if (IsOwner)
             {
 
-                if (specialguest.GetComponent<UniversalEntityProperties>().HP.Value < specialguest.GetComponent<UniversalEntityProperties>().BaseHP.Value)
-                {
 
-
-
-                    if (IsOwner)
-                    {
-
-
-                        consumptionregen.Value = 0;
-                        consumptionregenbool.Value = false;
-                    }
-
-
-
-                }
-
+                consumptionregen.Value = 0;
+                consumptionregenbool.Value = false;
             }
-
 
 
 
@@ -125,7 +110,15 @@ public class HealthPack : NetworkBehaviour
             {
 
                 GOD_HATES_ROVERS(specialguest);
+
             }
+
+        }
+        else
+        {
+            specialguests.Clear();
+
+
 
         }
 
