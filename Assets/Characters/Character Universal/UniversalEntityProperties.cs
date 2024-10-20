@@ -22,6 +22,11 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     [SerializeField] GameObject healthbar;
 
+    [SerializeField] GameObject healthmeasureR;
+
+
+    [SerializeField] GameObject healthmeasureL;
+
 
     [SerializeField] GameObject shieldbar;
 
@@ -143,11 +148,11 @@ public class UniversalEntityProperties : NetworkBehaviour
 
             }
 
-            if(HP.Value > 100)
+            if(HP.Value > BaseHP.Value)
             {
                 if (IsOwner)
                 {
-                    HP.Value = 100;
+                    HP.Value = BaseHP.Value;
                 }
 
             }
@@ -249,6 +254,14 @@ public class UniversalEntityProperties : NetworkBehaviour
 
                 shieldbar.transform.localScale = new Vector3(((HP.Value + Shield.Value) / BaseHP.Value) * 3, 0.3333f, 1f);
 
+                healthmeasureL.GetComponent<SpriteRenderer>().size = new Vector2(BaseHP.Value / 100f, 0.2f);
+
+                healthmeasureL.transform.localScale = new Vector3(-1.5f / (BaseHP.Value / 100f), 1.6665f, 1);
+
+                healthmeasureR.GetComponent<SpriteRenderer>().size = new Vector2(BaseHP.Value / 100f, 0.2f);
+
+                healthmeasureR.transform.localScale = new Vector3(1.5f / (BaseHP.Value / 100f), 1.6665f, 1);
+
             }
             else
             {
@@ -257,6 +270,17 @@ public class UniversalEntityProperties : NetworkBehaviour
                 shieldbar.transform.localScale = new Vector3((Shield.Value / (Shield.Value + 0.001f)) * 3, 0.3333f, 1f); ;
 
 
+                healthmeasureL.GetComponent<SpriteRenderer>().size = new Vector2((Shield.Value + HP.Value) / 100f, 0.2f);
+
+                healthmeasureL.transform.localScale = new Vector3(-1.5f / ((Shield.Value + HP.Value) / 100f), 1.6665f, 1);
+
+                healthmeasureR.GetComponent<SpriteRenderer>().size = new Vector2((Shield.Value + HP.Value) / 100f, 0.2f);
+
+                healthmeasureR.transform.localScale = new Vector3(1.5f / ((Shield.Value + HP.Value) / 100f), 1.6665f, 1);
+
+
+
+                //healthmeasure.GetComponent<SpriteRenderer>().size = new Vector2((Shield.Value / 2) * 3, 0.1665f);
             }
 
             //assuming hp is 100 and shield is 100 the inteded values here are healthbar 0.5 and shield 1
