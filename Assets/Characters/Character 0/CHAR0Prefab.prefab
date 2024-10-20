@@ -2255,21 +2255,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3889782954147317037, guid: 0cb23d8a444d3d444a5ad4906e3617ac, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6756755895923044925, guid: 0cb23d8a444d3d444a5ad4906e3617ac, type: 3}
       propertyPath: m_Name
       value: HealthObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 9011932783762780242, guid: 0cb23d8a444d3d444a5ad4906e3617ac, type: 3}
-      propertyPath: m_Size.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9011932783762780242, guid: 0cb23d8a444d3d444a5ad4906e3617ac, type: 3}
-      propertyPath: m_SpriteTileMode
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011932783762780242, guid: 0cb23d8a444d3d444a5ad4906e3617ac, type: 3}
       propertyPath: m_AdaptiveModeThreshold

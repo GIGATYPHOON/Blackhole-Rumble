@@ -145,10 +145,10 @@ public class CHAR0 : NetworkBehaviour
 
         if (Input.GetButtonDown("Special1") && StanceCooldown.Value >= 10f)
         {
-            GetComponent<UniversalEntityProperties>().Shielding(45f);
+            GetComponent<UniversalEntityProperties>().Shielding(40f);
             CurrentStanceBool.Value = !CurrentStanceBool.Value;
             StanceCooldown.Value = 0;
-            shielddecreaseincrement += 45;
+            shielddecreaseincrement += 40;
             shielddecreasefloat += 1f;
         }
 
