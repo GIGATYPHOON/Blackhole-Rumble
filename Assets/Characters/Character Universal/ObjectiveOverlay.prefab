@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 923578312929459576}
   m_Layer: 0
-  m_Name: CapturePointObjectiveOverlay
+  m_Name: ObjectiveOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
