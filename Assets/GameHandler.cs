@@ -23,6 +23,11 @@ public class GameHandler : NetworkBehaviour
 
     public NetworkVariable<char> KOTHCapTeamChar = new NetworkVariable<char>('N', NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    [SerializeField] GameObject KOTHCapR;
+
+
+    [SerializeField] GameObject KOTHCapB;
+
 
     void Start()
     {
@@ -101,10 +106,6 @@ public class GameHandler : NetworkBehaviour
             }
 
 
-
-
-
-
             KOTHCapFloat.Value= Mathf.Clamp(KOTHCapFloat.Value, 0f, 200f);
 
             if(KOTHCapFloat.Value <= 0)
@@ -123,24 +124,34 @@ public class GameHandler : NetworkBehaviour
 
         print(KOTHCapFloat.Value);
 
-        var gradient = new Gradient();
-
-        // Blend color from red at 0% to blue at 100%
-        var colors = new GradientColorKey[3];
-        colors[0] = new GradientColorKey(LColor, 0.0f);
-        colors[1] = new GradientColorKey(Color.gray * 1.6f, 0.5f);
-        colors[2] = new GradientColorKey(RColor, 1.0f);
-
-        var alphas = new GradientAlphaKey[1];
-        alphas[0] = new GradientAlphaKey(1.0f, 1.0f);
 
 
-        gradient.SetKeys(colors, alphas);   
+        //var gradient = new Gradient();
+
+        //var colors = new GradientColorKey[3];
+        //colors[0] = new GradientColorKey(LColor, 0.0f);
+        //colors[1] = new GradientColorKey(Color.gray * 1.6f, 0.5f);
+        //colors[2] = new GradientColorKey(RColor, 1.0f);
+
+        //var alphas = new GradientAlphaKey[1];
+        //alphas[0] = new GradientAlphaKey(1.0f, 1.0f);
 
 
-        GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapturePointObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color
-            = gradient.Evaluate(KOTHCapFloat.Value / 200f);
+        //gradient.SetKeys(colors, alphas);   
 
+
+        //GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapturePointObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color
+        //    = gradient.Evaluate(KOTHCapFloat.Value / 200f);
+
+
+        if (KOTHCapFloat.Value < 100)
+        {
+            KOTHCapTeamChar.Value = 'L';
+        }
+        else if (KOTHCapFloat.Value >= 200)
+        {
+            KOTHCapTeamChar.Value = 'R';
+        }
 
 
 

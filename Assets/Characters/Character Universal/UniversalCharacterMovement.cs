@@ -40,10 +40,11 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
         thefloor = GroundChecker.GetComponent<UniversalGroundChecker>().whatisfloor;
 
-        Jump();
+
 
         PlatformBypass();
 
+        Jump();
     }
 
     // Update is called once per frame
@@ -71,6 +72,7 @@ public class UniversalCharacterMovement : NetworkBehaviour
 
         }
 
+        JumpRelease();
 
     }
 
@@ -131,16 +133,24 @@ public class UniversalCharacterMovement : NetworkBehaviour
         }
 
 
+
+
+
+
+
+
+
+    }
+
+
+    void JumpRelease()
+    {
         //when releasing jump, do a short hop
 
         if (Input.GetButton("Jump") != true && GetComponent<Rigidbody>().velocity.y > 0)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.down * GetComponent<Rigidbody>().velocity.y , ForceMode.Force);
+            GetComponent<Rigidbody>().AddForce(Vector3.down * GetComponent<Rigidbody>().velocity.y * 5f, ForceMode.Force);
         }
-
-
-
-
 
     }
 

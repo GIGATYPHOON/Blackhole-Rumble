@@ -40,6 +40,10 @@ public class TeamAreaPoint : NetworkBehaviour
 
     [SerializeField] public GameObject CapturePointObject;
 
+    [SerializeField] public GameObject CapBMeter;
+
+    [SerializeField] public GameObject CapRMeter;
+
 
     void Start()
     {
