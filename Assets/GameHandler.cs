@@ -110,42 +110,56 @@ public class GameHandler : NetworkBehaviour
             else if(KOTHCapTeamChar.Value == 'L' || KOTHCapTeamChar.Value == 'R')
             {
 
-                bool CounterCaptured = false;
+                KOTHCapFloat.Value = 100;
+
+                char CounterCaptured = 'N';
 
 
 
                 if(KOTHCapTeamChar.Value == 'L' && GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R')
                 {
 
-                    CounterCaptured = true;
+                    CounterCaptured = 'Y';
                 }
 
                 if (KOTHCapTeamChar.Value == 'R' && GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
                 {
 
-                    CounterCaptured = true;
+                    CounterCaptured = 'Y';
                 }
 
+                if(GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'C')
+                {
+                    CounterCaptured = 'M';
+                }    
 
-                if (CounterCaptured == true)
+
+                if (CounterCaptured == 'Y')
                 {
                     KOTHCounterCapFloat.Value += 20f * Time.deltaTime;
 
 
                 }
-                else
+                else if (CounterCaptured == 'N')
                 {
                     KOTHCounterCapFloat.Value -= 20f * Time.deltaTime;
 
                 }
+                else
+                {
 
-                if(KOTHCounterCapFloat.Value >= 100f && KOTHCapTeamChar.Value == 'L')
+                }
+
+                KOTHCounterCapFloat.Value = Mathf.Clamp(KOTHCounterCapFloat.Value, 0, 100);
+
+
+                if(KOTHCounterCapFloat.Value >= 99f && KOTHCapTeamChar.Value == 'L')
                 {
                     KOTHCapTeamChar.Value = 'R';
                     KOTHCounterCapFloat.Value = 0;
 
                 }
-                else if(KOTHCounterCapFloat.Value >= 100f && KOTHCapTeamChar.Value == 'R')
+                else if(KOTHCounterCapFloat.Value >= 99f && KOTHCapTeamChar.Value == 'R')
                 {
                     KOTHCapTeamChar.Value = 'L';
                     KOTHCounterCapFloat.Value = 0;
@@ -224,7 +238,7 @@ public class GameHandler : NetworkBehaviour
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, 1);
             }
 
-            if (KOTHCapTeamChar.Value == 'R' && GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
+            if (KOTHCapTeamChar.Value == 'R')
             {
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, KOTHCounterCapFloat.Value / 100f));
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, 1);
