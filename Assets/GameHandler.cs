@@ -23,6 +23,7 @@ public class GameHandler : NetworkBehaviour
 
     public NetworkVariable<char> KOTHCapTeamChar = new NetworkVariable<char>('N', NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    public NetworkVariable<float> KOTHCounterCapFloat = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
 
@@ -106,6 +107,52 @@ public class GameHandler : NetworkBehaviour
 
             }
 
+            else if(KOTHCapTeamChar.Value == 'L' || KOTHCapTeamChar.Value == 'R')
+            {
+
+                bool CounterCaptured = false;
+
+
+
+                if(KOTHCapTeamChar.Value == 'L' && GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R')
+                {
+
+                    CounterCaptured = true;
+                }
+
+                if (KOTHCapTeamChar.Value == 'R' && GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
+                {
+
+                    CounterCaptured = true;
+                }
+
+
+                if (CounterCaptured == true)
+                {
+                    KOTHCounterCapFloat.Value += 20f * Time.deltaTime;
+
+
+                }
+                else
+                {
+                    KOTHCounterCapFloat.Value -= 20f * Time.deltaTime;
+
+                }
+
+                if(KOTHCounterCapFloat.Value >= 100f && KOTHCapTeamChar.Value == 'L')
+                {
+                    KOTHCapTeamChar.Value = 'R';
+                    KOTHCounterCapFloat.Value = 0;
+
+                }
+                else if(KOTHCounterCapFloat.Value >= 100f && KOTHCapTeamChar.Value == 'R')
+                {
+                    KOTHCapTeamChar.Value = 'L';
+                    KOTHCounterCapFloat.Value = 0;
+                }
+
+            }
+
 
             KOTHCapFloat.Value= Mathf.Clamp(KOTHCapFloat.Value, 0f, 200f);
 
@@ -146,23 +193,65 @@ public class GameHandler : NetworkBehaviour
 
 
 
-        if (KOTHCapFloat.Value > 100.1f)
+        if(KOTHCapTeamChar.Value == 'N')
+
         {
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(1, 0, (200f - KOTHCapFloat.Value) / 100f));
-        }
-        else if (KOTHCapFloat.Value < 99.9f)
-        {
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, (100f - KOTHCapFloat.Value) / 100f));
+            if (KOTHCapFloat.Value > 100.1f)
+            {
+                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(1, 0, (200f - KOTHCapFloat.Value) / 100f));
+            }
+            else if (KOTHCapFloat.Value < 99.9f)
+            {
+                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, (100f - KOTHCapFloat.Value) / 100f));
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, 0);
+                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, 0);
+
+            }
+
+
+
+
         }
         else
         {
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, 0);
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, 0);
+
+            if (KOTHCapTeamChar.Value == 'L')
+            {
+                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0,1,KOTHCounterCapFloat.Value/100f));
+                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, 1);
+            }
+
+            if (KOTHCapTeamChar.Value == 'R' && GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
+            {
+                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, KOTHCounterCapFloat.Value / 100f));
+                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, 1);
+            }
+
 
         }
 
 
 
+
+
+        if (KOTHCapTeamChar.Value == 'L')
+        {
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
+
+        if (KOTHCapTeamChar.Value == 'R')
+        {
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+
+
+        }
 
 
 
