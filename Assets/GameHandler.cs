@@ -23,10 +23,7 @@ public class GameHandler : NetworkBehaviour
 
     public NetworkVariable<char> KOTHCapTeamChar = new NetworkVariable<char>('N', NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    [SerializeField] GameObject KOTHCapR;
 
-
-    [SerializeField] GameObject KOTHCapB;
 
 
     void Start()
@@ -45,6 +42,10 @@ public class GameHandler : NetworkBehaviour
         {
             LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().LColor;
             RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().RColor;
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().color = LColor;
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().color = RColor;
+
+
         }
         catch
         {
@@ -144,14 +145,23 @@ public class GameHandler : NetworkBehaviour
         //    = gradient.Evaluate(KOTHCapFloat.Value / 200f);
 
 
-        if (KOTHCapFloat.Value < 100)
+
+        if (KOTHCapFloat.Value > 100.1f)
         {
-            KOTHCapTeamChar.Value = 'L';
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(1, 0, (200f - KOTHCapFloat.Value) / 100f));
         }
-        else if (KOTHCapFloat.Value >= 200)
+        else if (KOTHCapFloat.Value < 99.9f)
         {
-            KOTHCapTeamChar.Value = 'R';
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, (100f - KOTHCapFloat.Value) / 100f));
         }
+        else
+        {
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, 0);
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, 0);
+
+        }
+
+
 
 
 
