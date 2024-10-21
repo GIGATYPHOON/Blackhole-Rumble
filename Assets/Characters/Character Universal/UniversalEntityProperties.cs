@@ -14,6 +14,12 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public NetworkVariable<int> YourTeam = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+
+    public Color LColor;
+
+    public Color RColor;
+
+
     //0 is left, 1 is right
 
     public NetworkVariable<int> TeamInt = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -114,7 +120,17 @@ public class UniversalEntityProperties : NetworkBehaviour
             this.gameObject.layer = 7;
         }
 
+        if (NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().YourTeam.Value == 0)
+        {
 
+            LColor = new Color(0, 0, 1, 1f);
+            RColor = new Color(1, 0, 0, 1f);
+        }
+        else
+        {
+            RColor = new Color(0, 0, 1, 1f);
+            LColor = new Color(1, 0, 0, 1f);
+        }
 
 
 

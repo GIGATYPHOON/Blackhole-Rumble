@@ -35,19 +35,11 @@ public class GameHandler : NetworkBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         try
         {
-            if (NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().YourTeam.Value == 0)
-            {
-
-                LColor = new Color(0, 0, 1, 1f);
-                RColor = new Color(1, 0, 0, 1f);
-            }
-            else
-            {
-                RColor = new Color(0, 0, 1, 1f);
-                LColor = new Color(1, 0, 0, 1f);
-            }
+            LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().LColor;
+            RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().RColor;
         }
         catch
         {
@@ -55,7 +47,7 @@ public class GameHandler : NetworkBehaviour
         }
 
 
-        if(GameMode.Value == 0)
+        if (GameMode.Value == 0)
         {
             KingOfTheHillRules();
 
@@ -71,42 +63,58 @@ public class GameHandler : NetworkBehaviour
     {
         if(IsHost)
         {
-            if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
-            {
-                KOTHCapFloat.Value -= 15f * Time.deltaTime;
-            }
 
-            else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R')
+            if(KOTHCapTeamChar.Value == 'N')
             {
-                KOTHCapFloat.Value += 15f * Time.deltaTime;
-            }
-
-            else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'N')
-            {
-
-                if (KOTHCapFloat.Value > 100.1f)
+                if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
                 {
-
-                    KOTHCapFloat.Value -= 15f * Time.deltaTime;
-                }
-                else if (KOTHCapFloat.Value < 99.9f)
-                {
-                    KOTHCapFloat.Value += 15f * Time.deltaTime;
+                    KOTHCapFloat.Value -= 20f * Time.deltaTime;
                 }
 
+                else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R')
+                {
+                    KOTHCapFloat.Value += 20f * Time.deltaTime;
+                }
+
+                else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'N')
+                {
+
+                    if (KOTHCapFloat.Value > 100.1f)
+                    {
+
+                        KOTHCapFloat.Value -= 20f * Time.deltaTime;
+                    }
+                    else if (KOTHCapFloat.Value < 99.9f)
+                    {
+                        KOTHCapFloat.Value += 20f * Time.deltaTime;
+                    }
+
+
+                }
+                else
+                {
+
+                }
+
+
 
             }
-            else
-            {
-
-            }
 
 
 
 
-            
+
 
             KOTHCapFloat.Value= Mathf.Clamp(KOTHCapFloat.Value, 0f, 200f);
+
+            if(KOTHCapFloat.Value <= 0)
+            {
+                KOTHCapTeamChar.Value = 'L';
+            }
+            else if(KOTHCapFloat.Value >= 200)
+            {
+                KOTHCapTeamChar.Value = 'R';
+            }
 
         }
 
@@ -120,7 +128,7 @@ public class GameHandler : NetworkBehaviour
         // Blend color from red at 0% to blue at 100%
         var colors = new GradientColorKey[3];
         colors[0] = new GradientColorKey(LColor, 0.0f);
-        colors[1] = new GradientColorKey(Color.white, 0.5f);
+        colors[1] = new GradientColorKey(Color.gray * 1.6f, 0.5f);
         colors[2] = new GradientColorKey(RColor, 1.0f);
 
         var alphas = new GradientAlphaKey[1];

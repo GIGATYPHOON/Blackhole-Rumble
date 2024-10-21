@@ -54,17 +54,12 @@ public class TeamAreaPoint : NetworkBehaviour
 
         try
         {
-            if (NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().YourTeam.Value == 0)
-            {
+            LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().LColor;
+            RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().RColor;
 
-                LColor = new Color(0, 0, 1, 0.2f);
-                RColor = new Color(1, 0, 0, 0.2f);
-            }
-            else
-            {
-                RColor = new Color(0, 0, 1, 0.2f);
-                LColor = new Color(1, 0, 0, 0.2f);
-            }
+            LColor = new Color(LColor.r, LColor.g, LColor.b, 0.2f);
+
+            RColor = new Color(RColor.r, RColor.g, RColor.b, 0.2f);
         }
         catch
         {
