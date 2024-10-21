@@ -859,8 +859,7 @@ MonoBehaviour:
   UltimateChargeIndicator: {fileID: 2989343967169109976}
   Eventus: {fileID: 1224496642343830106}
   CaughtInAttacksCounter: 0
-  shielddecreasefloat: 0
-  shielddecreaseincrement: 0
+  shielddecreaseincrement: 40
 --- !u!114 &7261251903851003422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,6 +876,8 @@ MonoBehaviour:
     m_InternalValue: 1
   YourTeam:
     m_InternalValue: 0
+  LColor: {r: 0, g: 0, b: 0, a: 0}
+  RColor: {r: 0, g: 0, b: 0, a: 0}
   TeamInt:
     m_InternalValue: 0
   SelfCamera: {fileID: 7056983186917795653}

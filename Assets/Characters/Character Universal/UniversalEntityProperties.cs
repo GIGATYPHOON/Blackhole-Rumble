@@ -410,8 +410,10 @@ public class UniversalEntityProperties : NetworkBehaviour
             float leftovershielddamage = 0;
 
 
+
             if(IsOwner)
             {
+                OnDamageTakenEffects(dmg);
 
                 GetComponent<UniversalEntityProperties>().Shield.Value -= dmg;
 
@@ -560,8 +562,28 @@ public class UniversalEntityProperties : NetworkBehaviour
     }
 
 
-    void Ghosted()
+
+    void OnDamageTakenEffects(float DamageAboutToBeTaken)
     {
+
+        if(GetComponent<CHAR0>())
+        {
+
+            CHAR0ShieldIncrementAdjust(DamageAboutToBeTaken);
+        }
+        
+    }
+
+
+
+    void CHAR0ShieldIncrementAdjust(float thingy)
+    {
+        GetComponent<CHAR0>().shielddecreaseincrement -= thingy;
+
+        if (GetComponent<CHAR0>().shielddecreaseincrement <= 0)
+        {
+            GetComponent<CHAR0>().shielddecreaseincrement = 0;
+        }
 
 
 
