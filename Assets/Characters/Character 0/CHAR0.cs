@@ -53,12 +53,12 @@ public class CHAR0 : NetworkBehaviour
     public int CaughtInAttacksCounter = 0;
 
 
-    public float shielddecreaseincrement = 40f;
+    public float shielddecreaseincrement = 20f;
 
 
     void Start()
     {
-        GetComponent<UniversalEntityProperties>().Shielding(40f);
+        GetComponent<UniversalEntityProperties>().Shielding(20f);
 
     }
 
@@ -145,8 +145,10 @@ public class CHAR0 : NetworkBehaviour
 
         if (Input.GetButtonDown("Special1") && StanceCooldown.Value >= 10f)
         {
-            GetComponent<UniversalEntityProperties>().Shielding(40f - shielddecreaseincrement);
+            GetComponent<UniversalEntityProperties>().Shielding(20f - shielddecreaseincrement);
             CurrentStanceBool.Value = !CurrentStanceBool.Value;
+
+            shielddecreaseincrement = 20f;
             StanceCooldown.Value = 0;
         }
 

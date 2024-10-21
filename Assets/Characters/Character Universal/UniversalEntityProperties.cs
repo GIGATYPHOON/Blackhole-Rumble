@@ -522,6 +522,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
                     dead.Value = false;
 
+                    OnRespawnEffects();
+
                 }
 
 
@@ -561,6 +563,19 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     }
 
+
+
+
+    void OnRespawnEffects()
+    {
+        if (GetComponent<CHAR0>())
+        {
+            GetComponent<CHAR0>().shielddecreaseincrement = 20f;
+            Shielding(20f);
+        }
+
+
+    }
 
 
     void OnDamageTakenEffects(float DamageAboutToBeTaken)

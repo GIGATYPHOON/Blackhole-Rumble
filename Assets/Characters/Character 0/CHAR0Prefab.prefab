@@ -859,7 +859,7 @@ MonoBehaviour:
   UltimateChargeIndicator: {fileID: 2989343967169109976}
   Eventus: {fileID: 1224496642343830106}
   CaughtInAttacksCounter: 0
-  shielddecreaseincrement: 40
+  shielddecreaseincrement: 20
 --- !u!114 &7261251903851003422
 MonoBehaviour:
   m_ObjectHideFlags: 0
