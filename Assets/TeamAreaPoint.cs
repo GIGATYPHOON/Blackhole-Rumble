@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -26,6 +27,18 @@ public class TeamAreaPoint : NetworkBehaviour
     bool ContestedFakeSineWaveBool = false;
 
     float ContestedFakeSineWave = 0f;
+
+
+
+
+    public NetworkVariable<char> TheState = new NetworkVariable<char>('A', NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    //state 0 is neutral, state 1 is left side cap, state 2 is right side cap, state 3 is contested;
+
+    //other thingd
+
+
+    [SerializeField] public GameObject CapturePointObject;
 
 
     void Start()
@@ -102,18 +115,38 @@ public class TeamAreaPoint : NetworkBehaviour
         {
             this.GetComponent<SpriteRenderer>().color = LColor;
 
+            if (IsHost)
+            {
+                TheState.Value =  'L';
+
+            }
 
         }
         else if (RTeamCount.Value > 0 && LTeamCount.Value == 0)
         {
 
             this.GetComponent<SpriteRenderer>().color = RColor;
+
+
+            if (IsHost)
+            {
+                TheState.Value = 'R';
+
+            }
+
         }
         else if (LTeamCount.Value == 0 && RTeamCount.Value ==0)
         {
 
 
             this.GetComponent<SpriteRenderer>().color =  new Color(0.5f, 0.5f, 0.5f, 0.4f);
+
+
+            if (IsHost)
+            {
+                TheState.Value = 'N';
+
+            }
 
         }
         else
@@ -140,7 +173,11 @@ public class TeamAreaPoint : NetworkBehaviour
                 }
             }
 
+            if (IsHost)
+            {
+                TheState.Value = 'C';
 
+            }
 
             this.GetComponent<SpriteRenderer>().color = Color.Lerp(RColor,LColor, ContestedFakeSineWave/10f);
 

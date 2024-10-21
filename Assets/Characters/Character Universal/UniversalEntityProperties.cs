@@ -14,6 +14,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public NetworkVariable<int> YourTeam = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    //0 is left, 1 is right
+
     public NetworkVariable<int> TeamInt = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 

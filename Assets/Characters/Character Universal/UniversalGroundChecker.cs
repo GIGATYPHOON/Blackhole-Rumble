@@ -19,7 +19,7 @@ public class UniversalGroundChecker : MonoBehaviour
     void Update()
     {
 
-        print(whatisfloor);
+       // print(whatisfloor);
     }
 
     private void OnTriggerEnter(Collider collision)

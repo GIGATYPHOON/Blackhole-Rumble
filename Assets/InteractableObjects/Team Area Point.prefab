@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 2944320100904686375}
   m_Layer: 0
   m_Name: Team Area Point
-  m_TagString: Untagged
+  m_TagString: TeamAreaPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,6 +191,9 @@ MonoBehaviour:
     m_InternalValue: 0
   RTeamCount:
     m_InternalValue: 0
+  TheState:
+    m_InternalValue: 0
+  CapturePointObject: {fileID: 6262794715258835434}
 --- !u!114 &5249759544925941732
 MonoBehaviour:
   m_ObjectHideFlags: 0

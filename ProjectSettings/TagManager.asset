@@ -10,6 +10,8 @@ TagManager:
   - RSpawn
   - Platform
   - Terrain
+  - TeamAreaPoint
+  - GameHandler
   layers:
   - Default
   - TransparentFX
