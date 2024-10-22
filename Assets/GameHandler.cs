@@ -76,11 +76,23 @@ public class GameHandler : NetworkBehaviour
                 if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
                 {
                     KOTHCapFloat.Value -= 20f * Time.deltaTime;
+
+                    if (KOTHCapFloat.Value > 100.1f)
+                    {
+
+                        KOTHCapFloat.Value -= 20f * Time.deltaTime;
+                    }
+
                 }
 
                 else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R')
                 {
                     KOTHCapFloat.Value += 20f * Time.deltaTime;
+
+                    if (KOTHCapFloat.Value < 99.9f)
+                    {
+                        KOTHCapFloat.Value += 20f * Time.deltaTime;
+                    }
                 }
 
                 else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'N')
@@ -89,11 +101,11 @@ public class GameHandler : NetworkBehaviour
                     if (KOTHCapFloat.Value > 100.1f)
                     {
 
-                        KOTHCapFloat.Value -= 20f * Time.deltaTime;
+                        KOTHCapFloat.Value -= 40f * Time.deltaTime;
                     }
                     else if (KOTHCapFloat.Value < 99.9f)
                     {
-                        KOTHCapFloat.Value += 20f * Time.deltaTime;
+                        KOTHCapFloat.Value += 40f * Time.deltaTime;
                     }
 
 
@@ -210,11 +222,11 @@ public class GameHandler : NetworkBehaviour
         if(KOTHCapTeamChar.Value == 'N')
 
         {
-            if (KOTHCapFloat.Value > 100.1f)
+            if (KOTHCapFloat.Value > 100.2f)
             {
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(1, 0, (200f - KOTHCapFloat.Value) / 100f));
             }
-            else if (KOTHCapFloat.Value < 99.9f)
+            else if (KOTHCapFloat.Value < 99.8f)
             {
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, (100f - KOTHCapFloat.Value) / 100f));
             }
