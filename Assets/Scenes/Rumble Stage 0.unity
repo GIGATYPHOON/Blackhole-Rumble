@@ -2029,6 +2029,8 @@ MonoBehaviour:
     m_InternalValue: 100
   KOTHCapTeamChar:
     m_InternalValue: 78
+  KOTHCounterCapFloat:
+    m_InternalValue: 0
 --- !u!114 &1598417521
 MonoBehaviour:
   m_ObjectHideFlags: 0
