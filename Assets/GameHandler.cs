@@ -234,34 +234,15 @@ public class GameHandler : NetworkBehaviour
         }
 
 
-        //bring this and every setcolor to on network spawn or something later
-
-        // print(KOTHCapFloat.Value);
-
-
-
-        //var gradient = new Gradient();
-
-        //var colors = new GradientColorKey[3];
-        //colors[0] = new GradientColorKey(LColor, 0.0f);
-        //colors[1] = new GradientColorKey(Color.gray * 1.6f, 0.5f);
-        //colors[2] = new GradientColorKey(RColor, 1.0f);
-
-        //var alphas = new GradientAlphaKey[1];
-        //alphas[0] = new GradientAlphaKey(1.0f, 1.0f);
-
-
-        //gradient.SetKeys(colors, alphas);   
-
-
-        //GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapturePointObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color
-        //    = gradient.Evaluate(KOTHCapFloat.Value / 200f);
 
 
 
         if (KOTHCapTeamChar.Value == 'N')
 
         {
+
+            //CAP METER GO RETURN
+
             if (KOTHCapFloat.Value > 101f)
             {
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(1, 0, (200f - KOTHCapFloat.Value) / 100f));
@@ -284,6 +265,8 @@ public class GameHandler : NetworkBehaviour
         else
         {
 
+            //CAP METER GO UP
+
             if (KOTHCapTeamChar.Value == 'L')
             {
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0,1,KOTHCounterCapFloat.Value/100f));
@@ -301,7 +284,7 @@ public class GameHandler : NetworkBehaviour
 
 
 
-
+        //THESE ARE THINGS FOR IF THE THING IS CAPPED
 
         if (KOTHCapTeamChar.Value == 'L')
         {
@@ -309,8 +292,9 @@ public class GameHandler : NetworkBehaviour
 
             GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
 
-            
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicator1.GetComponent<SpriteRenderer>().color = LColor;
 
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicator2.GetComponent<SpriteRenderer>().color = LColor;
         }
 
         if (KOTHCapTeamChar.Value == 'R')
@@ -319,7 +303,9 @@ public class GameHandler : NetworkBehaviour
 
             GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
 
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicator1.GetComponent<SpriteRenderer>().color = RColor;
 
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicator2.GetComponent<SpriteRenderer>().color = RColor;
         }
 
 

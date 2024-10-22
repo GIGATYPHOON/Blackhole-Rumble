@@ -44,9 +44,10 @@ public class TeamAreaPoint : NetworkBehaviour
 
     [SerializeField] public GameObject CapLMeter;
 
-    [SerializeField] public GameObject CapIndicator;
+    [SerializeField] public GameObject CapIndicator1;
 
 
+    [SerializeField] public GameObject CapIndicator2;
 
     void Start()
     {
