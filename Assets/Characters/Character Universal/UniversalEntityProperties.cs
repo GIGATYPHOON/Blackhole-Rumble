@@ -40,6 +40,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     [SerializeField] GameObject youindicator;
 
+
     public bool multihitted = false;
     public GameObject multihitdamagesource;
     public float multihitdmg;
@@ -68,6 +69,8 @@ public class UniversalEntityProperties : NetworkBehaviour
     public GameObject deathoverlay;
 
     public GameObject deathoverlayint;
+
+    public GameObject objectiveoverlay;
 
     public bool isdamageable = true;
 
@@ -100,7 +103,7 @@ public class UniversalEntityProperties : NetworkBehaviour
             return;
         SelfCamera.SetActive(true);
 
-
+        objectiveoverlay.SetActive(true);
 
 
 

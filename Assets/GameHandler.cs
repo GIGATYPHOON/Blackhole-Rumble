@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameHandler : NetworkBehaviour
 {
@@ -207,7 +209,7 @@ public class GameHandler : NetworkBehaviour
 
             if (KOTHCapTeamChar.Value == 'L')
             {
-                KOTHTeamHoldFloatL.Value += 2.0f * Time.deltaTime;
+                KOTHTeamHoldFloatL.Value += 0.9f * Time.deltaTime;
 
                 if(KOTHTeamHoldFloatL.Value >= 100f)
                 {
@@ -219,7 +221,7 @@ public class GameHandler : NetworkBehaviour
 
             if (KOTHCapTeamChar.Value == 'R')
             {
-                KOTHTeamHoldFloatR.Value += 2.0f * Time.deltaTime;
+                KOTHTeamHoldFloatR.Value += 0.9f * Time.deltaTime;
 
 
                 if (KOTHTeamHoldFloatR.Value >= 100f)
@@ -292,20 +294,71 @@ public class GameHandler : NetworkBehaviour
 
             GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
 
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicator1.GetComponent<SpriteRenderer>().color = LColor;
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[0].GetComponent<SpriteRenderer>().color = LColor;
 
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicator2.GetComponent<SpriteRenderer>().color = LColor;
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[1].GetComponent<SpriteRenderer>().color = LColor;
+
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[2].GetComponent<SpriteRenderer>().color = LColor;
+
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[3].GetComponent<SpriteRenderer>().color = LColor;
+
+            //forgive me for this is concrete sinning
+
+
+            if (GameObject.FindGameObjectWithTag("KOTH"))
+            {
+                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = LColor;
+
+                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+
+                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatL.Value) + "%";
+
+            }
+
         }
 
-        if (KOTHCapTeamChar.Value == 'R')
+        else if (KOTHCapTeamChar.Value == 'R')
         {
             GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
 
             GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
 
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicator1.GetComponent<SpriteRenderer>().color = RColor;
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[0].GetComponent<SpriteRenderer>().color = RColor;
 
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicator2.GetComponent<SpriteRenderer>().color = RColor;
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[1].GetComponent<SpriteRenderer>().color = RColor;
+
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[2].GetComponent<SpriteRenderer>().color = RColor;
+
+            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[3].GetComponent<SpriteRenderer>().color = RColor;
+
+
+
+            if (GameObject.FindGameObjectWithTag("KOTH"))
+            {
+                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+
+                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = RColor;
+
+
+                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatR.Value) + "%";
+            }
+
+        }
+
+        else
+        {
+
+
+            if (GameObject.FindGameObjectWithTag("KOTH"))
+            {
+
+                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+
+                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+
+            }
+
+
         }
 
 

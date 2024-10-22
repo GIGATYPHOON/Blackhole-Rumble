@@ -908,6 +908,7 @@ MonoBehaviour:
   deathtimer: 10
   deathoverlay: {fileID: 7322086079085387759}
   deathoverlayint: {fileID: 7810980634451987074}
+  objectiveoverlay: {fileID: 8234479395315516126}
   isdamageable: 1
   sprites: {fileID: 7261251903886915488}
   hitinvincibilitytimer:
@@ -2185,11 +2186,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectiveOverlay
       objectReference: {fileID: 0}
+    - target: {fileID: 8204291260398697304, guid: 90f0da7c88fc2b043a73cc0066ecf905, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90f0da7c88fc2b043a73cc0066ecf905, type: 3}
 --- !u!4 &1102526051470525694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 923578312929459576, guid: 90f0da7c88fc2b043a73cc0066ecf905, type: 3}
+  m_PrefabInstance: {fileID: 260575524750489990}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8234479395315516126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8204291260398697304, guid: 90f0da7c88fc2b043a73cc0066ecf905, type: 3}
   m_PrefabInstance: {fileID: 260575524750489990}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1831780943285729228

@@ -12,6 +12,7 @@ TagManager:
   - Terrain
   - TeamAreaPoint
   - GameHandler
+  - KOTH
   layers:
   - Default
   - TransparentFX
