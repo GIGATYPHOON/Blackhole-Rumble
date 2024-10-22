@@ -467,7 +467,7 @@ MonoBehaviour:
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: d24484a8fb7ddac45977abb15f39e9e1, type: 2}
-    TickRate: 30
+    TickRate: 128
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
     ConnectionData: 
@@ -2030,6 +2030,10 @@ MonoBehaviour:
   KOTHCapTeamChar:
     m_InternalValue: 78
   KOTHCounterCapFloat:
+    m_InternalValue: 0
+  KOTHTeamPointFloatL:
+    m_InternalValue: 0
+  KOTHTeamPointFloatR:
     m_InternalValue: 0
 --- !u!114 &1598417521
 MonoBehaviour:

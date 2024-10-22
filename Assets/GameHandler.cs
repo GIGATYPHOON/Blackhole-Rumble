@@ -25,7 +25,9 @@ public class GameHandler : NetworkBehaviour
 
     public NetworkVariable<float> KOTHCounterCapFloat = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    public NetworkVariable<float> KOTHTeamPointFloatL = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    public NetworkVariable<float> KOTHTeamPointFloatR = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     void Start()
     {
@@ -98,12 +100,12 @@ public class GameHandler : NetworkBehaviour
                 else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'N')
                 {
 
-                    if (KOTHCapFloat.Value > 100.1f)
+                    if (KOTHCapFloat.Value > 101f)
                     {
 
                         KOTHCapFloat.Value -= 40f * Time.deltaTime;
                     }
-                    else if (KOTHCapFloat.Value < 99.9f)
+                    else if (KOTHCapFloat.Value < 99f)
                     {
                         KOTHCapFloat.Value += 40f * Time.deltaTime;
                     }
@@ -191,12 +193,40 @@ public class GameHandler : NetworkBehaviour
                 KOTHCapTeamChar.Value = 'R';
             }
 
+
+
+            if (KOTHCapTeamChar.Value == 'L')
+            {
+                KOTHTeamPointFloatL.Value += 1.2f * Time.deltaTime;
+
+                if(KOTHTeamPointFloatL.Value >= 100f)
+                {
+                    KOTHTeamPointFloatL.Value = 100f;
+                }    
+
+
+            }
+
+            if (KOTHCapTeamChar.Value == 'R')
+            {
+                KOTHTeamPointFloatR.Value += 1.2f * Time.deltaTime;
+
+
+                if (KOTHTeamPointFloatR.Value >= 100f)
+                {
+                    KOTHTeamPointFloatR.Value = 100f;
+                }
+            }
+
+
+            
+
         }
 
 
         //bring this and every setcolor to on network spawn or something later
 
-       // print(KOTHCapFloat.Value);
+        // print(KOTHCapFloat.Value);
 
 
 
@@ -219,14 +249,14 @@ public class GameHandler : NetworkBehaviour
 
 
 
-        if(KOTHCapTeamChar.Value == 'N')
+        if (KOTHCapTeamChar.Value == 'N')
 
         {
-            if (KOTHCapFloat.Value > 100.2f)
+            if (KOTHCapFloat.Value > 101f)
             {
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(1, 0, (200f - KOTHCapFloat.Value) / 100f));
             }
-            else if (KOTHCapFloat.Value < 99.8f)
+            else if (KOTHCapFloat.Value < 99f)
             {
                 GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, (100f - KOTHCapFloat.Value) / 100f));
             }
@@ -268,6 +298,9 @@ public class GameHandler : NetworkBehaviour
             GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+            
+
         }
 
         if (KOTHCapTeamChar.Value == 'R')
