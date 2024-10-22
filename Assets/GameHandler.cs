@@ -25,9 +25,9 @@ public class GameHandler : NetworkBehaviour
 
     public NetworkVariable<float> KOTHCounterCapFloat = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    public NetworkVariable<float> KOTHTeamPointFloatL = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> KOTHTeamHoldFloatL = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    public NetworkVariable<float> KOTHTeamPointFloatR = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> KOTHTeamHoldFloatR = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     void Start()
     {
@@ -181,6 +181,16 @@ public class GameHandler : NetworkBehaviour
 
             }
 
+            else if(KOTHCapTeamChar.Value == 'D')
+            {
+
+
+            }
+
+
+
+
+
 
             KOTHCapFloat.Value= Mathf.Clamp(KOTHCapFloat.Value, 0f, 200f);
 
@@ -197,11 +207,11 @@ public class GameHandler : NetworkBehaviour
 
             if (KOTHCapTeamChar.Value == 'L')
             {
-                KOTHTeamPointFloatL.Value += 1.2f * Time.deltaTime;
+                KOTHTeamHoldFloatL.Value += 2.0f * Time.deltaTime;
 
-                if(KOTHTeamPointFloatL.Value >= 100f)
+                if(KOTHTeamHoldFloatL.Value >= 100f)
                 {
-                    KOTHTeamPointFloatL.Value = 100f;
+                    KOTHTeamHoldFloatL.Value = 100f;
                 }    
 
 
@@ -209,12 +219,12 @@ public class GameHandler : NetworkBehaviour
 
             if (KOTHCapTeamChar.Value == 'R')
             {
-                KOTHTeamPointFloatR.Value += 1.2f * Time.deltaTime;
+                KOTHTeamHoldFloatR.Value += 2.0f * Time.deltaTime;
 
 
-                if (KOTHTeamPointFloatR.Value >= 100f)
+                if (KOTHTeamHoldFloatR.Value >= 100f)
                 {
-                    KOTHTeamPointFloatR.Value = 100f;
+                    KOTHTeamHoldFloatR.Value = 100f;
                 }
             }
 

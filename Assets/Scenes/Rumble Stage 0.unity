@@ -2705,11 +2705,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2449179900252247840, guid: f3bc9801eb0fa42439dde170b9b9a6f9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.04
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4400550530475284112, guid: f3bc9801eb0fa42439dde170b9b9a6f9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.04
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5249759544925941729, guid: f3bc9801eb0fa42439dde170b9b9a6f9, type: 3}
       propertyPath: m_Color.a
@@ -2733,7 +2733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249759544925941730, guid: f3bc9801eb0fa42439dde170b9b9a6f9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 19.2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5249759544925941730, guid: f3bc9801eb0fa42439dde170b9b9a6f9, type: 3}
       propertyPath: m_LocalScale.y
@@ -2789,7 +2789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782522225174039852, guid: f3bc9801eb0fa42439dde170b9b9a6f9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.04
+      value: 1.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3bc9801eb0fa42439dde170b9b9a6f9, type: 3}
