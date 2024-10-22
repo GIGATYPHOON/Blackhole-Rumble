@@ -344,6 +344,7 @@ MonoBehaviour:
   CapturePointObject: {fileID: 6262794715258835434}
   CapRMeter: {fileID: 3242397344893034261}
   CapLMeter: {fileID: 3999950235512999655}
+  CapIndicator: {fileID: 975114207895712584}
 --- !u!114 &5249759544925941732
 MonoBehaviour:
   m_ObjectHideFlags: 0
