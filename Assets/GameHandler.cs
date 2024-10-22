@@ -385,13 +385,13 @@ public class GameHandler : NetworkBehaviour
                 GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
 
 
-                if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L' && RColor == NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().RColor)
+                if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L' && NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 1)
                 {
                     GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = LColor;
 
                     GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
                 }
-                else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R' && LColor == NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().LColor)
+                else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R' && NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 0)
                 {
                     GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = RColor;
 
