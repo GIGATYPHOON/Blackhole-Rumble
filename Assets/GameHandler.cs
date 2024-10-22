@@ -77,6 +77,8 @@ public class GameHandler : NetworkBehaviour
         if(IsHost)
         {
 
+            //logic
+
             if(KOTHCapTeamChar.Value == 'N')
             {
                 if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
@@ -315,19 +317,7 @@ public class GameHandler : NetworkBehaviour
 
                 GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatL.Value) + "%";
 
-                if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R')
-                {
-                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = RColor;
 
-                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
-                }
-                else
-                {
-
-
-                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
-
-                }
             }
 
         }
@@ -358,19 +348,7 @@ public class GameHandler : NetworkBehaviour
                 GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatR.Value) + "%";
 
 
-                if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
-                {
-                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = LColor;
 
-                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
-                }
-                else
-                {
-
-
-                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
-
-                }
             }
 
         }
@@ -394,54 +372,7 @@ public class GameHandler : NetworkBehaviour
 
 
 
-        bool enemyonpointalert = false;
 
-        Color colorofflicker = Color.white;
-
-
-        if (GameObject.FindGameObjectWithTag("KOTH"))
-        {
-
-            if (NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 0 && GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().RTeamCount.Value > 0)
-            {
-
-                colorofflicker = RColor;
-                enemyonpointalert = true;
-            }
-            else if (NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 1 && GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().LTeamCount.Value > 0)
-
-            {
-                colorofflicker = LColor;
-                enemyonpointalert = true;
-            }
-
-            if (enemyonpointalert == true)
-            {
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().color = colorofflicker;
-                KOTHAlertFlickerFloat += 15f* Time.deltaTime;
-
-                if (KOTHAlertFlickerFloat >= 10f)
-                {
-                    KOTHAlertFlickerFloat = 0f;
-                }
-
-                if (KOTHAlertFlickerFloat > 5f)
-                {
-
-                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
-
-                }
-            }
-            else
-            {
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
-
-            }
-        }
 
 
 
