@@ -192,7 +192,7 @@ public class CHAR0 : NetworkBehaviour
             HorizonStrikesObject.transform.localScale = new Vector3(2f, 1f, 1f);
             HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetInvincibilityTimer(1.2f);
 
-            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(0.6f);
+            HorizonStrikesObject.transform.GetChild(0).GetComponent<CHAR0Attacks>().SetDMGMulti(0.7f);
         }
 
 
@@ -290,7 +290,7 @@ public class CHAR0 : NetworkBehaviour
 
             TheSphere.GetComponent<CHAR0Attacks>().SetInvincibilityTimer(0.4f);
 
-            TheSphere.GetComponent<CHAR0Attacks>().SetDMGMulti(0.45f);
+            TheSphere.GetComponent<CHAR0Attacks>().SetDMGMulti(0.55f);
 
         }
 
