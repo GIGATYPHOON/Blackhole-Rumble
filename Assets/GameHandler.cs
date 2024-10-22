@@ -196,7 +196,7 @@ public class GameHandler : NetworkBehaviour
 
         //bring this and every setcolor to on network spawn or something later
 
-        print(KOTHCapFloat.Value);
+       // print(KOTHCapFloat.Value);
 
 
 
