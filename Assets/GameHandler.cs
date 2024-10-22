@@ -313,6 +313,19 @@ public class GameHandler : NetworkBehaviour
 
                 GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatL.Value) + "%";
 
+                if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R')
+                {
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = RColor;
+
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
+                }
+                else
+                {
+
+
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
+
+                }
             }
 
         }
@@ -341,6 +354,21 @@ public class GameHandler : NetworkBehaviour
 
 
                 GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatR.Value) + "%";
+
+
+                if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
+                {
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = LColor;
+
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
+                }
+                else
+                {
+
+
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
+
+                }
             }
 
         }
@@ -355,6 +383,28 @@ public class GameHandler : NetworkBehaviour
                 GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
 
                 GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+
+
+                if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'L')
+                {
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = LColor;
+
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
+                }
+                else if (GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().TheState.Value == 'R')
+                {
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = RColor;
+
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
+                }
+                else
+                {
+
+
+                    GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
+
+                }
+
 
             }
 
