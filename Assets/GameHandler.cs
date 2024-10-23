@@ -194,12 +194,13 @@ public class GameHandler : NetworkBehaviour
                     if(KOTHTeamHoldFloatL.Value >= 100f)
                     {
 
+                        if(KOTHTeamLPoints.Value < 2)
                         KOTHTeamLPoints.Value += 1;
                     }
                     else if (KOTHTeamHoldFloatR.Value >= 100f)
                     {
-
-                        KOTHTeamRPoints.Value += 1;
+                        if (KOTHTeamRPoints.Value < 2)
+                            KOTHTeamRPoints.Value += 1;
                     }
 
 
@@ -221,7 +222,7 @@ public class GameHandler : NetworkBehaviour
             else if(KOTHCapTeamChar.Value == 'D')
             {
 
-                KOTHDisabledFloat.Value -= 2f * Time.deltaTime;
+                KOTHDisabledFloat.Value -= 1.0f * Time.deltaTime;
 
                 if(KOTHDisabledFloat.Value <= 0f)
                 {

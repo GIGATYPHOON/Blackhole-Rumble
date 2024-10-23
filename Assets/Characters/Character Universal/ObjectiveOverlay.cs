@@ -28,22 +28,15 @@ public class ObjectiveOverlay : NetworkBehaviour
 
     [SerializeField] GameObject KOTHMiddleBar2;
 
+    [SerializeField] GameObject KOTHMiddleBar3;
 
     [SerializeField] GameObject KOTHMiddleBar1Holder;
 
     [SerializeField] GameObject KOTHMiddleBar2Holder;
+    [SerializeField] GameObject KOTHMiddleBar3Holder;
 
-    [SerializeField] GameObject KOTHLPoint1;
-
-    [SerializeField] GameObject KOTHLPoint2;
-
-
-
-
-    [SerializeField] GameObject KOTHRPoint1;
-
-    [SerializeField] GameObject KOTHRPoint2;
-
+    [SerializeField] GameObject[] KOTHLPoints;
+    [SerializeField] GameObject[] KOTHRPoints;
 
 
     void Start()
@@ -88,6 +81,8 @@ public class ObjectiveOverlay : NetworkBehaviour
 
             KOTHMiddleBar2Holder.SetActive(false);
 
+            KOTHMiddleBar3Holder.SetActive(false);
+
             KOTHMiddleBar1.transform.GetChild(0).GetComponent<Image>().color = LColor;
 
 
@@ -110,6 +105,7 @@ public class ObjectiveOverlay : NetworkBehaviour
 
             KOTHMiddleBar2Holder.SetActive(true);
 
+            KOTHMiddleBar3Holder.SetActive(false);
 
             KOTHMiddleBar2.transform.GetChild(0).GetComponent<Image>().color = LColor;
 
@@ -130,11 +126,32 @@ public class ObjectiveOverlay : NetworkBehaviour
 
 
         }
+        else
+        {
+
+            KOTHMiddleBar3Holder.SetActive(true);
+            KOTHMiddleBar1Holder.SetActive(false);
+            KOTHMiddleBar2Holder.SetActive(false);
+        }
 
 
 
         KOTHRSidePercentage.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHTeamHoldFloatR.Value) + "%";
         KOTHLSidePercentage.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHTeamHoldFloatL.Value) + "%";
+
+
+
+        for(int i = 0; i < GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHTeamLPoints.Value; i++)
+        {
+            KOTHLPoints[i].SetActive(false);
+        }
+
+        for (int i = 0; i < GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHTeamRPoints.Value; i++)
+        {
+            KOTHRPoints[i].SetActive(false);
+        }
+
+
 
         if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'L')
         {
