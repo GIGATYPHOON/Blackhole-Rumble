@@ -38,7 +38,6 @@ public class TeamAreaPoint : NetworkBehaviour
 
     public NetworkVariable<char> TheState = new NetworkVariable<char>('A', NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    //state 0 is neutral, state 1 is left side cap, state 2 is right side cap, state 3 is contested;
 
     //other thingd
 
@@ -50,6 +49,8 @@ public class TeamAreaPoint : NetworkBehaviour
     [SerializeField] public GameObject CapLMeter;
 
     [SerializeField] public GameObject[] CapIndicators;
+
+    [SerializeField] public GameObject CapDim;
 
     void Start()
     {
@@ -261,6 +262,13 @@ public class TeamAreaPoint : NetworkBehaviour
                 CapRMeter.transform.localScale = new Vector3(1, 1);
             }
 
+            if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'D')
+            {
+                CapLMeter.transform.localScale = new Vector3(1, 0);
+                CapRMeter.transform.localScale = new Vector3(1, 0);
+
+                CapDim.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHDisabledFloat.Value / 10f));
+            }
 
         }
 

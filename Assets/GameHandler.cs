@@ -31,7 +31,11 @@ public class GameHandler : NetworkBehaviour
 
     public NetworkVariable<float> KOTHTeamHoldFloatR = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    float KOTHAlertFlickerFloat = 0f;
+    public NetworkVariable<float> KOTHDisabledFloat = new NetworkVariable<float>(10f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    public NetworkVariable<int> KOTHTeamLPoints = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    public NetworkVariable<int> KOTHTeamRPoints = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     void Start()
     {
@@ -184,10 +188,45 @@ public class GameHandler : NetworkBehaviour
                     KOTHCounterCapFloat.Value = 0;
                 }
 
+
+                if(KOTHTeamHoldFloatL.Value >= 100f || KOTHTeamHoldFloatR.Value >= 100f)
+                {
+                    if(KOTHTeamHoldFloatL.Value >= 100f)
+                    {
+
+                        KOTHTeamLPoints.Value += 1;
+                    }
+                    else if (KOTHTeamHoldFloatR.Value >= 100f)
+                    {
+
+                        KOTHTeamRPoints.Value += 1;
+                    }
+
+
+                    KOTHTeamHoldFloatL.Value = 0f;
+                    KOTHTeamHoldFloatR.Value = 0f;
+
+                    KOTHCapFloat.Value = 100f;
+
+                    KOTHCounterCapFloat.Value = 0f;
+
+
+                    KOTHDisabledFloat.Value = 10f;
+
+                    KOTHCapTeamChar.Value = 'D';
+                }
+
             }
 
             else if(KOTHCapTeamChar.Value == 'D')
             {
+
+                KOTHDisabledFloat.Value -= 2f * Time.deltaTime;
+
+                if(KOTHDisabledFloat.Value <= 0f)
+                {
+                    KOTHCapTeamChar.Value = 'N';
+                }
 
 
             }
