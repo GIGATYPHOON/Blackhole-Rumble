@@ -24,6 +24,26 @@ public class ObjectiveOverlay : NetworkBehaviour
 
     [SerializeField] GameObject KOTHRSidePercentage;
 
+    [SerializeField] GameObject KOTHMiddleBar1;
+
+    [SerializeField] GameObject KOTHMiddleBar2;
+
+
+    [SerializeField] GameObject KOTHMiddleBar1Holder;
+
+    [SerializeField] GameObject KOTHMiddleBar2Holder;
+
+    [SerializeField] GameObject KOTHLPoint1;
+
+    [SerializeField] GameObject KOTHLPoint2;
+
+
+
+
+    [SerializeField] GameObject KOTHRPoint1;
+
+    [SerializeField] GameObject KOTHRPoint2;
+
 
 
     void Start()
@@ -62,12 +82,67 @@ public class ObjectiveOverlay : NetworkBehaviour
 
     void KOTHStuff()
     {
+        if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'N')
+        {
+            KOTHMiddleBar1Holder.SetActive(true);
+
+            KOTHMiddleBar2Holder.SetActive(false);
+
+            KOTHMiddleBar1.transform.GetChild(0).GetComponent<Image>().color = LColor;
+
+
+            KOTHMiddleBar1.transform.GetChild(1).GetComponent<Image>().color = RColor;
+
+            if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapFloat.Value > 101f || GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapFloat.Value < 99f)
+            {
+                KOTHMiddleBar1.transform.localPosition = new Vector2(Mathf.Lerp(227.8f, -227.8f, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapFloat.Value / 200f), 0f);
+            }
+            else
+            {
+                KOTHMiddleBar1.transform.localPosition = new Vector2(0f, 0f);
+
+            }
+
+        }
+        else if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'R' || GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'L')
+        {
+            KOTHMiddleBar1Holder.SetActive(false);
+
+            KOTHMiddleBar2Holder.SetActive(true);
+
+
+            KOTHMiddleBar2.transform.GetChild(0).GetComponent<Image>().color = LColor;
+
+
+            KOTHMiddleBar2.transform.GetChild(1).GetComponent<Image>().color = RColor;
+
+
+
+            if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'L')
+            {
+                KOTHMiddleBar2.transform.localPosition = new Vector2(Mathf.Lerp(113.9f, -113.9f, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCounterCapFloat.Value /100f), 0f);
+            }
+
+            if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'R')
+            {
+                KOTHMiddleBar2.transform.localPosition = new Vector2(Mathf.Lerp(-113.9f, 113.9f, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCounterCapFloat.Value / 100f), 0f);
+            }
+
+
+        }
+
+
+
+
+
 
         if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'L')
         {
             KOTHLBlackToColor.GetComponent<Image>().color = LColor;
 
             KOTHRBlackToColor.GetComponent<Image>().color = Color.black;
+
+            KOTHLSidePercentage.GetComponent<TextMeshProUGUI>().color = Color.white;
 
             KOTHLSidePercentage.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHTeamHoldFloatL.Value) + "%";
 
@@ -80,8 +155,9 @@ public class ObjectiveOverlay : NetworkBehaviour
 
             KOTHRBlackToColor.GetComponent<Image>().color = RColor;
 
+            KOTHRSidePercentage.GetComponent<TextMeshProUGUI>().color = Color.white;
 
-            KOTHLSidePercentage.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHTeamHoldFloatR.Value) + "%";
+            KOTHRSidePercentage.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHTeamHoldFloatR.Value) + "%";
 
 
 
@@ -89,6 +165,8 @@ public class ObjectiveOverlay : NetworkBehaviour
 
         else
         {
+            KOTHRSidePercentage.GetComponent<TextMeshProUGUI>().color = RColor;
+            KOTHLSidePercentage.GetComponent<TextMeshProUGUI>().color = LColor;
 
             KOTHLBlackToColor.GetComponent<Image>().color = Color.black;
 

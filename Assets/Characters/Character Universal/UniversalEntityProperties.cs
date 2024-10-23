@@ -126,13 +126,13 @@ public class UniversalEntityProperties : NetworkBehaviour
         if (NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().YourTeam.Value == 0)
         {
 
-            LColor = new Color(0, 0, 1, 1f);
-            RColor = new Color(1, 0, 0, 1f);
+            LColor = new Color(0.2f, 0.2f, 1, 1f);
+            RColor = new Color(1, 0.2f, 0.2f, 1f);
         }
         else
         {
-            RColor = new Color(0, 0, 1, 1f);
-            LColor = new Color(1, 0, 0, 1f);
+            RColor = new Color(0.2f, 0.2f, 1, 1f);
+            LColor = new Color(1, 0.2f, 0.2f, 1f);
         }
 
 
