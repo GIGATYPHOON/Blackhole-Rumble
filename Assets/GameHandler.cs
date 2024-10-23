@@ -309,13 +309,13 @@ public class GameHandler : NetworkBehaviour
             //forgive me for this is concrete sinning
 
 
-            if (GameObject.FindGameObjectWithTag("KOTH"))
+            if (GameObject.FindGameObjectWithTag("KOTHUI"))
             {
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = LColor;
+                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = LColor;
 
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
 
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatL.Value) + "%";
+                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatL.Value) + "%";
 
 
             }
@@ -338,14 +338,14 @@ public class GameHandler : NetworkBehaviour
 
 
 
-            if (GameObject.FindGameObjectWithTag("KOTH"))
+            if (GameObject.FindGameObjectWithTag("KOTHUI"))
             {
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
 
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = RColor;
+                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = RColor;
 
 
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatR.Value) + "%";
+                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatR.Value) + "%";
 
 
 
@@ -357,12 +357,12 @@ public class GameHandler : NetworkBehaviour
         {
 
 
-            if (GameObject.FindGameObjectWithTag("KOTH"))
+            if (GameObject.FindGameObjectWithTag("KOTHUI"))
             {
 
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
 
-                GameObject.FindGameObjectWithTag("KOTH").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
+                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
 
 
             }
