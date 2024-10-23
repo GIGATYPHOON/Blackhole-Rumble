@@ -34,7 +34,7 @@ public class KOTHShockwaveScript : MonoBehaviour
             if(other.GetComponent<UniversalEntityProperties>().dead.Value== false)
             {
 
-                other.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * -12000f * Time.deltaTime, ForceMode.Force);
+                other.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * -112000f * Time.deltaTime, ForceMode.Force);
             }
 
         }
