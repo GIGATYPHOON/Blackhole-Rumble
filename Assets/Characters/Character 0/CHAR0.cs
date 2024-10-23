@@ -358,19 +358,6 @@ public class CHAR0 : NetworkBehaviour
                 UltimateCharge.Value = 100f;
             }
 
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                GetComponent<UniversalEntityProperties>().HP.Value -= 5f;;
-
-            }
-
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                GetComponent<UniversalEntityProperties>().Shield.Value += 5f;
-
-            }
-
 
 
 

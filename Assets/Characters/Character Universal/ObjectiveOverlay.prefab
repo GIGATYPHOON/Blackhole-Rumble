@@ -890,7 +890,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 15}
+  m_SizeDelta: {x: 227, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8380794121282469412
 CanvasRenderer:
@@ -2127,8 +2127,10 @@ MonoBehaviour:
   KOTHRSidePercentage: {fileID: 8349938911759606300}
   KOTHMiddleBar1: {fileID: 5298483169617713070}
   KOTHMiddleBar2: {fileID: 934846375105919362}
+  KOTHMiddleBar3: {fileID: 3142556140760685278}
   KOTHMiddleBar1Holder: {fileID: 8364310739279219445}
   KOTHMiddleBar2Holder: {fileID: 3156329275356774329}
+  KOTHMiddleBar3Holder: {fileID: 2818572871925150109}
   KOTHLPoints:
   - {fileID: 8446494324605737224}
   - {fileID: 1557235075133275754}

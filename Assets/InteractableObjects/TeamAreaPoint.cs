@@ -52,6 +52,11 @@ public class TeamAreaPoint : NetworkBehaviour
 
     [SerializeField] public GameObject CapDim;
 
+
+    //koth
+
+
+
     void Start()
     {
 

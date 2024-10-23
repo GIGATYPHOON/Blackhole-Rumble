@@ -132,6 +132,13 @@ public class ObjectiveOverlay : NetworkBehaviour
             KOTHMiddleBar3Holder.SetActive(true);
             KOTHMiddleBar1Holder.SetActive(false);
             KOTHMiddleBar2Holder.SetActive(false);
+
+            float LengthOfThing;
+
+            LengthOfThing = Mathf.Lerp(227.8f, 0, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHDisabledFloat.Value / 10f);
+
+            KOTHMiddleBar3.GetComponent<RectTransform>().sizeDelta = new Vector2(LengthOfThing, 15f);
+
         }
 
 

@@ -37,6 +37,8 @@ public class GameHandler : NetworkBehaviour
 
     public NetworkVariable<int> KOTHTeamRPoints = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    public GameObject KOTHShockwave;
+
     void Start()
     {
 
@@ -213,6 +215,10 @@ public class GameHandler : NetworkBehaviour
 
 
                     KOTHDisabledFloat.Value = 10f;
+
+
+
+                    Instantiate(KOTHShockwave, GameObject.FindGameObjectWithTag("TeamAreaPoint").transform.position, Quaternion.identity);
 
                     KOTHCapTeamChar.Value = 'D';
                 }

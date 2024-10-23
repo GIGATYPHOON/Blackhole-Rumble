@@ -574,6 +574,7 @@ public class UniversalEntityProperties : NetworkBehaviour
         if (GetComponent<CHAR0>())
         {
             GetComponent<CHAR0>().shielddecreaseincrement = 20f;
+            Shield.Value = 0f;
             Shielding(20f);
         }
 
