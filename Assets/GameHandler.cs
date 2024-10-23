@@ -42,6 +42,8 @@ public class GameHandler : NetworkBehaviour
     void Start()
     {
 
+
+      KOTHCapTeamChar.OnValueChanged += PointDisabledShockwave;
     }
     
 
@@ -218,8 +220,6 @@ public class GameHandler : NetworkBehaviour
 
 
 
-                    Instantiate(KOTHShockwave, GameObject.FindGameObjectWithTag("TeamAreaPoint").transform.position, Quaternion.identity);
-
                     KOTHCapTeamChar.Value = 'D';
                 }
 
@@ -292,4 +292,26 @@ public class GameHandler : NetworkBehaviour
 
 
     }
+
+
+
+    public void PointDisabledShockwave(char previous, char current)
+    {
+
+
+        if (KOTHCapTeamChar.Value == 'D')
+        {
+
+
+            Instantiate(KOTHShockwave, GameObject.FindGameObjectWithTag("TeamAreaPoint").transform.position, Quaternion.identity);
+
+        }
+        else
+        {
+
+
+        }
+
+    }
+
 }
