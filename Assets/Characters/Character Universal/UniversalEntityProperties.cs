@@ -9,6 +9,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 {
     // Start is called before the first frame update
 
+    public GameObject PreGameThing;
+
 
     public NetworkVariable<bool> isFacingRight = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -105,7 +107,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         objectiveoverlay.SetActive(true);
 
-
+        PreGameThing = GameObject.FindGameObjectWithTag("PreGameCanvas");
 
     }
 
@@ -205,6 +207,23 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         DeadAndRespawn();
 
+
+        //remove this lat6er
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+
+            if (PreGameThing.activeSelf == true)
+            {
+                PreGameThing.SetActive(false);
+            }
+            else
+            {
+
+                PreGameThing.SetActive(true);
+            }
+ 
+
+        }
 
     }
 
@@ -542,6 +561,17 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
