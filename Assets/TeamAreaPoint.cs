@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -23,6 +24,10 @@ public class TeamAreaPoint : NetworkBehaviour
     Color LColor;
 
     Color RColor;
+
+    Color LColorAlpha;
+
+    Color RColorAlpha;
 
     bool ContestedFakeSineWaveBool = false;
 
@@ -62,9 +67,12 @@ public class TeamAreaPoint : NetworkBehaviour
             LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().LColor;
             RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().RColor;
 
-            LColor = new Color(LColor.r, LColor.g, LColor.b, 0.2f);
+            LColorAlpha = new Color(LColor.r, LColor.g, LColor.b, 0.2f);
 
-            RColor = new Color(RColor.r, RColor.g, RColor.b, 0.2f);
+            RColorAlpha = new Color(RColor.r, RColor.g, RColor.b, 0.2f);
+
+            CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().color = LColor;
+            CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().color = RColor;
         }
         catch
         {
@@ -113,7 +121,7 @@ public class TeamAreaPoint : NetworkBehaviour
 
         if (LTeamCount.Value > 0 && RTeamCount.Value == 0)
         {
-            this.GetComponent<SpriteRenderer>().color = LColor;
+            this.GetComponent<SpriteRenderer>().color = LColorAlpha;
 
             if (IsHost)
             {
@@ -125,7 +133,7 @@ public class TeamAreaPoint : NetworkBehaviour
         else if (RTeamCount.Value > 0 && LTeamCount.Value == 0)
         {
 
-            this.GetComponent<SpriteRenderer>().color = RColor;
+            this.GetComponent<SpriteRenderer>().color = RColorAlpha;
 
 
             if (IsHost)
@@ -179,10 +187,12 @@ public class TeamAreaPoint : NetworkBehaviour
 
             }
 
-            this.GetComponent<SpriteRenderer>().color = Color.Lerp(RColor,LColor, ContestedFakeSineWave/10f);
+            this.GetComponent<SpriteRenderer>().color = Color.Lerp(RColorAlpha,LColorAlpha, ContestedFakeSineWave/10f);
 
         }
 
+
+        KOTHFunction();
 
 
     }
@@ -197,80 +207,107 @@ public class TeamAreaPoint : NetworkBehaviour
             Gizmos.DrawWireCube(transform.position, transform.localScale);
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-
-    //    if (other.gameObject.GetComponent<UniversalEntityProperties>())
-    //    {
-
-    //        if(other.gameObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 0)
-    //        {
-    //            if (!LPlayersInside.Contains(other.gameObject))
-    //                LPlayersInside.Add(other.gameObject);
-
-    //        }
-    //        else if (other.gameObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 1)
-    //        {
-    //            if (!RPlayersInside.Contains(other.gameObject))
-    //                RPlayersInside.Add(other.gameObject);
-
-    //        }
-
-
-    //    }
-
-    //}
-
-    //private void OnTriggerStay(Collider other)
-    //{
-
-
-    //    if (other.gameObject.GetComponent<UniversalEntityProperties>())
-    //    {
-
-    //        if (other.gameObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 0)
-    //        {
-    //            if (!LPlayersInside.Contains(other.gameObject))
-    //                LPlayersInside.Add(other.gameObject);
-
-    //        }
-    //        else if (other.gameObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 1)
-    //        {
-    //            if (!RPlayersInside.Contains(other.gameObject))
-    //                RPlayersInside.Add(other.gameObject);
-
-    //        }
-
-
-    //    }
-
-    //}
-
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.GetComponent<UniversalEntityProperties>())
-    //    {
-
-    //        if (other.gameObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 0)
-    //        {
-    //            if (LPlayersInside.Contains(other.gameObject))
-    //                LPlayersInside.Remove(other.gameObject);
-
-    //        }
-    //        else if (other.gameObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 1)
-    //        {
-    //            if (RPlayersInside.Contains(other.gameObject))
-    //                RPlayersInside.Remove(other.gameObject);
-
-    //        }
-
-
-    //    }
-    //}
 
 
 
 
+
+    void KOTHFunction()
+    {
+
+
+
+        //if neutral
+
+        if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'N')
+
+        {
+
+            //CAP METER GO RETURN
+
+            if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapFloat.Value > 101f)
+            {
+                CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(1, 0, (200f - GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapFloat.Value) / 100f));
+            }
+            else if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapFloat.Value < 99f)
+            {
+                CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, (100f - GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapFloat.Value) / 100f));
+            }
+            else
+            {
+                CapRMeter.transform.localScale = new Vector3(1, 0);
+                CapLMeter.transform.localScale = new Vector3(1, 0);
+
+            }
+
+
+
+
+        }
+        else
+        {
+
+            //CAP METER GO UP
+
+            if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'L')
+            {
+                CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCounterCapFloat.Value / 100f));
+                CapLMeter.transform.localScale = new Vector3(1, 1);
+            }
+
+            if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'R')
+            {
+                CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCounterCapFloat.Value / 100f));
+                CapRMeter.transform.localScale = new Vector3(1, 1);
+            }
+
+
+        }
+
+
+
+        //THESE ARE THINGS FOR IF THE THING IS CAPPED
+
+        if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'L')
+        {
+            CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+
+            CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+
+            //forgive me for this is concrete sinning
+
+
+
+
+        }
+
+        else if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'R')
+        {
+            CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+            CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+
+
+
+
+
+
+        }
+
+        else
+        {
+
+
+
+
+        }
+
+
+
+
+
+
+    }
 
 }

@@ -2031,9 +2031,9 @@ MonoBehaviour:
     m_InternalValue: 78
   KOTHCounterCapFloat:
     m_InternalValue: 0
-  KOTHTeamPointFloatL:
+  KOTHTeamHoldFloatL:
     m_InternalValue: 0
-  KOTHTeamPointFloatR:
+  KOTHTeamHoldFloatR:
     m_InternalValue: 0
 --- !u!114 &1598417521
 MonoBehaviour:

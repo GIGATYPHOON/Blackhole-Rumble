@@ -49,8 +49,7 @@ public class GameHandler : NetworkBehaviour
         {
             LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().LColor;
             RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().RColor;
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().color = LColor;
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().color = RColor;
+
 
 
         }
@@ -238,138 +237,6 @@ public class GameHandler : NetworkBehaviour
             
 
         }
-
-
-
-        //if neutral
-
-        if (KOTHCapTeamChar.Value == 'N')
-
-        {
-
-            //CAP METER GO RETURN
-
-            if (KOTHCapFloat.Value > 101f)
-            {
-                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(1, 0, (200f - KOTHCapFloat.Value) / 100f));
-            }
-            else if (KOTHCapFloat.Value < 99f)
-            {
-                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, (100f - KOTHCapFloat.Value) / 100f));
-            }
-            else
-            {
-                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, 0);
-                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, 0);
-
-            }
-
-
-
-
-        }
-        else
-        {
-
-            //CAP METER GO UP
-
-            if (KOTHCapTeamChar.Value == 'L')
-            {
-                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0,1,KOTHCounterCapFloat.Value/100f));
-                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, 1);
-            }
-
-            if (KOTHCapTeamChar.Value == 'R')
-            {
-                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, KOTHCounterCapFloat.Value / 100f));
-                GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.localScale = new Vector3(1, 1);
-            }
-
-
-        }
-
-
-
-        //THESE ARE THINGS FOR IF THE THING IS CAPPED
-
-        if (KOTHCapTeamChar.Value == 'L')
-        {
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[0].GetComponent<SpriteRenderer>().color = LColor;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[1].GetComponent<SpriteRenderer>().color = LColor;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[2].GetComponent<SpriteRenderer>().color = LColor;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[3].GetComponent<SpriteRenderer>().color = LColor;
-
-            //forgive me for this is concrete sinning
-
-
-            if (GameObject.FindGameObjectWithTag("KOTHUI"))
-            {
-                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = LColor;
-
-                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
-
-                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatL.Value) + "%";
-
-
-            }
-
-        }
-
-        else if (KOTHCapTeamChar.Value == 'R')
-        {
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[0].GetComponent<SpriteRenderer>().color = RColor;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[1].GetComponent<SpriteRenderer>().color = RColor;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[2].GetComponent<SpriteRenderer>().color = RColor;
-
-            GameObject.FindGameObjectWithTag("TeamAreaPoint").GetComponent<TeamAreaPoint>().CapIndicators[3].GetComponent<SpriteRenderer>().color = RColor;
-
-
-
-            if (GameObject.FindGameObjectWithTag("KOTHUI"))
-            {
-                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
-
-                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = RColor;
-
-
-                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(KOTHTeamHoldFloatR.Value) + "%";
-
-
-
-            }
-
-        }
-
-        else
-        {
-
-
-            if (GameObject.FindGameObjectWithTag("KOTHUI"))
-            {
-
-                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
-
-                GameObject.FindGameObjectWithTag("KOTHUI").transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.black;
-
-
-            }
-
-
-        }
-
 
 
 

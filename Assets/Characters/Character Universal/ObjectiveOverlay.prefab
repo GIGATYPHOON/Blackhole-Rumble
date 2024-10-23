@@ -1753,6 +1753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 923578312929459576}
   - component: {fileID: 7862851314077345491}
+  - component: {fileID: 4480842133880037567}
   m_Layer: 0
   m_Name: ObjectiveOverlay
   m_TagString: Untagged
@@ -1788,8 +1789,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252f24381034a0448bff1002d2941845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KOTHLBlackToColor: {fileID: 9125618434243734670}
-  KOTHRBlackToColor: {fileID: 9085854883935960296}
+  KOTHLBlackToColor: {fileID: 1413000550909468788}
+  KOTHRBlackToColor: {fileID: 5265419383006160115}
+  KOTHLSidePercentage: {fileID: 7852918539052656339}
+  KOTHRSidePercentage: {fileID: 8349938911759606300}
+--- !u!114 &4480842133880037567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204291260398697304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &8349938911759606300
 GameObject:
   m_ObjectHideFlags: 0
