@@ -311,6 +311,9 @@ public class TeamAreaPoint : NetworkBehaviour
         else
         {
 
+            CapRMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+            CapLMeter.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder =0;
 
 
 
