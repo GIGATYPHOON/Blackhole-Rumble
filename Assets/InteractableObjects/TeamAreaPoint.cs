@@ -259,12 +259,17 @@ public class TeamAreaPoint : NetworkBehaviour
             {
                 CapRMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCounterCapFloat.Value / 100f));
                 CapLMeter.transform.localScale = new Vector3(1, 1);
+
+
+                CapDim.transform.localScale = new Vector3(1, 0);
             }
 
             if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'R')
             {
                 CapLMeter.transform.localScale = new Vector3(1, Mathf.Lerp(0, 1, GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCounterCapFloat.Value / 100f));
                 CapRMeter.transform.localScale = new Vector3(1, 1);
+
+                CapDim.transform.localScale = new Vector3(1, 0);
             }
 
             if (GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().KOTHCapTeamChar.Value == 'D')
