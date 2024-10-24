@@ -208,22 +208,29 @@ public class UniversalEntityProperties : NetworkBehaviour
         DeadAndRespawn();
 
 
-        //remove this lat6er
-        if(Input.GetKeyDown(KeyCode.H))
+        if(IsOwner)
         {
 
-            if (PreGameThing.activeSelf == true)
-            {
-                PreGameThing.SetActive(false);
-            }
-            else
+            if (Input.GetKeyDown(KeyCode.H))
             {
 
-                PreGameThing.SetActive(true);
+                if (PreGameThing.activeSelf == true)
+                {
+                    PreGameThing.SetActive(false);
+                }
+                else
+                {
+
+                    PreGameThing.SetActive(true);
+                }
+
+
             }
- 
+
+
 
         }
+        //remove this lat6er
 
     }
 
