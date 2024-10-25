@@ -86,7 +86,6 @@ public class TeamAreaPoint : NetworkBehaviour
         }
 
         Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
-        int i = 0;
         int LPlayersInside = 0;
         int RPlayersInside = 0;
 
@@ -247,7 +246,7 @@ public class TeamAreaPoint : NetworkBehaviour
             }
 
 
-
+            CapDim.transform.localScale = new Vector3(1, 0);
 
         }
         else
