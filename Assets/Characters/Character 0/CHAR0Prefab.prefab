@@ -860,7 +860,7 @@ MonoBehaviour:
   UltimateChargeIndicator: {fileID: 2989343967169109976}
   Eventus: {fileID: 1224496642343830106}
   CaughtInAttacksCounter: 0
-  shielddecreaseincrement: 20
+  shielddecreaseincrement: 50
 --- !u!114 &7261251903851003422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f14e79d501abf4d99ed6fdb51a59c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PreGameThing: {fileID: 0}
   isFacingRight:
     m_InternalValue: 1
   YourTeam:
@@ -2181,6 +2182,10 @@ PrefabInstance:
     - target: {fileID: 923578312929459576, guid: 90f0da7c88fc2b043a73cc0066ecf905, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480842133880037567, guid: 90f0da7c88fc2b043a73cc0066ecf905, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
       objectReference: {fileID: 0}
     - target: {fileID: 8204291260398697304, guid: 90f0da7c88fc2b043a73cc0066ecf905, type: 3}
       propertyPath: m_Name

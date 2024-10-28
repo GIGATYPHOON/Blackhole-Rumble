@@ -27,6 +27,8 @@ public class CHAR0 : NetworkBehaviour
 
     [SerializeField] GameObject HorizonStrikesObject;
 
+    public bool canswitchdirections = true;
+
 
     public NetworkVariable<bool> HorizonStriking = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -53,12 +55,12 @@ public class CHAR0 : NetworkBehaviour
     public int CaughtInAttacksCounter = 0;
 
 
-    public float shielddecreaseincrement = 20f;
+    public float shielddecreaseincrement = 50f;
 
 
     void Start()
     {
-        GetComponent<UniversalEntityProperties>().Shielding(20f);
+        GetComponent<UniversalEntityProperties>().Shielding(50f);
 
     }
 
@@ -113,14 +115,21 @@ public class CHAR0 : NetworkBehaviour
 
     void Facing()
     {
-        if (Input.GetAxisRaw("Horizontal") > 0)
+
+        if(canswitchdirections == true)
         {
-            GetComponent<UniversalEntityProperties>().isFacingRight.Value = true;
+            if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                GetComponent<UniversalEntityProperties>().isFacingRight.Value = true;
+            }
+            if (Input.GetAxisRaw("Horizontal") < 0)
+            {
+                GetComponent<UniversalEntityProperties>().isFacingRight.Value = false;
+            }
+
+
         }
-        if (Input.GetAxisRaw("Horizontal") < 0)
-        {
-            GetComponent<UniversalEntityProperties>().isFacingRight.Value = false;
-        }
+
 
 
 
@@ -145,10 +154,10 @@ public class CHAR0 : NetworkBehaviour
 
         if (Input.GetButtonDown("Special1") && StanceCooldown.Value >= 10f)
         {
-            GetComponent<UniversalEntityProperties>().Shielding(20f - shielddecreaseincrement);
+            GetComponent<UniversalEntityProperties>().Shielding(50f - shielddecreaseincrement);
             CurrentStanceBool.Value = !CurrentStanceBool.Value;
 
-            shielddecreaseincrement = 20f;
+            shielddecreaseincrement = 50f;
             StanceCooldown.Value = 0;
         }
 

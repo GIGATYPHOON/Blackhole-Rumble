@@ -610,9 +610,9 @@ public class UniversalEntityProperties : NetworkBehaviour
     {
         if (GetComponent<CHAR0>())
         {
-            GetComponent<CHAR0>().shielddecreaseincrement = 20f;
+            GetComponent<CHAR0>().shielddecreaseincrement = 50f;
             Shield.Value = 0f;
-            Shielding(20f);
+            Shielding(50f);
         }
 
 
