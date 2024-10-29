@@ -5,6 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using TMPro;
 
+
 public class UniversalPlayerScript : NetworkBehaviour
 {
     // Start is called before the first frame update
@@ -18,6 +19,10 @@ public class UniversalPlayerScript : NetworkBehaviour
     public Color RColor;
 
     [SerializeField] List<GameObject> Characters;
+
+
+    GameObject PlayerCharacter = null;
+
 
     void Start()
     {
@@ -69,8 +74,6 @@ public class UniversalPlayerScript : NetworkBehaviour
             }
 
 
-            GameObject PlayerCharacter = null;
-
             if (GameObject.FindGameObjectWithTag("PreGameCanvas").transform.GetChild(5).transform.GetChild(0).GetComponent<TMP_Text>().text == "Evan and Riza")
             {
                 PlayerCharacter = Characters[0];
@@ -82,11 +85,11 @@ public class UniversalPlayerScript : NetworkBehaviour
 
             if(PlayerCharacter != null)
             {
+                MP_CreatePlayerServerRpc(NetworkManager.LocalClientId);
 
-
-                var instance = Instantiate(PlayerCharacter);
-                var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-                instanceNetworkObject.Spawn();
+                //var instance = Instantiate(PlayerCharacter);
+                //var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+                //instanceNetworkObject.Spawn();
 
             }
 
@@ -116,5 +119,15 @@ public class UniversalPlayerScript : NetworkBehaviour
     }
 
 
+    [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
+    public void MP_CreatePlayerServerRpc(ulong clientId)
+    {
+        var instance = Instantiate(PlayerCharacter);
+
+       // instance = (GameObject)Instantiate(instance);
+        NetworkObject netObj = instance.GetComponent<NetworkObject>();
+        instance.SetActive(true);
+        netObj.SpawnAsPlayerObject(clientId, true);
+    }
 
 }
