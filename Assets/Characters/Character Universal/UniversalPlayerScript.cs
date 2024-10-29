@@ -21,12 +21,17 @@ public class UniversalPlayerScript : NetworkBehaviour
     [SerializeField] List<GameObject> Characters;
 
 
-    GameObject PlayerCharacter = null;
+    public GameObject PlayerCharacter = null;
 
 
     void Start()
     {
-        
+
+        if (GameObject.FindGameObjectWithTag("PreGameCanvas").transform.GetChild(5).transform.GetChild(0).GetComponent<TMP_Text>().text == "Evan and Riza")
+        {
+            PlayerCharacter = Characters[0];
+
+        }
     }
 
     // Update is called once per frame
@@ -78,21 +83,10 @@ public class UniversalPlayerScript : NetworkBehaviour
             {
                 PlayerCharacter = Characters[0];
 
-
-
             }
 
 
-            if(PlayerCharacter != null)
-            {
-                MP_CreatePlayerServerRpc(NetworkManager.LocalClientId);
-
-                //var instance = Instantiate(PlayerCharacter);
-                //var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-                //instanceNetworkObject.Spawn();
-
-            }
-
+            MP_CreatePlayerServerRpc(NetworkManager.LocalClientId);
 
             //YourTeam.Value = TeamInt.Value;
 
@@ -122,12 +116,17 @@ public class UniversalPlayerScript : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
     public void MP_CreatePlayerServerRpc(ulong clientId)
     {
-        var instance = Instantiate(PlayerCharacter);
+        if (PlayerCharacter != null)
+        {
+            var instance = Instantiate(PlayerCharacter);
 
-       // instance = (GameObject)Instantiate(instance);
-        NetworkObject netObj = instance.GetComponent<NetworkObject>();
-        instance.SetActive(true);
-        netObj.SpawnWithOwnership(clientId, true);
+            // instance = (GameObject)Instantiate(instance);
+            NetworkObject netObj = instance.GetComponent<NetworkObject>();
+            instance.SetActive(true);
+            netObj.SpawnWithOwnership(clientId, true);
+
+        }
+
     }
 
 }
