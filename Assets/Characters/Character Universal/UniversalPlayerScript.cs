@@ -68,6 +68,29 @@ public class UniversalPlayerScript : NetworkBehaviour
 
             }
 
+
+            GameObject PlayerCharacter = null;
+
+            if (GameObject.FindGameObjectWithTag("PreGameCanvas").transform.GetChild(5).transform.GetChild(0).GetComponent<TMP_Text>().text == "Evan and Riza")
+            {
+                PlayerCharacter = Characters[0];
+
+
+
+            }
+
+
+            if(PlayerCharacter != null)
+            {
+
+
+                var instance = Instantiate(PlayerCharacter);
+                var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+                instanceNetworkObject.Spawn();
+
+            }
+
+
             //YourTeam.Value = TeamInt.Value;
 
             //healthbar.GetComponent<SpriteRenderer>().color = Color.green;

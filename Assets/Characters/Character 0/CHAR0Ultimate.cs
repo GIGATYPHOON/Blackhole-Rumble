@@ -29,7 +29,7 @@ public class CHAR0Ultimate : MonoBehaviour
 
         if (collision.tag == "Player")
         {
-            if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != collision.GetComponent<UniversalEntityProperties>().TeamInt.Value)
+            if (owner.GetComponent<UniversalEntityProperties>().TeamChar.Value != collision.GetComponent<UniversalEntityProperties>().TeamChar.Value)
             {
                 collision.gameObject.GetComponent<UniversalEntityProperties>().hitloc = collision.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
 
