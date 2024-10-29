@@ -127,7 +127,7 @@ public class UniversalPlayerScript : NetworkBehaviour
        // instance = (GameObject)Instantiate(instance);
         NetworkObject netObj = instance.GetComponent<NetworkObject>();
         instance.SetActive(true);
-        netObj.SpawnAsPlayerObject(clientId, true);
+        netObj.SpawnWithOwnership(clientId, true);
     }
 
 }
