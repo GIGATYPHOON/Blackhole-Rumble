@@ -36,7 +36,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
         foreach (GameObject fuckwad in GameObject.FindGameObjectsWithTag("Player"))
         {
 
-            if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != fuckwad.GetComponent<UniversalEntityProperties>().TeamInt.Value)
+            if (owner.GetComponent<UniversalEntityProperties>().TeamChar.Value != fuckwad.GetComponent<UniversalEntityProperties>().TeamChar.Value)
             {
 
                 fuckwad.GetComponent<UniversalCharacterMovement>().CHAR0Eventus(false);
@@ -45,7 +45,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
 
         foreach (Collider dumbidiot in hitColliders)
         {
-            if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != dumbidiot.GetComponent<UniversalEntityProperties>().TeamInt.Value && dumbidiot.GetComponent<UniversalEntityProperties>().dead.Value == false)
+            if (owner.GetComponent<UniversalEntityProperties>().TeamChar.Value != dumbidiot.GetComponent<UniversalEntityProperties>().TeamChar.Value && dumbidiot.GetComponent<UniversalEntityProperties>().dead.Value == false)
             {
                 dumbidiot.gameObject.GetComponent<UniversalEntityProperties>().hitloc = dumbidiot.gameObject.GetComponent<Collider>().ClosestPoint(this.transform.position);
 
@@ -139,7 +139,7 @@ public class CHAR0Ultimate2 : MonoBehaviour
         foreach (GameObject fuckwad in GameObject.FindGameObjectsWithTag("Player"))
         {
 
-            if (owner.GetComponent<UniversalEntityProperties>().TeamInt.Value != fuckwad.GetComponent<UniversalEntityProperties>().TeamInt.Value)
+            if (owner.GetComponent<UniversalEntityProperties>().TeamChar.Value != fuckwad.GetComponent<UniversalEntityProperties>().TeamChar.Value)
             {
 
                 fuckwad.GetComponent<UniversalCharacterMovement>().CHAR0Eventus(false);

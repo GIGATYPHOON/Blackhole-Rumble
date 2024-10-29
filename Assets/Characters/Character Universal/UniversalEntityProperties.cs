@@ -17,14 +17,9 @@ public class UniversalEntityProperties : NetworkBehaviour
     public NetworkVariable<int> YourTeam = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
-    public Color LColor;
-
-    public Color RColor;
-
-
     //0 is left, 1 is right
 
-    public NetworkVariable<int> TeamInt = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<char> TeamChar = new NetworkVariable<char>('N', NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
     [SerializeField] GameObject SelfCamera;
@@ -116,26 +111,15 @@ public class UniversalEntityProperties : NetworkBehaviour
     {
        
 
-        if (TeamInt.Value == 0)
+        if (TeamChar.Value == 'L')
         {
             this.gameObject.layer = 3;
         }
-        else if (TeamInt.Value == 1)
+        else if (TeamChar.Value == 'R')
         {
             this.gameObject.layer = 7;
         }
 
-        if (NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().YourTeam.Value == 0)
-        {
-
-            LColor = new Color(0.2f, 0.2f, 1, 1f);
-            RColor = new Color(1, 0.2f, 0.2f, 1f);
-        }
-        else
-        {
-            RColor = new Color(0.2f, 0.2f, 1, 1f);
-            LColor = new Color(1, 0.2f, 0.2f, 1f);
-        }
 
 
 
@@ -144,7 +128,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         if(!IsOwner)
         {
-            if (TeamInt.Value == NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().YourTeam.Value)
+            if (TeamChar.Value == NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalPlayerScript>().TheTeam.Value)
             {
                 healthbar.GetComponent<SpriteRenderer>().color = Color.blue;
             }
@@ -360,24 +344,24 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         if(IsOwner)
         {
-            //if (GameObject.FindGameObjectWithTag("TeamButton").transform.GetChild(0).GetComponent<TMP_Text>().text == "L")
-            //{
-            //   TeamInt.Value = 0;
-            //    this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
+            if (GameObject.FindGameObjectWithTag("TeamButton").transform.GetChild(0).GetComponent<TMP_Text>().text == "L")
+            {
+                TeamChar.Value = 'L';
+                this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
 
-            //    isFacingRight.Value = true;
+                isFacingRight.Value = true;
 
 
-            //}
-            //else
-            //{
-            //    TeamInt.Value = 1;
-            //    this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
+            }
+            else
+            {
+                TeamChar.Value = 'R';
+                this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
 
-            //    isFacingRight.Value = false;
-            //}
+                isFacingRight.Value = false;
+            }
 
-            //YourTeam.Value = TeamInt.Value;
+          //  YourTeam.Value = TeamInt.Value;
 
             healthbar.GetComponent<SpriteRenderer>().color = Color.green;
 
@@ -526,7 +510,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
                     HP.Value = BaseHP.Value;
 
-                    if (TeamInt.Value == 0)
+                    if (TeamChar.Value == 'L')
                     {
 
                         this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
@@ -535,7 +519,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
 
                     }
-                    else if (TeamInt.Value == 1)
+                    else if (TeamChar.Value == 'R')
                     {
                         this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
 

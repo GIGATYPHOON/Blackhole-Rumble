@@ -70,8 +70,8 @@ public class TeamAreaPoint : NetworkBehaviour
 
         try
         {
-            LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().LColor;
-            RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().RColor;
+            LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalPlayerScript>().LColor;
+            RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalPlayerScript>().RColor;
 
             LColorAlpha = new Color(LColor.r, LColor.g, LColor.b, 0.2f);
 
@@ -96,11 +96,11 @@ public class TeamAreaPoint : NetworkBehaviour
             if(thingamajig.gameObject.GetComponent<UniversalEntityProperties>().dead.Value == false)
             {
 
-                if(thingamajig.gameObject.GetComponent< UniversalEntityProperties>().TeamInt.Value == 0)
+                if(thingamajig.gameObject.GetComponent<UniversalEntityProperties>().TeamChar.Value == 'L')
                 {
                     LPlayersInside++;
                 }
-                if (thingamajig.gameObject.GetComponent<UniversalEntityProperties>().TeamInt.Value == 1)
+                if (thingamajig.gameObject.GetComponent<UniversalEntityProperties>().TeamChar.Value == 'R')
                 {
                     RPlayersInside++;
                 }

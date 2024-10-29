@@ -56,8 +56,8 @@ public class ObjectiveOverlay : NetworkBehaviour
 
         try
         {
-            LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().LColor;
-            RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalEntityProperties>().RColor;
+            LColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalPlayerScript>().LColor;
+            RColor = NetworkManager.LocalClient.PlayerObject.GetComponent<UniversalPlayerScript>().RColor;
 
 
 

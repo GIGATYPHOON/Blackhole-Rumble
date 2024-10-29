@@ -27,7 +27,21 @@ public class UniversalPlayerScript : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (TheTeam.Value == 'L')
+        {
+
+            LColor = new Color(0.2f, 0.2f, 1, 1f);
+            RColor = new Color(1, 0.2f, 0.2f, 1f);
+        }
+        else
+        {
+            RColor = new Color(0.2f, 0.2f, 1, 1f);
+            LColor = new Color(1, 0.2f, 0.2f, 1f);
+        }
+
+
+
+
     }
 
     public override void OnNetworkSpawn()
