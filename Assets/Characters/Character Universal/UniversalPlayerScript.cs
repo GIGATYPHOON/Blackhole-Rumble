@@ -1,0 +1,83 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Netcode;
+using UnityEngine;
+using TMPro;
+
+public class UniversalPlayerScript : NetworkBehaviour
+{
+    // Start is called before the first frame update
+
+    public NetworkVariable<FixedString32Bytes> Name = new NetworkVariable<FixedString32Bytes>("", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    public NetworkVariable<char> TheTeam = new NetworkVariable<char>('N', NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    public Color LColor;
+
+    public Color RColor;
+
+    [SerializeField] List<GameObject> Characters;
+
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public override void OnNetworkSpawn()
+    {
+
+
+        if (IsOwner)
+        {
+            if (GameObject.FindGameObjectWithTag("TeamButton").transform.GetChild(0).GetComponent<TMP_Text>().text == "L")
+            {
+
+                TheTeam.Value = 'L';
+                this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
+
+
+
+
+            }
+            else
+            {
+                TheTeam.Value = 'R';
+
+                this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
+
+            }
+
+            //YourTeam.Value = TeamInt.Value;
+
+            //healthbar.GetComponent<SpriteRenderer>().color = Color.green;
+
+            //youindicator.gameObject.SetActive(true);
+
+
+
+
+            //GameObject.FindGameObjectWithTag("PreGameCanvas").SetActive(false);
+
+        }
+        else
+        {
+
+
+        }
+
+
+        base.OnNetworkSpawn();
+
+
+    }
+
+
+
+}

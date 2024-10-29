@@ -360,24 +360,24 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         if(IsOwner)
         {
-            if (GameObject.FindGameObjectWithTag("TeamButton").transform.GetChild(0).GetComponent<TMP_Text>().text == "L")
-            {
-               TeamInt.Value = 0;
-                this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
+            //if (GameObject.FindGameObjectWithTag("TeamButton").transform.GetChild(0).GetComponent<TMP_Text>().text == "L")
+            //{
+            //   TeamInt.Value = 0;
+            //    this.transform.position = GameObject.FindGameObjectWithTag("LSpawn").transform.position;
 
-                isFacingRight.Value = true;
+            //    isFacingRight.Value = true;
 
 
-            }
-            else
-            {
-                TeamInt.Value = 1;
-                this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
+            //}
+            //else
+            //{
+            //    TeamInt.Value = 1;
+            //    this.transform.position = GameObject.FindGameObjectWithTag("RSpawn").transform.position;
 
-                isFacingRight.Value = false;
-            }
+            //    isFacingRight.Value = false;
+            //}
 
-            YourTeam.Value = TeamInt.Value;
+            //YourTeam.Value = TeamInt.Value;
 
             healthbar.GetComponent<SpriteRenderer>().color = Color.green;
 
