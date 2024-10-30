@@ -24,6 +24,7 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     [SerializeField] GameObject SelfCamera;
 
+    [SerializeField] GameObject fullhealthbar;
 
     [SerializeField] GameObject healthbar;
 
@@ -73,6 +74,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
     public GameObject sprites;
 
+    public GameObject otherUI;
+
     [SerializeField]
     private NetworkVariable<float>  hitinvincibilitytimer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> invuln = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -86,7 +89,7 @@ public class UniversalEntityProperties : NetworkBehaviour
     public string lastspecificcause = "";
 
 
-    public NetworkVariable<bool> ghosted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> invisible = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public NetworkVariable<float> healcooldowntimer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -171,8 +174,11 @@ public class UniversalEntityProperties : NetworkBehaviour
             INVINCIBLEEEE();
 
 
-
             Healthbar();
+
+
+            Invisibility();
+
 
             if (multihitted == true)
             {
@@ -215,6 +221,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
         }
         //remove this lat6er
+
+
 
     }
 
@@ -497,7 +505,8 @@ public class UniversalEntityProperties : NetworkBehaviour
 
             GetComponent<Collider>().enabled = false;
 
-
+            healthbar.SetActive(false);
+            otherUI.SetActive(false);
 
             if(deathtimer <=0 )
             {
@@ -582,6 +591,34 @@ public class UniversalEntityProperties : NetworkBehaviour
         if (IsOwner)
         {
             GetComponent<UniversalEntityProperties>().Shield.Value += shieldamount;
+        }
+
+
+    }
+
+
+
+
+
+    public void Invisibility()
+    {
+        if (!IsOwner)
+        {
+            if(invisible.Value == true)
+            {
+
+                sprites.SetActive(false);
+                fullhealthbar.SetActive(false);
+                otherUI.SetActive(false);
+            }
+
+            else
+            {
+                otherUI.SetActive(true);
+                fullhealthbar.SetActive(true);
+
+            }
+
         }
 
 

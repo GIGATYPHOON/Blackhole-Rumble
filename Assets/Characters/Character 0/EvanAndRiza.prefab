@@ -851,6 +851,7 @@ MonoBehaviour:
   StanceBar: {fileID: 1913675298562277978}
   StanceText: {fileID: 7261251904999877626}
   HorizonStrikesObject: {fileID: 7261251905434700306}
+  canswitchdirections: 1
   HorizonStriking:
     m_InternalValue: 1
   SingularitySpherePrefab: {fileID: 5253101934381260997, guid: 2f4dc5a6a68e3c34dbb478bfbd04ecf2, type: 3}
@@ -878,11 +879,10 @@ MonoBehaviour:
     m_InternalValue: 1
   YourTeam:
     m_InternalValue: 0
-  LColor: {r: 0, g: 0, b: 0, a: 0}
-  RColor: {r: 0, g: 0, b: 0, a: 0}
-  TeamInt:
-    m_InternalValue: 0
+  TeamChar:
+    m_InternalValue: 78
   SelfCamera: {fileID: 7056983186917795653}
+  fullhealthbar: {fileID: 8216346050161901617}
   healthbar: {fileID: 8526854491006020142}
   healthmeasureR: {fileID: 6084859988545039744}
   healthmeasureL: {fileID: 6775618808045202676}
@@ -912,6 +912,7 @@ MonoBehaviour:
   objectiveoverlay: {fileID: 8234479395315516126}
   isdamageable: 1
   sprites: {fileID: 7261251903886915488}
+  otherUI: {fileID: 7261251905850183246}
   hitinvincibilitytimer:
     m_InternalValue: 0
   invuln:
@@ -920,7 +921,7 @@ MonoBehaviour:
   olddamageprio: 0
   currentdamageprio: 0
   lastspecificcause: 
-  ghosted:
+  invisible:
     m_InternalValue: 0
   healcooldowntimer:
     m_InternalValue: 0
@@ -2362,6 +2363,11 @@ GameObject:
 --- !u!1 &6775618808045202676 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8198055364330790648, guid: 0cb23d8a444d3d444a5ad4906e3617ac, type: 3}
+  m_PrefabInstance: {fileID: 3441456564770271756}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8216346050161901617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6756755895923044925, guid: 0cb23d8a444d3d444a5ad4906e3617ac, type: 3}
   m_PrefabInstance: {fileID: 3441456564770271756}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8526854491006020142 stripped
